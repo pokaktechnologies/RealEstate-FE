@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/auth/login_screen.dart';
 
 class SplashScreenTwo extends StatefulWidget {
   const SplashScreenTwo({super.key});
@@ -21,7 +22,12 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
             padding: const EdgeInsets.only(right: 16.0),
             child: TextButton(
               onPressed: () {
-                // Handle skip action
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(),
+                  ),
+                );
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
