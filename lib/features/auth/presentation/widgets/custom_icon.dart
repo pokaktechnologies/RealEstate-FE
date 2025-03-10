@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 
-class LoginIconWidget extends StatelessWidget {
+class CustomIcon extends StatelessWidget {
   final String assetImg;
-  const LoginIconWidget({
+  const CustomIcon({
     super.key,
     required this.assetImg,
   });

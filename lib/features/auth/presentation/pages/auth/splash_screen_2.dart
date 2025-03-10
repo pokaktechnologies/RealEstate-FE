@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/auth/login_screen.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/auth/signup_screen.dart';
 
 class SplashScreenTwo extends StatefulWidget {
   const SplashScreenTwo({super.key});
@@ -80,7 +81,14 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
               ],
             ),
           ),
-          customButton("Login"),
+          customButton("Login", () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+            );
+          }),
           const SizedBox(
             height: 20,
           ),
@@ -114,7 +122,14 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
           const SizedBox(
             height: 20,
           ),
-          customButton("Sign Up"),
+          customButton("Sign Up", () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignupScreen(),
+              ),
+            );
+          }),
         ],
       ),
     );
@@ -122,10 +137,11 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
 
   Widget customButton(
     String name,
+    final VoidCallback onPressed,
   ) {
     return InkWell(
       onTap: () {
-        print("butotn tapped");
+        onPressed();
       },
       child: Container(
         height: 45,
