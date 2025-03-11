@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/forgot_password.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
 
 class VerificationPage extends StatefulWidget {
@@ -22,7 +24,7 @@ class _VerificationPageState extends State<VerificationPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 100),
+            const SizedBox(height: 90),
             Padding(
               padding: EdgeInsets.all(20),
               child: Form(
@@ -35,24 +37,23 @@ class _VerificationPageState extends State<VerificationPage> {
                       child: Text(
                         "Verification Code",
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 32,
                           fontWeight: FontWeight.w600,
                           color: AppColors.black,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
                     const Center(
                       child: Text(
                         "We send you an OTP to your mail",
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: AppColors.black,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -72,30 +73,30 @@ class _VerificationPageState extends State<VerificationPage> {
                       ],
                     ),
                     const SizedBox(height: 25),
-                    // PinCodeTextField(
-                    //   appContext: context,
-                    //   length: 4,
-                    //   keyboardType: TextInputType.number,
-                    //   animationType: AnimationType.fade,
-                    //   pinTheme: PinTheme(
-                    //     shape: PinCodeFieldShape.box,
-                    //     borderRadius: BorderRadius.circular(8),
-                    //     fieldHeight: 64,
-                    //     fieldWidth: 70,
-                    //     activeFillColor: AppColors.white,
-                    //     inactiveFillColor: AppColors.white,
-                    //     selectedFillColor: AppColors.white,
-                    //     activeColor: AppColors.tealBlue,
-                    //     inactiveColor: AppColors.tealBlue,
-                    //     selectedColor: AppColors.tealBlue,
-                    //   ),
-                    //   animationDuration: const Duration(milliseconds: 300),
-                    //   enableActiveFill: true,
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   textStyle: const TextStyle(fontSize: 20),
-                    //   onCompleted: (value) {},
-                    //   onChanged: (value) {},
-                    // ),
+                    PinCodeTextField(
+                      appContext: context,
+                      length: 4,
+                      keyboardType: TextInputType.number,
+                      animationType: AnimationType.fade,
+                      pinTheme: PinTheme(
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(8),
+                        fieldHeight: 64,
+                        fieldWidth: 70,
+                        activeFillColor: AppColors.white,
+                        inactiveFillColor: AppColors.white,
+                        selectedFillColor: AppColors.white,
+                        activeColor: AppColors.tealBlue,
+                        inactiveColor: AppColors.tealBlue,
+                        selectedColor: AppColors.tealBlue,
+                      ),
+                      animationDuration: const Duration(milliseconds: 300),
+                      enableActiveFill: true,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      textStyle: const TextStyle(fontSize: 20),
+                      onCompleted: (value) {},
+                      onChanged: (value) {},
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -129,7 +130,7 @@ class _VerificationPageState extends State<VerificationPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => VerificationPage(),
+                            builder: (context) => ForgotPassword(),
                           ),
                         );
                       },

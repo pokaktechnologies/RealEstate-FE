@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/forgot_password.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/signup_screen.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/verification_code.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
@@ -117,11 +118,21 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: Align(
                 alignment: Alignment.centerRight,
-                child: Text(
-                  "forgot password?",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 15,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ForgotPassword(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "forgot password?",
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
               ),

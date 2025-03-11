@@ -12,4 +12,5 @@ class AppAssets {
   static const String facebookIcon = 'assets/auth/facebook_icon.png';
   static const String appleIcon = 'assets/auth/apple_icon.png';
   static const String authvector = 'assets/auth/auth_vector.png';
+  static const String backArrow = 'assets/auth/back_arrow.png';
 }
