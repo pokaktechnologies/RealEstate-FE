@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/auth/login_screen.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/auth/signup_screen.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/login_screen.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/signup_screen.dart';
 
 class SplashScreenTwo extends StatefulWidget {
   const SplashScreenTwo({super.key});

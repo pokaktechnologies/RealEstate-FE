@@ -1,19 +1,20 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/auth/login_screen.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/signup_screen.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/custom_textfield.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_icon.dart';
+import 'package:realestate_fe/features/auth/presentation/widgets/custom_textfield.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +72,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             Text(
-              "Create Your Account",
+              "Login!",
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 26,
@@ -79,21 +80,10 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             Text(
-              "Welcome!",
+              "Welcome back!",
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 16,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                right: 20,
-                left: 20,
-                top: 20,
-              ),
-              child: CustomTextfield(
-                hintText: "Enter Your Name",
-                prefixImg: AppAssets.usernameIcon,
               ),
             ),
             Padding(
@@ -127,7 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  "remember me",
+                  "forgot password?",
                   style: TextStyle(
                     color: AppColors.black,
                     fontSize: 15,
@@ -142,7 +132,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 top: 20,
               ),
               child: CustomButton(
-                buttonText: "Sign up",
+                buttonText: "Login",
               ),
             ),
             SizedBox(
@@ -215,12 +205,19 @@ class _SignupScreenState extends State<SignupScreen> {
                       color: AppColors.black,
                       fontWeight: FontWeight.bold,
                     ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        // Navigate to SignupScreen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignupScreen(),
+                          ),
+                        );
+                      },
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 30,
             ),
           ],
         ),

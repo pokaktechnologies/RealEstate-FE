@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/auth/splash_screen_2.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/splash_screen_2.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
