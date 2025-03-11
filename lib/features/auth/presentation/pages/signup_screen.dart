@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/login_screen.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/verification_code.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_textfield.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_icon.dart';
@@ -143,6 +144,14 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               child: CustomButton(
                 buttonText: "Sign up",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VerificationPage(),
+                    ),
+                  );
+                },
               ),
             ),
             SizedBox(

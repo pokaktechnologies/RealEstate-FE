@@ -3,16 +3,18 @@ import 'package:realestate_fe/core/utils/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String buttonText;
+  final VoidCallback onPressed;
   const CustomButton({
     super.key,
     required this.buttonText,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print("button pressed");
+        onPressed();
       },
       child: Container(
         height: 43,
