@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/forgot_password.dart';
+import 'package:realestate_fe/features/auth/presentation/pages/create_password.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
 
 class VerificationPage extends StatefulWidget {
@@ -130,7 +130,7 @@ class _VerificationPageState extends State<VerificationPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ForgotPassword(),
+                            builder: (context) => CreatePassword(),
                           ),
                         );
                       },
