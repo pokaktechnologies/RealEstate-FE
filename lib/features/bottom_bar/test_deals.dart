@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realestate_fe/core/utils/app_colors.dart';
 
 class TestDeals extends StatelessWidget {
   const TestDeals({super.key});
@@ -6,6 +7,7 @@ class TestDeals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.lightMint,
       body: Center(
         child: Container(
           height: 50,

@@ -59,7 +59,7 @@ class _BottomBarState extends State<BottomBar> {
                         colorFilter: ColorFilter.mode(
                           (_selectedIndex == 0)
                               ? AppColors.tealBlue
-                              : Colors.grey,
+                              : AppColors.grey,
                           BlendMode.srcIn,
                         ),
                         child: Image.asset(
@@ -74,7 +74,7 @@ class _BottomBarState extends State<BottomBar> {
                         colorFilter: ColorFilter.mode(
                           (_selectedIndex == 1)
                               ? AppColors.tealBlue
-                              : Colors.grey,
+                              : AppColors.grey,
                           BlendMode.srcIn,
                         ),
                         child: Image.asset(
@@ -89,7 +89,7 @@ class _BottomBarState extends State<BottomBar> {
                         colorFilter: ColorFilter.mode(
                           (_selectedIndex == 2)
                               ? AppColors.tealBlue
-                              : Colors.grey,
+                              : AppColors.grey,
                           BlendMode.srcIn,
                         ),
                         child: Image.asset(
@@ -104,7 +104,7 @@ class _BottomBarState extends State<BottomBar> {
                         colorFilter: ColorFilter.mode(
                           (_selectedIndex == 3)
                               ? AppColors.tealBlue
-                              : Colors.grey,
+                              : AppColors.grey,
                           BlendMode.srcIn,
                         ),
                         child: Image.asset(
@@ -119,7 +119,7 @@ class _BottomBarState extends State<BottomBar> {
                         colorFilter: ColorFilter.mode(
                           (_selectedIndex == 4)
                               ? AppColors.tealBlue
-                              : Colors.grey,
+                              : AppColors.grey,
                           BlendMode.srcIn,
                         ),
                         child: Image.asset(
