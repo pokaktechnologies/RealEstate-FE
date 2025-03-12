@@ -13,4 +13,11 @@ class AppAssets {
   static const String appleIcon = 'assets/auth/apple_icon.png';
   static const String authvector = 'assets/auth/auth_vector.png';
   static const String backArrow = 'assets/auth/back_arrow.png';
+
+  // home
+  static const String homeIcon = 'assets/home/home_icon.png';
+  static const String dealsIcon = 'assets/home/deals_icon.png';
+  static const String messageIcon = 'assets/home/message_icon.png';
+  static const String savedIcon = 'assets/home/saved_icon.png';
+  static const String profileIcon = 'assets/home/profile_icon.png';
 }

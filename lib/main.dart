@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/splash_screen.dart';
+import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      // home: SplashScreen(),
+      home: BottomBar(),
     );
   }
 }
