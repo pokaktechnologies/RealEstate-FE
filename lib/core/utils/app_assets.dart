@@ -20,4 +20,8 @@ class AppAssets {
   static const String messageIcon = 'assets/home/message_icon.png';
   static const String savedIcon = 'assets/home/saved_icon.png';
   static const String profileIcon = 'assets/home/profile_icon.png';
+
+  // deals
+  static const dealsoffer = 'assets/deals/dealsoffer.jpg';
+  static const dealscreditcard = 'assets/deals/deal_creditcard.png';
 }
