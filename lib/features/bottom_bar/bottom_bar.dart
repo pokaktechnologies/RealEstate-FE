@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/bottom_bar/test_deals.dart';
-import 'package:realestate_fe/features/bottom_bar/test_home.dart';
 import 'package:realestate_fe/features/bottom_bar/test_message.dart';
 import 'package:realestate_fe/features/bottom_bar/test_profile.dart';
 import 'package:realestate_fe/features/bottom_bar/test_saved.dart';
+import 'package:realestate_fe/features/home/presentation/pages/homePage.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -18,7 +18,7 @@ class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const TestHome(),
+    const Homepage(),
     const TestDeals(),
     const TestMessage(),
     const TestSaved(),
