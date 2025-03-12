@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/bottom_bar/test_deals.dart';
+import 'package:realestate_fe/features/Deals/presentation/pages/Deals.dart';
 import 'package:realestate_fe/features/bottom_bar/test_message.dart';
 import 'package:realestate_fe/features/bottom_bar/test_profile.dart';
 import 'package:realestate_fe/features/bottom_bar/test_saved.dart';
@@ -19,7 +19,7 @@ class _BottomBarState extends State<BottomBar> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Homepage(),
-    const TestDeals(),
+    DealsScreen(),
     const TestMessage(),
     const TestSaved(),
     const TestProfile(),
