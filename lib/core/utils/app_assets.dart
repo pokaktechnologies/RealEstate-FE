@@ -31,4 +31,29 @@ class AppAssets {
   // deals
   static const dealsoffer = 'assets/deals/dealsoffer.jpg';
   static const dealscreditcard = 'assets/deals/deal_creditcard.png';
+
+  // profile
+  static const userProfile = 'assets/profile/profilepic.png';
+  static const notificationIcon = 'assets/profile/notification.png';
+  static const darkmodeIcon = 'assets/profile/darkmode.png';
+  static const settingsIcon = 'assets/profile/settings.png';
+  static const languageIcon = 'assets/profile/language.png';
+  static const logoutIcon = 'assets/profile/logout.png';
+  static const accountIcon = 'assets/profile/account.png';
+  static const privacyIcon = 'assets/profile/privacy.png';
+  static const helpsupportIcon = 'assets/profile/helpsupport.png';
+  static const termsIcon = 'assets/profile/terms.png';
+  static const paymentIcon = 'assets/profile/payment.png';
+  static const arrowbackIcon = 'assets/profile/arrowback.png';
+  static const editIcon = 'assets/profile/editIcon.png';
+  static const camerplusIcon = 'assets/profile/imagepicker.png';
+
+  static const creditCardIcon = 'assets/profile/card.png';
+  static const paypalIcon = 'assets/profile/addupi.png';
+  static const bankTransferIcon = 'assets/profile/addaccount.png';
+  static const transactionperson = 'assets/profile/person.png';
+
+// transaction
+  static const filterIcon = 'assets/profile/filter.png';
+  static const arrowdownIcon = 'assets/profile/arrowdown.png';
 }
