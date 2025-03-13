@@ -6,6 +6,7 @@ import 'package:realestate_fe/features/bottom_bar/test_message.dart';
 import 'package:realestate_fe/features/bottom_bar/test_profile.dart';
 import 'package:realestate_fe/features/bottom_bar/test_saved.dart';
 import 'package:realestate_fe/features/home/presentation/pages/homePage.dart';
+import 'package:realestate_fe/features/profile/presentation/pages/profile/user_profile.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -19,10 +20,10 @@ class _BottomBarState extends State<BottomBar> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Homepage(),
-    DealsScreen(),
+    const DealsScreen(),
     const TestMessage(),
     const TestSaved(),
-    const TestProfile(),
+    const UserProfileScreen()
   ];
 
   @override
