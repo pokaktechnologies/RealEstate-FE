@@ -24,6 +24,7 @@ class AppAssets {
   static const String buyIcon = 'assets/home/buy_icon.png';
   static const String payingGuest = 'assets/home/paying_guest.png';
   static const String rentIcon = 'assets/home/rent_icon.png';
+  static const String bannerImg = 'assets/home/banner_img.png';
 
   // deals
   static const dealsoffer = 'assets/deals/dealsoffer.jpg';

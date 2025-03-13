@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/bottom_bar/test_deals.dart';
 import 'package:realestate_fe/features/bottom_bar/test_message.dart';
 import 'package:realestate_fe/features/bottom_bar/test_profile.dart';
+import 'package:realestate_fe/features/home/presentation/pages/foryou_page.dart';
 
 class HomepageCubit extends Cubit<int> {
   HomepageCubit() : super(0);
@@ -14,7 +14,7 @@ class HomepageCubit extends Cubit<int> {
   Widget getScreen(int index) {
     switch (index) {
       case 0:
-        return TestDeals();
+        return ForyouPage();
       case 1:
         return TestMessage();
       case 2:
@@ -22,7 +22,7 @@ class HomepageCubit extends Cubit<int> {
       case 3:
         return TestProfile();
       default:
-        return TestDeals();
+        return ForyouPage();
     }
   }
 }
