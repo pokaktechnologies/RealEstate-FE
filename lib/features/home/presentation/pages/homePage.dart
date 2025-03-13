@@ -145,15 +145,14 @@ class Homepage extends StatelessWidget {
             Image.asset(
               iconPath,
               color: isSelected ? AppColors.tealBlue : AppColors.grey,
-              // height: 20,
-              // width: 20,
             ),
             SizedBox(width: 5),
             Text(
               label,
               style: TextStyle(
                 color: isSelected ? AppColors.tealBlue : AppColors.grey,
-                // fontSize: 20,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],

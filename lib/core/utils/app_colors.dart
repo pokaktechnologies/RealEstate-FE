@@ -11,5 +11,9 @@ class AppColors {
   static const Color lightMint = Color(0xFFDBF8F7);
   static const Color grey = Colors.grey;
   static const Color aquaTeal = Color(0xFF4DBCB8);
-
+  static const red = Colors.red;
+  static const Color blackTranslucent = Color(0x2E000000);
+  static const lightBlack = Color(0xFF727272);
+  static const ratingColor = Color(0xFFFFD70E);
+  static const pink = Colors.pink;
 }
