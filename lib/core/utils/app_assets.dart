@@ -31,6 +31,8 @@ class AppAssets {
   static const String sampleImg4 = 'assets/home/sample_img4.png';
   static const String sampleImg5 = 'assets/home/sample_img5.png';
   static const String sampleImg6 = 'assets/home/sample_img6.png';
+  static const String sampleImg7 = 'assets/home/sample_img7.png';
+  static const String sampleImg8 = 'assets/home/sample_img8.png';
 
   // deals
   static const dealsoffer = 'assets/deals/dealsoffer.jpg';
