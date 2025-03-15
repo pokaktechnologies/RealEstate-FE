@@ -29,6 +29,8 @@ class AppAssets {
   static const String roomDummyImg2 = 'assets/home/room_dummy_img2.png';
   static const String sampleImg3 = 'assets/home/sample_img3.png';
   static const String sampleImg4 = 'assets/home/sample_img4.png';
+  static const String sampleImg5 = 'assets/home/sample_img5.png';
+  static const String sampleImg6 = 'assets/home/sample_img6.png';
 
   // deals
   static const dealsoffer = 'assets/deals/dealsoffer.jpg';

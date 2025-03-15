@@ -149,8 +149,7 @@ class TrendingProperties extends StatelessWidget {
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              color: const Color.fromARGB(
-                                                  255, 67, 65, 65),
+                                              color: AppColors.black,
                                               fontSize: 13,
                                               fontWeight: FontWeight.bold,
                                             ),

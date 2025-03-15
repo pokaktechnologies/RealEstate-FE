@@ -3,17 +3,17 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 
-class StayFinderScreen extends StatelessWidget {
-  const StayFinderScreen({super.key});
+class BestProperties extends StatelessWidget {
+  const BestProperties({super.key});
 
   @override
   Widget build(BuildContext context) {
     final List<String> roomImg = [
-      AppAssets.roomDummyImg1,
-      AppAssets.roomDummyImg2,
-      AppAssets.roomDummyImg1,
-      AppAssets.roomDummyImg2,
-      AppAssets.roomDummyImg1,
+      AppAssets.sampleImg5,
+      AppAssets.sampleImg6,
+      AppAssets.sampleImg5,
+      AppAssets.sampleImg6,
+      AppAssets.sampleImg5,
     ];
     return Container(
       height: 290,
@@ -30,7 +30,7 @@ class StayFinderScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Find Your Ideal Pay Guest Stay",
+                  "Best Properties For Rent",
                   style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.w500,
@@ -131,91 +131,69 @@ class StayFinderScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const SizedBox(height: 4),
+                                      Text(
+                                        "₹7000/Month",
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "₹1000",
-                                            maxLines: 2,
+                                            "3BHK House ",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              color: AppColors.black,
+                                              fontSize: 13,
                                               fontWeight: FontWeight.bold,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
-                                          Text(
-                                            "Single Share",
-                                            maxLines: 2,
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              color: AppColors.lightBlack,
-                                            ),
-                                            textAlign: TextAlign.center,
+                                          Row(
+                                            children: [
+                                              RatingBar.builder(
+                                                initialRating: 1,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 1,
+                                                ignoreGestures: true,
+                                                itemSize: 14,
+                                                itemBuilder: (context, _) =>
+                                                    const Icon(
+                                                  Icons.star,
+                                                  color: AppColors.ratingColor,
+                                                ),
+                                                onRatingUpdate: (rating) {},
+                                              ),
+                                              Text(
+                                                "4.5",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
+
+                                      //-----
                                       Text(
-                                        "Edappally, Kochi",
+                                        "Kakkanad, Kochi",
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           color: AppColors.lightBlack,
-                                          fontSize: 13,
+                                          fontSize: 12,
                                         ),
                                         textAlign: TextAlign.center,
-                                      ),
-                                      Row(
-                                        children: [
-                                          RatingBar.builder(
-                                            initialRating: 1,
-                                            minRating: 1,
-                                            direction: Axis.horizontal,
-                                            allowHalfRating: true,
-                                            itemCount: 1,
-                                            ignoreGestures: true,
-                                            itemSize: 14,
-                                            itemBuilder: (context, _) =>
-                                                const Icon(
-                                              Icons.star,
-                                              color: AppColors.ratingColor,
-                                            ),
-                                            onRatingUpdate: (rating) {},
-                                          ),
-                                          Text(
-                                            "4.5",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text(
-                                            "(20)",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Container(
-                                            width: 60,
-                                            height: 17,
-                                            decoration: BoxDecoration(
-                                              color: AppColors.pink,
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "For Women",
-                                                style: TextStyle(
-                                                  fontSize: 10,
-                                                  color: AppColors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        ],
                                       ),
                                       const Spacer(),
                                     ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/features/home/presentation/widgets/foryou/banner.dart';
+import 'package:realestate_fe/features/home/presentation/widgets/foryou/best_properties.dart';
 import 'package:realestate_fe/features/home/presentation/widgets/foryou/stay_finder_screen.dart';
 import 'package:realestate_fe/features/home/presentation/widgets/foryou/trending_properties.dart';
 
@@ -17,6 +18,8 @@ class ForyouPage extends StatelessWidget {
           StayFinderScreen(),
           SizedBox(height: 15),
           TrendingProperties(),
+          SizedBox(height: 15),
+          BestProperties(),
           SizedBox(height: 15),
         ],
       ),
