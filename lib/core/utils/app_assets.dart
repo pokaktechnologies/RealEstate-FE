@@ -27,6 +27,8 @@ class AppAssets {
   static const String bannerImg = 'assets/home/banner_img.png';
   static const String roomDummyImg1 = 'assets/home/room_dummy_img.png';
   static const String roomDummyImg2 = 'assets/home/room_dummy_img2.png';
+  static const String sampleImg3 = 'assets/home/sample_img3.png';
+  static const String sampleImg4 = 'assets/home/sample_img4.png';
 
   // deals
   static const dealsoffer = 'assets/deals/dealsoffer.jpg';
