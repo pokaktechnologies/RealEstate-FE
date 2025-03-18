@@ -70,6 +70,7 @@ flutter:
    - assets/home/
    - assets/deals/
    - assets/profile/
+   - assets/property/
 
   #   - images/a_dot_ham.jpeg
 
