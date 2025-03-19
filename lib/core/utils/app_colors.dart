@@ -16,4 +16,7 @@ class AppColors {
   static const lightBlack = Color(0xFF727272);
   static const ratingColor = Color(0xFFFFD70E);
   static const pink = Colors.pink;
+  static const blue = Colors.blue;
+  static const green = Colors.green;
+  static const shadowblack = Colors.black12;
 }

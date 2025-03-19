@@ -86,4 +86,12 @@ class AppAssets {
   static const rentApartmentImg = 'assets/home/rent_apartment_img.png';
   static const rentHouseImg = 'assets/home/rent_house_img.png';
   static const rentVillaImg = 'assets/home/rent_villa_img.png';
+
+  // message
+  static const phoneIcons = 'assets/message/phoneicon.png';
+
+  // saved
+  static const savedOneImg = 'assets/saved/savedone.png';
+  static const savedTwoImg = 'assets/saved/savedtwo.png';
+  static const savedThreeImg = 'assets/saved/savedthree.png';
 }

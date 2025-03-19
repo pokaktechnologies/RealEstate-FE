@@ -71,6 +71,8 @@ flutter:
    - assets/deals/
    - assets/profile/
    - assets/property/
+   - assets/saved/
+   - assets/message/
 
   #   - images/a_dot_ham.jpeg
 

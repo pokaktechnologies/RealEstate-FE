@@ -12,7 +12,10 @@ class DealsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Deals',
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+              color: AppColors.black),
         ),
         backgroundColor: AppColors.white,
       ),
