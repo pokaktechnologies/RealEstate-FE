@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/Deals/presentation/pages/Deals.dart';
-import 'package:realestate_fe/features/bottom_bar/test_message.dart';
-import 'package:realestate_fe/features/bottom_bar/test_profile.dart';
-import 'package:realestate_fe/features/bottom_bar/test_saved.dart';
 import 'package:realestate_fe/features/home/presentation/pages/homePage.dart';
+import 'package:realestate_fe/features/message/presentation/pages/message.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile/user_profile.dart';
+import 'package:realestate_fe/features/saved/presentation/pages/saved.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -21,8 +20,8 @@ class _BottomBarState extends State<BottomBar> {
   static final List<Widget> _widgetOptions = <Widget>[
     const Homepage(),
     const DealsScreen(),
-    const TestMessage(),
-    const TestSaved(),
+    const MessageScreen(),
+    const SavedScreen(),
     const UserProfileScreen()
   ];
 

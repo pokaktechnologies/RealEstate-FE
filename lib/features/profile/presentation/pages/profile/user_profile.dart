@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/profile/presentation/pages/mybooking/mybooking.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile/edit_profile.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/language.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/logout.dart';
@@ -107,7 +108,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookingsScreen()),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.tealBlue,
                           backgroundColor: AppColors.white,

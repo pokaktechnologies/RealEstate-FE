@@ -75,4 +75,6 @@ class AppAssets {
 
   static const annieprofile = 'assets/property/anniesteve.png';
   static const evemariarofile = 'assets/property/evaMaria.png';
+  // message
+  static const phoneIcons = 'assets/message/phoneicon.png';
 }

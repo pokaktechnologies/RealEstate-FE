@@ -17,46 +17,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.lightGray,
-      // appBar: AppBar(
-      //   leading: InkWell(
-      //       onTap: () {
-      //         Navigator.pop(context);
-      //       },
-      //       child: Image.asset(AppAssets.arrowbackIcon)),
-      //   title: const Text(
-      //     "Setting",
-      //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-      //   ),
-      //   backgroundColor: AppColors.white,
-      // ),
       appBar: AppBar(
-        backgroundColor: AppColors.white,
-        elevation: 0,
+        title: Text(
+          "Setting",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: AppColors.black,
+          ),
+        ),
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
           },
           child: Image.asset(AppAssets.arrowbackIcon),
         ),
-        title: SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                "Setting",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.black,
-                ),
-              ),
-            ),
-          ),
-        ),
+        backgroundColor: AppColors.white,
+        centerTitle: true,
       ),
-
       body: SizedBox(
         height: height,
         width: width,
