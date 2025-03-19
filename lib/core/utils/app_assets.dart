@@ -81,4 +81,9 @@ class AppAssets {
 
   static const annieprofile = 'assets/property/anniesteve.png';
   static const evemariarofile = 'assets/property/evaMaria.png';
+
+  // rent
+  static const rentApartmentImg = 'assets/home/rent_apartment_img.png';
+  static const rentHouseImg = 'assets/home/rent_house_img.png';
+  static const rentVillaImg = 'assets/home/rent_villa_img.png';
 }

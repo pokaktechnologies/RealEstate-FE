@@ -5,13 +5,6 @@ import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/property_details/presentation/blocs/wishlist.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/reviews.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: PropertyDetailsScreen(),
-  ));
-}
-
 class PropertyDetailsScreen extends StatefulWidget {
   const PropertyDetailsScreen({super.key});
 

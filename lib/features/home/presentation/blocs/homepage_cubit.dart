@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/bottom_bar/test_message.dart';
 import 'package:realestate_fe/features/bottom_bar/test_profile.dart';
 import 'package:realestate_fe/features/home/presentation/pages/foryou_page.dart';
+import 'package:realestate_fe/features/home/presentation/pages/rent_page.dart';
 
 class HomepageCubit extends Cubit<int> {
   HomepageCubit() : super(0);
@@ -16,7 +16,7 @@ class HomepageCubit extends Cubit<int> {
       case 0:
         return ForyouPage();
       case 1:
-        return TestMessage();
+        return RentPage();
       case 2:
         return TestProfile();
       case 3:
