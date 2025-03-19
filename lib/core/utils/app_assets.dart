@@ -62,4 +62,23 @@ class AppAssets {
 // transaction
   static const filterIcon = 'assets/profile/filter.png';
   static const arrowdownIcon = 'assets/profile/arrowdown.png';
+
+// dummy images
+  static const imageOne = 'assets/property/imageone.png';
+  static const imageTwo = 'assets/property/imagetwo.png';
+  static const imagethree = 'assets/property/imagethree.png';
+
+// property
+  static const bedroomIcon = 'assets/property/bedroom.png';
+  static const bathroomIcon = 'assets/property/bathroom.png';
+  static const sqfeetIcon = 'assets/property/sqfeet.png';
+  static const furnishedIcon = 'assets/property/furnished.png';
+
+  static const minimarketIcon = 'assets/property/shopping-cart.png';
+  static const hospitaIcon = 'assets/property/hospital.png';
+  static const foodIcon = 'assets/property/food.png';
+  static const trainIcon = 'assets/property/train.png';
+
+  static const annieprofile = 'assets/property/anniesteve.png';
+  static const evemariarofile = 'assets/property/evaMaria.png';
 }
