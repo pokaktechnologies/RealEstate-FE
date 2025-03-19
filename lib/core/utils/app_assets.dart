@@ -53,6 +53,7 @@ class AppAssets {
   static const arrowbackIcon = 'assets/profile/arrowback.png';
   static const editIcon = 'assets/profile/editIcon.png';
   static const camerplusIcon = 'assets/profile/imagepicker.png';
+  static const pgBottomImg = 'assets/home/pg_bottom_img.png';
 
   static const creditCardIcon = 'assets/profile/card.png';
   static const paypalIcon = 'assets/profile/addupi.png';

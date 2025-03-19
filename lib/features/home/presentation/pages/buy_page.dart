@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:realestate_fe/features/home/presentation/widgets/buy/buy_banner.dart';
+import 'package:realestate_fe/features/home/presentation/widgets/buy/trending_properties.dart';
 import 'package:realestate_fe/features/home/presentation/widgets/foryou/bottom_image.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/rent/rent_banner.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/rent/trending_properties.dart';
 
-class RentPage extends StatelessWidget {
-  const RentPage({super.key});
+class BuyPage extends StatelessWidget {
+  const BuyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class RentPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 10),
-          RentBanner(),
+          BuyBanner(),
           SizedBox(height: 10),
           TrendingProperties(),
           BottomImage(
