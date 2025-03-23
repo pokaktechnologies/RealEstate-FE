@@ -77,4 +77,13 @@ class AppAssets {
   static const evemariarofile = 'assets/property/evaMaria.png';
   // message
   static const phoneIcons = 'assets/message/phoneicon.png';
+
+  // booking
+  static const contactIcons = 'assets/booking/contactIcon.png';
+  static const cancelIcons = 'assets/booking/cancel.png';
+  static const copylinkIcons = 'assets/booking/link.png';
+  static const instaIcons = 'assets/booking/insta.png';
+  static const fbIcons = 'assets/booking/fb.png';
+  static const whatsappIcon = 'assets/booking/whatsapp.png';
+  static const mailIcon = 'assets/booking/email.png';
 }

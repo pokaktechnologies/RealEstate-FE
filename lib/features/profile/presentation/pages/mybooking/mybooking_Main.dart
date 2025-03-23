@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/profile/presentation/pages/mybooking/mybooking_details.dart';
+import 'package:realestate_fe/features/profile/presentation/pages/mybooking/share_bottomsheet.dart';
 
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({super.key});
@@ -96,10 +98,15 @@ class _BookingsScreenState extends State<BookingsScreen> {
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.black),
                                 ),
-                                Icon(
-                                  Icons.share,
-                                  color: AppColors.mediumGray,
-                                  size: 25,
+                                InkWell(
+                                  onTap: () {
+                                    showShareBottomSheet(context);
+                                  },
+                                  child: Icon(
+                                    Icons.share,
+                                    color: AppColors.grey,
+                                    size: 25,
+                                  ),
                                 ),
                               ],
                             ),
@@ -156,7 +163,13 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     ),
                     Expanded(
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookingDetailsScreen()),
+                          );
+                        },
                         style: TextButton.styleFrom(
                           foregroundColor: AppColors.black,
                           padding: EdgeInsets.symmetric(vertical: 16),

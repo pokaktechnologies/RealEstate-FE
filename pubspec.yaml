@@ -73,6 +73,7 @@ flutter:
    - assets/property/
    - assets/saved/
    - assets/message/
+   - assets/booking/
 
   #   - images/a_dot_ham.jpeg
 
