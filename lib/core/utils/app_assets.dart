@@ -96,4 +96,12 @@ class AppAssets {
   static const savedOneImg = 'assets/saved/savedone.png';
   static const savedTwoImg = 'assets/saved/savedtwo.png';
   static const savedThreeImg = 'assets/saved/savedthree.png';
+  // booking
+  static const contactIcons = 'assets/booking/contactIcon.png';
+  static const cancelIcons = 'assets/booking/cancel.png';
+  static const copylinkIcons = 'assets/booking/link.png';
+  static const instaIcons = 'assets/booking/insta.png';
+  static const fbIcons = 'assets/booking/fb.png';
+  static const whatsappIcon = 'assets/booking/whatsapp.png';
+  static const mailIcon = 'assets/booking/email.png';
 }
