@@ -40,6 +40,7 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   flutter_rating_bar: ^4.0.1
   image_picker: ^1.1.2
+  lottie: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,7 @@ flutter:
    - assets/saved/
    - assets/message/
    - assets/booking/
+   - assets/animation/
 
   #   - images/a_dot_ham.jpeg
 

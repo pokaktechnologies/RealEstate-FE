@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
+import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/notification.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -21,7 +22,7 @@ class Homepage extends StatelessWidget {
           children: [
             SizedBox(
               height: screenHeight * 0.05,
-              width: screenWidth * 0.3,
+              width: screenWidth * 0.25,
               child: Row(
                 children: [
                   Icon(Icons.location_on_sharp),
@@ -61,9 +62,18 @@ class Homepage extends StatelessWidget {
                 const SizedBox(
                   width: 3,
                 ),
-                Icon(
-                  Icons.notifications_sharp,
-                  size: 26,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NotificationsScreen()),
+                    );
+                  },
+                  child: Icon(
+                    Icons.notifications_sharp,
+                    size: 26,
+                  ),
                 ),
               ],
             )

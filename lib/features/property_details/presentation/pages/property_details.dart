@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/payment/presentation/pages/payment_screen.dart';
 import 'package:realestate_fe/features/property_details/presentation/blocs/wishlist.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/reviews.dart';
+import 'package:realestate_fe/features/property_details/presentation/widgets/property_details/details.dart';
 
 class PropertyDetailsScreen extends StatefulWidget {
   const PropertyDetailsScreen({super.key});
@@ -30,9 +32,8 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FavoriteBloc(), // Provide the FavoriteBloc
+      create: (context) => FavoriteBloc(),
       child: Scaffold(
-        // contact and Book now button
         bottomNavigationBar: SizedBox(
           height: 80,
           child: BottomAppBar(
@@ -67,7 +68,13 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                   child: SizedBox(
                     height: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PaymentScreen()),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
                         backgroundColor: Colors.teal,
@@ -90,7 +97,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
             ),
           ),
         ),
-        //--------
         appBar: AppBar(
           leading: InkWell(
             onTap: () {
@@ -112,13 +118,10 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                   icon: Icon(
                       state is FavoriteFilledState
                           ? Icons.favorite
-                          : Icons.favorite_border, // Toggle icon
-                      color: AppColors.tealBlue // Keep color consistent
-                      ),
+                          : Icons.favorite_border,
+                      color: AppColors.tealBlue),
                   onPressed: () {
-                    context
-                        .read<FavoriteBloc>()
-                        .add(ToggleFavoriteEvent()); // Trigger event
+                    context.read<FavoriteBloc>().add(ToggleFavoriteEvent());
                   },
                 );
               },
@@ -128,7 +131,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
         backgroundColor: AppColors.white,
         body: Stack(
           children: [
-            // Top Image with Carousel Effect
             Positioned(
               top: 0,
               left: 0,
@@ -150,8 +152,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                 ),
               ),
             ),
-
-            // Next Image Button
             Positioned(
               right: 16,
               top: MediaQuery.of(context).size.height * 0.18,
@@ -161,8 +161,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                     color: AppColors.white, size: 50),
               ),
             ),
-
-            // Curved Bottom Container
             Positioned(
               top: MediaQuery.of(context).size.height * 0.35,
               left: 0,
@@ -189,18 +187,18 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildPriceAndRating(),
+                      PropertyDetailsWidgets.buildPriceAndRating(),
                       const SizedBox(height: 10),
-                      _buildPropertyDetails(),
+                      PropertyDetailsWidgets.buildPropertyDetails(),
                       const SizedBox(height: 10),
-                      _buildFacilityContainer(),
+                      PropertyDetailsWidgets.buildFacilityContainer(),
                       const SizedBox(height: 10),
-                      _buildAboutProperty(),
+                      PropertyDetailsWidgets.buildNearestPublicFacilities(),
                       const SizedBox(height: 10),
-                      _buildPropertySpecs(),
-                      const SizedBox(height: 20),
-                      _nearestpublicfacilities(),
-                      const SizedBox(height: 20),
+                      PropertyDetailsWidgets.buildAboutProperty(),
+                      const SizedBox(height: 10),
+                      PropertyDetailsWidgets.buildPropertySpecs(),
+                      const SizedBox(height: 10),
                       Divider(),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -267,277 +265,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildPriceAndRating() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          "₹50,00,000",
-          style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w600,
-              color: AppColors.tealBlue),
-        ),
-        Row(
-          children: const [
-            Icon(Icons.star, color: AppColors.ratingColor, size: 25),
-            SizedBox(width: 4),
-            Text(
-              "4.5",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.black),
-            ),
-            SizedBox(width: 4),
-            Text("(73)",
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: AppColors.mediumGray)),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPropertyDetails() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        Text(
-          "Furnished 2BHK apartment in a prime location",
-          style: TextStyle(
-              fontSize: 16,
-              color: AppColors.black,
-              fontWeight: FontWeight.w700),
-        ),
-        SizedBox(height: 8),
-        Text(
-          "Kakkanad- Kochi, Eranakulam, Kerala",
-          style: TextStyle(
-              fontSize: 14,
-              color: AppColors.mediumGray,
-              fontWeight: FontWeight.w400),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildFacilityContainer() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0xFFEAF8F9),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildDetail(AppAssets.bedroomIcon, "Bedroom", "2"),
-              _buildDetail(AppAssets.bathroomIcon, "Bathroom", "2"),
-            ],
-          ),
-          const SizedBox(height: 12), // Spacing
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildDetail(AppAssets.sqfeetIcon, "Build Up Area", "1250 sq-ft"),
-              _buildDetail(AppAssets.furnishedIcon, "Furnished", ""),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDetail(String imagePath, String label, String value) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.asset(
-          imagePath,
-          width: 28,
-          height: 25,
-          fit: BoxFit.contain,
-        ),
-        SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              label,
-              style: TextStyle(
-                  color: AppColors.mediumGray,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400),
-            ),
-            if (value.isNotEmpty)
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.black,
-                ),
-              ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _nearestpublicfacilities() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0xFFEAF8F9),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildNerestdetails(
-                  AppAssets.minimarketIcon, "Minimarket", "200m"),
-              _buildNerestdetails(
-                  AppAssets.hospitaIcon, "Hospital       ", "130m"),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildNerestdetails(AppAssets.foodIcon, "Cafe", "400m"),
-              _buildNerestdetails(AppAssets.trainIcon, "Train station", "500m"),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNerestdetails(String imagePath, String label, String value) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.asset(
-          imagePath,
-          width: 28,
-          height: 25,
-          fit: BoxFit.contain,
-        ),
-        SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              label,
-              style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-            if (value.isNotEmpty)
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.mediumGray,
-                ),
-              ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAboutProperty() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        SizedBox(height: 10),
-        Text(
-          "About the property",
-          style: TextStyle(
-              fontSize: 18,
-              color: AppColors.black,
-              fontWeight: FontWeight.w700),
-        ),
-        SizedBox(height: 5),
-        Text(
-          "Furnished 2BHK apartment in a prime location, offering modern amenities like a gym, parking, "
-          "and easy access to public transport. Perfect for families or individuals seeking a comfortable, "
-          "long-term rental. Includes furniture like Refrigerator, Washing Machine, Air Conditioner, Tables and chairs.",
-          style: TextStyle(
-              fontSize: 14,
-              color: AppColors.black,
-              fontWeight: FontWeight.w400),
-          textAlign: TextAlign.justify,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPropertySpecs() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildPropertyRow("Property ID", "R11234", "Ownership", "Single",
-            "Deposit", "₹50,000"),
-        _buildPropertyRow(
-            "Total Floors", "02", "Constructed In", "2019", "State", "Kerala"),
-        _buildPropertyRow("District", "Eranakulam", "Town", "Kakkanad",
-            "Street", "Gandhi Nagar"),
-      ],
-    );
-  }
-
-  Widget _buildPropertyRow(String title1, String value1, String title2,
-      String value2, String title3, String value3) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _buildPropertyColumn(title1, value1),
-          SizedBox(
-            width: 15,
-          ),
-          _buildPropertyColumn(title2, value2),
-          SizedBox(
-            width: 15,
-          ),
-          _buildPropertyColumn(title3, value3),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPropertyColumn(String title, String value) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title,
-              style:
-                  const TextStyle(fontSize: 14, color: AppColors.mediumGray)),
-          Text(value,
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.black)),
-        ],
       ),
     );
   }

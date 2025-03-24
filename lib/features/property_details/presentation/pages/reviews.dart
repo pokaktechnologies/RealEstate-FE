@@ -123,8 +123,7 @@ class ReviewsScreen extends StatelessWidget {
               borderSide: BorderSide(color: AppColors.grey, width: 1),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: AppColors.tealBlue, width: 2), // Focus border color
+              borderSide: BorderSide(color: AppColors.tealBlue, width: 2),
             ),
             suffixIcon: IconButton(
               icon: Icon(

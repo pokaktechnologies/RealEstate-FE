@@ -92,7 +92,7 @@ class TopAgents extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "akkruzzz",
+                                      "Alen steve",
                                       maxLines: 2,
                                       overflow: TextOverflow.visible,
                                       softWrap: true,

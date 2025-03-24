@@ -32,15 +32,16 @@ class BookingDetailsScreen extends StatelessWidget {
           centerTitle: true,
         ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Card(
                 color: AppColors.white,
-                shape: RoundedRectangleBorder(),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Row(
                     children: [
                       ClipRRect(

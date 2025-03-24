@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/splash_screen.dart';
+import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
 
@@ -23,9 +23,11 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Colors.red,
+          scaffoldBackgroundColor: AppColors.lightGray, // Background Color
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
+
         // home: SplashScreen(),
         home: BottomBar(),
       ),

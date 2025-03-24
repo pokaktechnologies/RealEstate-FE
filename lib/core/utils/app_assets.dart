@@ -56,10 +56,11 @@ class AppAssets {
   static const camerplusIcon = 'assets/profile/imagepicker.png';
   static const pgBottomImg = 'assets/home/pg_bottom_img.png';
 
-  static const creditCardIcon = 'assets/profile/card.png';
+  static const creditCardIcon = 'assets/profile/credit.png';
   static const paypalIcon = 'assets/profile/addupi.png';
   static const bankTransferIcon = 'assets/profile/addaccount.png';
   static const transactionperson = 'assets/profile/person.png';
+  static const moneyIcon = 'assets/profile/money.png';
 
 // transaction
   static const filterIcon = 'assets/profile/filter.png';
@@ -104,4 +105,7 @@ class AppAssets {
   static const fbIcons = 'assets/booking/fb.png';
   static const whatsappIcon = 'assets/booking/whatsapp.png';
   static const mailIcon = 'assets/booking/email.png';
+  static const animationPath =
+      'assets/animation/Animation - 1742810730745.json';
+  static const nonotification = 'assets/profile/emptyNotification.png';
 }
