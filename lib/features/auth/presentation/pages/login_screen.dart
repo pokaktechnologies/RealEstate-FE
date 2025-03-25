@@ -4,10 +4,10 @@ import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/forgot_password.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/signup_screen.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/verification_code.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_icon.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_textfield.dart';
+import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -37,11 +37,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     right: 10,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
+                          MaterialPageRoute(builder: (context) => BottomBar()),
+                          (route) => false,
                         );
                       },
                       child: Row(
@@ -146,11 +145,10 @@ class _LoginScreenState extends State<LoginScreen> {
               child: CustomButton(
                 buttonText: "Login",
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => VerificationPage(),
-                    ),
+                    MaterialPageRoute(builder: (context) => BottomBar()),
+                    (route) => false,
                   );
                 },
               ),
