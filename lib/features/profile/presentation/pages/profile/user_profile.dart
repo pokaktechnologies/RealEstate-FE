@@ -24,7 +24,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      // backgroundColor: AppColors.lightGray,
+
+      backgroundColor: AppColors.greyBackground,
       body: SizedBox(
         height: height,
         width: width,
@@ -215,7 +216,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               value: theme.brightness == Brightness.dark,
                               activeColor: AppColors.black,
                               onChanged: (bool value) {
-                                context.read<ThemeBloc>().toggleTheme();
+                                // context.read<ThemeBloc>().toggleTheme();
                               },
                             ),
                           ),

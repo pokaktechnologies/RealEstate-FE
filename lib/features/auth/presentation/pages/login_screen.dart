@@ -20,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -225,7 +226,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        // Navigate to SignupScreen
                         Navigator.push(
                           context,
                           MaterialPageRoute(

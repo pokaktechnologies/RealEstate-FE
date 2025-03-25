@@ -20,6 +20,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        backgroundColor: AppColors.white,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);

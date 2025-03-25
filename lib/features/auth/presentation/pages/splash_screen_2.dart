@@ -15,8 +15,9 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
+        backgroundColor: AppColors.white,
         automaticallyImplyLeading: false,
         actions: [
           Padding(

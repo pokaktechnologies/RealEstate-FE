@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/home/presentation/widgets/foryou/banner.dart';
 import 'package:realestate_fe/features/home/presentation/widgets/foryou/best_properties.dart';
 import 'package:realestate_fe/features/home/presentation/widgets/foryou/bottom_image.dart';

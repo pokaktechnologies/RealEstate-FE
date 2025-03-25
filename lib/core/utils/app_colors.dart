@@ -19,4 +19,5 @@ class AppColors {
   static const blue = Colors.blue;
   static const green = Colors.green;
   static const shadowblack = Colors.black12;
+  static const Color greyBackground = Color(0xFFF6F6F6);
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
@@ -17,6 +18,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -209,7 +211,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             RichText(
               text: TextSpan(
-                text: "Dont have an account? ",
+                text: "Already have an account? ",
                 style: const TextStyle(
                   color: AppColors.black,
                   fontSize: 14,
@@ -217,12 +219,21 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 children: [
                   TextSpan(
-                    text: "Signup",
+                    text: "Login",
                     style: const TextStyle(
                       fontSize: 14,
                       color: AppColors.black,
                       fontWeight: FontWeight.bold,
                     ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
                   ),
                 ],
               ),
