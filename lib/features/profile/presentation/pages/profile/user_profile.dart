@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/profile/presentation/blocs/theme_bloc.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/mybooking/mybooking_Main.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile/edit_profile.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/language.dart';
@@ -19,11 +21,10 @@ class UserProfileScreen extends StatefulWidget {
 class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = false;
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: AppColors.lightGray,
+      // backgroundColor: AppColors.lightGray,
       body: SizedBox(
         height: height,
         width: width,
@@ -59,14 +60,17 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             Text(
                               "Albert John",
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             Text(
                               "+91 856321478",
                               style: TextStyle(
-                                  color: AppColors.mediumGray,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
+                                color: AppColors.mediumGray,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,9 +78,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 Text(
                                   "albertjohn@abc.com",
                                   style: TextStyle(
-                                      color: AppColors.mediumGray,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500),
+                                    color: AppColors.mediumGray,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                                 Spacer(),
                                 InkWell(
@@ -122,14 +127,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             color: AppColors.tealBlue,
                           ),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                         child: Text(
                           "My Bookings",
                           style: TextStyle(
-                              color: AppColors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
+                            color: AppColors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),
@@ -148,14 +155,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           backgroundColor: Colors.white,
                           side: BorderSide(color: AppColors.tealBlue),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                         child: Text(
                           "Transactions",
                           style: TextStyle(
-                              color: AppColors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
+                            color: AppColors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),
@@ -170,15 +179,67 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                   );
                 }),
-                _WidgetListTile("Dark Mode", AppAssets.darkmodeIcon, () {},
-                    trailing: CustomSwitch(
-                      value: isDarkMode,
-                      onChanged: (value) {
-                        setState(() {
-                          isDarkMode = value;
-                        });
-                      },
-                    )),
+
+                BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppColors.white, width: 1.5),
+                      ),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        leading: Image.asset(
+                          AppAssets.darkmodeIcon,
+                          height: 24,
+                          width: 24,
+                        ),
+                        title: Text(
+                          "Dark Mode",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.black,
+                          ),
+                        ),
+                        trailing: SizedBox(
+                          width: 60,
+                          height: 35,
+                          child: FittedBox(
+                            fit: BoxFit.fill,
+                            child: Switch(
+                              value: theme.brightness == Brightness.dark,
+                              activeColor: AppColors.black,
+                              onChanged: (bool value) {
+                                context.read<ThemeBloc>().toggleTheme();
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+
+                // _WidgetListTile(
+                //   "Dark Mode",
+                //   AppAssets.darkmodeIcon,
+                //   () {
+                //     print("button pressed");
+                //   },
+                //   trailing: CustomSwitch(
+                //     value: isDarkMode,
+                //     onChanged: (value) {
+                //       setState(() {
+                //         isDarkMode = value;
+                //       });
+                //     },
+                //   ),
+                // ),
                 _WidgetListTile("Settings", AppAssets.settingsIcon, () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -228,9 +289,10 @@ Widget _WidgetListTile(String title, String imagePath, VoidCallback onTap,
         title: Text(
           title,
           style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: AppColors.black),
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: AppColors.black,
+          ),
         ),
         trailing: trailing,
         onTap: onTap,
