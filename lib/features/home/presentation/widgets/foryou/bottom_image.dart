@@ -15,6 +15,11 @@ class BottomImage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(18),
             child: Image.asset(AppAssets.pgBottomImg),
+            // child: Image.asset(
+            //   AppAssets.dealsoffer,
+            //   width: double.infinity,
+            //   fit: BoxFit.cover,
+            // ),
           ),
         )
       ],

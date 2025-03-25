@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/message/presentation/pages/chat_screen.dart';
 import 'package:realestate_fe/features/payment/presentation/pages/payment_screen.dart';
+import 'package:realestate_fe/features/profile/presentation/pages/mybooking/share_bottomsheet.dart';
 import 'package:realestate_fe/features/property_details/presentation/blocs/wishlist.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/reviews.dart';
 import 'package:realestate_fe/features/property_details/presentation/widgets/property_details/details.dart';
@@ -106,12 +108,15 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
           ),
           backgroundColor: AppColors.white,
           actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.share,
-                  color: AppColors.tealBlue,
-                ),
-                onPressed: () {}),
+            InkWell(
+              onTap: () {
+                showShareBottomSheet(context);
+              },
+              child: Icon(
+                Icons.share,
+                color: AppColors.tealBlue,
+              ),
+            ),
             BlocBuilder<FavoriteBloc, FavoriteState>(
               builder: (context, state) {
                 return IconButton(
@@ -161,107 +166,123 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                     color: AppColors.white, size: 50),
               ),
             ),
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.35,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.65,
-                padding: const EdgeInsets.all(24.0),
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10,
-                      spreadRadius: 2,
+            DraggableScrollableSheet(
+              initialChildSize: 0.6,
+              minChildSize: 0.6,
+              maxChildSize: 0.9,
+              builder: (context, scrollController) {
+                return Container(
+                  padding: const EdgeInsets.all(24.0),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
                     ),
-                  ],
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PropertyDetailsWidgets.buildPriceAndRating(),
-                      const SizedBox(height: 10),
-                      PropertyDetailsWidgets.buildPropertyDetails(),
-                      const SizedBox(height: 10),
-                      PropertyDetailsWidgets.buildFacilityContainer(),
-                      const SizedBox(height: 10),
-                      PropertyDetailsWidgets.buildNearestPublicFacilities(),
-                      const SizedBox(height: 10),
-                      PropertyDetailsWidgets.buildAboutProperty(),
-                      const SizedBox(height: 10),
-                      PropertyDetailsWidgets.buildPropertySpecs(),
-                      const SizedBox(height: 10),
-                      Divider(),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 25,
-                                  backgroundImage:
-                                      AssetImage(AppAssets.annieprofile),
-                                ),
-                                SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Annie Steve",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.black,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PropertyDetailsWidgets.buildPriceAndRating(),
+                        const SizedBox(height: 10),
+                        PropertyDetailsWidgets.buildPropertyDetails(),
+                        const SizedBox(height: 10),
+                        PropertyDetailsWidgets.buildFacilityContainer(),
+                        const SizedBox(height: 10),
+                        PropertyDetailsWidgets.buildAboutProperty(),
+                        const SizedBox(height: 10),
+                        PropertyDetailsWidgets.buildPropertySpecs(),
+                        const SizedBox(height: 10),
+                        PropertyDetailsWidgets.buildNearestPublicFacilities(),
+                        const SizedBox(height: 10),
+                        Divider(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 25,
+                                    backgroundImage:
+                                        AssetImage(AppAssets.annieprofile),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Annie Steve",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.black,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "Host",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.mediumGray,
+                                      Text(
+                                        "Host",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppColors.mediumGray,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: AppColors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    blurRadius: 5,
-                                    spreadRadius: 1,
+                                    ],
                                   ),
                                 ],
                               ),
-                              child:
-                                  Icon(Icons.chat_bubble, color: Colors.teal),
-                            ),
-                          ],
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatScreen(
+                                        name: "Annie Steve",
+                                        imageUrl: AppAssets.annieprofile,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.white,
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 5,
+                                        spreadRadius: 1,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Icon(Icons.chat_bubble,
+                                      color: Colors.teal),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Divider(),
-                      ReviewsScreen(),
-                      const SizedBox(height: 150),
-                    ],
+                        Divider(),
+                        ReviewsScreen(),
+                        const SizedBox(height: 100),
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),
