@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/property_details/presentation/pages/property_details.dart';
 
 class TrendingProperties extends StatelessWidget {
   const TrendingProperties({super.key});
@@ -84,7 +85,13 @@ class TrendingProperties extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (context, i) {
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PropertyDetailsScreen()),
+                      );
+                    },
                     child: SizedBox(
                       width: 170,
                       height: 195,

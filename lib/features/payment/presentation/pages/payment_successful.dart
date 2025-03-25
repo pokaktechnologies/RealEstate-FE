@@ -16,7 +16,7 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 700), () {
+    Future.delayed(const Duration(milliseconds: 730), () {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => BottomBar()),

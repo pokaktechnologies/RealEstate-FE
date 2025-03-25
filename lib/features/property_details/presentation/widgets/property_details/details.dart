@@ -77,7 +77,7 @@ class PropertyDetailsWidgets {
               buildDetail(AppAssets.bathroomIcon, "Bathroom", "2"),
             ],
           ),
-          const SizedBox(height: 12), // Spacing
+          const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -144,7 +144,7 @@ class PropertyDetailsWidgets {
               buildNearestDetails(AppAssets.hospitaIcon, "Hospital", "130m"),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

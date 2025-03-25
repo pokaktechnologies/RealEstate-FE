@@ -4,14 +4,35 @@ import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/notification.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
+    void _openGoogleMaps(String searchQuery) async {
+      final query = Uri.encodeComponent(searchQuery);
+      final googleMapsUrl =
+          Uri.parse("https://www.google.com/maps/search/?api=1&query=$query");
+
+      if (await canLaunchUrl(googleMapsUrl)) {
+        await launchUrl(googleMapsUrl, mode: LaunchMode.externalApplication);
+        _searchController.clear(); // Clear text after navigation
+      } else {
+        print("Could not open Google Maps");
+      }
+    }
+
     return Scaffold(
       backgroundColor: AppColors.lightMint,
       appBar: AppBar(
@@ -43,6 +64,12 @@ class Homepage extends StatelessWidget {
                   height: 35,
                   width: 200,
                   child: TextField(
+                    controller: _searchController,
+                    onSubmitted: (value) {
+                      if (value.isNotEmpty) {
+                        _openGoogleMaps(value);
+                      }
+                    },
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: AppColors.white,

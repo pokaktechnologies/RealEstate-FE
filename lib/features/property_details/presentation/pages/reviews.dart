@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/property_details/presentation/pages/customer_reviews.dart';
 
 class ReviewsScreen extends StatelessWidget {
   const ReviewsScreen({super.key});
@@ -21,7 +22,13 @@ class ReviewsScreen extends StatelessWidget {
                   color: AppColors.black),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CustomerReviewScreen()),
+                );
+              },
               child: Text(
                 'View all 30',
                 style: TextStyle(
