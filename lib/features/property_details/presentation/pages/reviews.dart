@@ -135,6 +135,7 @@ class ReviewsScreen extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 40),
       ],
     );
   }
