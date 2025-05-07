@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/customer_reviews.dart';
+import 'package:realestate_fe/features/property_details/presentation/widgets/reviews/write_review.dart';
 
 class ReviewsScreen extends StatelessWidget {
   const ReviewsScreen({super.key});
@@ -141,6 +142,12 @@ class ReviewsScreen extends StatelessWidget {
               onPressed: () {},
             ),
           ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WriteReviewScreen()),
+            );
+          },
         ),
         SizedBox(height: 40),
       ],

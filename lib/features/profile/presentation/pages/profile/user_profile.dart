@@ -64,19 +64,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Text(
-                              "+91 856321478",
-                              style: TextStyle(
-                                color: AppColors.mediumGray,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "albertjohn@abc.com",
+                                  "+91 856321478",
                                   style: TextStyle(
                                     color: AppColors.mediumGray,
                                     fontSize: 12,
@@ -93,13 +85,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                       ),
                                     );
                                   },
-                                  child: Image.asset(
-                                    AppAssets.editIcon,
-                                    height: 20,
-                                    width: 25,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: AppColors.tealBlue,
+                                    size: 20,
                                   ),
-                                ),
+                                )
                               ],
+                            ),
+                            Text(
+                              "albertjohn@abc.com",
+                              style: TextStyle(
+                                color: AppColors.mediumGray,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ],
                         ),

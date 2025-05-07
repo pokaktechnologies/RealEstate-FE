@@ -16,7 +16,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Scaffold(
       backgroundColor: AppColors.lightGray,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Notification",
           style: TextStyle(
             fontSize: 20,
@@ -24,14 +24,18 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             color: AppColors.black,
           ),
         ),
+        centerTitle: true,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
           },
-          child: Image.asset(AppAssets.arrowbackIcon),
+          child: Padding(
+            padding:
+                const EdgeInsets.all(12.0), // Adjust padding to center better
+            child: Image.asset(AppAssets.arrowbackIcon),
+          ),
         ),
         backgroundColor: AppColors.white,
-        centerTitle: true,
       ),
       body:
           notifications.isEmpty ? _buildEmptyState() : _buildNotificationList(),

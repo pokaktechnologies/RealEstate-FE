@@ -77,6 +77,9 @@ class AppAssets {
   static const sqfeetIcon = 'assets/property/sqfeet.png';
   static const furnishedIcon = 'assets/property/furnished.png';
 
+  static const sendmessageIcon = 'assets/property/message.png';
+  static const callingIcon = 'assets/property/calling.png';
+
   static const minimarketIcon = 'assets/property/shopping-cart.png';
   static const hospitaIcon = 'assets/property/hospital.png';
   static const foodIcon = 'assets/property/food.png';
