@@ -31,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Image.asset(
                     AppAssets.authImg,
                     fit: BoxFit.cover,
+                    width: double.infinity,
                   ),
                   Positioned(
                     bottom: 180,

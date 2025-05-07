@@ -15,8 +15,9 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
+        backgroundColor: AppColors.white,
         automaticallyImplyLeading: false,
         actions: [
           Padding(
@@ -25,9 +26,7 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               },
               child: Row(
@@ -42,11 +41,7 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Image.asset(
-                    AppAssets.rightArrow,
-                    width: 20,
-                    height: 20,
-                  ),
+                  Image.asset(AppAssets.rightArrow, width: 20, height: 20),
                 ],
               ),
             ),
@@ -57,25 +52,29 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset(AppAssets.appLogo),
+            child: SizedBox(
+              width: 300,
+              child: Image.asset(AppAssets.pokaklogo),
+            ),
+          ),
+          SizedBox(
+            height: 50,
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Stack(
-              alignment: Alignment.center, // Centers the text over the image
+              alignment: Alignment.center,
               children: [
                 Image.asset(
                   AppAssets.bottonDesign,
                   fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
                 Positioned(
                   bottom: 50,
                   child: Text(
                     "Step Into Your Future Home",
-                    style: TextStyle(
-                      color: AppColors.mediumGray,
-                      fontSize: 17,
-                    ),
+                    style: TextStyle(color: AppColors.mediumGray, fontSize: 17),
                   ),
                 ),
               ],
@@ -84,14 +83,10 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
           customButton("Login", () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => LoginScreen(),
-              ),
+              MaterialPageRoute(builder: (context) => LoginScreen()),
             );
           }),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -104,10 +99,7 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
               ),
               Text(
                 "Or",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.black,
-                ),
+                style: TextStyle(fontSize: 16, color: AppColors.black),
               ),
               Expanded(
                 child: Divider(
@@ -119,15 +111,11 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           customButton("Sign Up", () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => SignupScreen(),
-              ),
+              MaterialPageRoute(builder: (context) => SignupScreen()),
             );
           }),
         ],
@@ -135,10 +123,7 @@ class _SplashScreenTwoState extends State<SplashScreenTwo> {
     );
   }
 
-  Widget customButton(
-    String name,
-    final VoidCallback onPressed,
-  ) {
+  Widget customButton(String name, final VoidCallback onPressed) {
     return InkWell(
       onTap: () {
         onPressed();

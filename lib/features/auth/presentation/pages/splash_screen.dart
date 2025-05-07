@@ -22,27 +22,31 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 3),
       () => Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => SplashScreenTwo(),
-        ),
+        MaterialPageRoute(builder: (context) => SplashScreenTwo()),
       ),
     );
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             child: Center(
-              child: Image.asset(AppAssets.appLogo),
+              child: Image.asset(
+                AppAssets.pokaklogo,
+                width: 300,
+              ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Image.asset(AppAssets.bottonDesign, fit: BoxFit.cover),
+          Image.asset(
+            AppAssets.bottonDesign,
+            fit: BoxFit.cover,
+            width: double.infinity,
           ),
         ],
       ),
