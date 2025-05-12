@@ -69,8 +69,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Positioned(
-                    bottom: 70,
-                    child: Image.asset(AppAssets.whiteLogo),
+                    bottom: 100,
+                    child: SizedBox(
+                      width: 300,
+                      child: Image.asset(AppAssets.whitepokaklogo),
+                    ),
                   ),
                 ],
               ),

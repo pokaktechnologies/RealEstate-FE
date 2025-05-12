@@ -24,7 +24,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      // backgroundColor: AppColors.lightGray,
+      backgroundColor: AppColors.lightGray,
       body: SizedBox(
         height: height,
         width: width,

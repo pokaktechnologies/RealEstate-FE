@@ -17,6 +17,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -65,8 +66,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   Positioned(
-                    bottom: 70,
-                    child: Image.asset(AppAssets.whiteLogo),
+                    bottom: 100,
+                    child: SizedBox(
+                      width: 300,
+                      child: Image.asset(AppAssets.whitepokaklogo),
+                    ),
                   ),
                 ],
               ),
