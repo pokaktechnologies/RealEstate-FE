@@ -114,4 +114,5 @@ class AppAssets {
   static const animationPath =
       'assets/animation/Animation - 1742810730745.json';
   static const nonotification = 'assets/profile/emptyNotification.png';
+  static const nosaved = 'assets/saved/nosaved.png';
 }

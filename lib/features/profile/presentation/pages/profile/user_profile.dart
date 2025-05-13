@@ -78,12 +78,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 Spacer(),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            EditProfileScreen(),
-                                      ),
-                                    );
+                                    // Navigator.of(context).push(
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) =>
+                                    //         EditProfileScreen(),
+                                    //   ),
+                                    // );
                                   },
                                   child: Icon(
                                     Icons.arrow_forward_ios,
@@ -114,11 +114,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BookingsScreen()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => BookingsScreen()),
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.tealBlue,
@@ -144,11 +144,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TransactionsScreen()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => TransactionsScreen()),
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.tealBlue,
@@ -173,11 +173,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 const SizedBox(height: 10),
                 _WidgetListTile("Notifications", AppAssets.notificationIcon,
                     () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const NotificationsScreen(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const NotificationsScreen(),
+                  //   ),
+                  // );
                 }),
 
                 BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
@@ -241,21 +241,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 //   ),
                 // ),
                 _WidgetListTile("Settings", AppAssets.settingsIcon, () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SettingsScreen(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const SettingsScreen(),
+                  //   ),
+                  // );
                 }),
                 _WidgetListTile("Language", AppAssets.languageIcon, () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const LanguageSelectionScreen(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const LanguageSelectionScreen(),
+                  //   ),
+                  // );
                 }),
                 _WidgetListTile("Logout", AppAssets.logoutIcon, () {
-                  showLogoutDialog(context);
+                  // showLogoutDialog(context);
                 }),
                 const SizedBox(height: 150),
               ],

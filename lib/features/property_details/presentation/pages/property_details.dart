@@ -135,7 +135,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                       height: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          _showContactMenu(contactButtonContext);
+                          // _showContactMenu(contactButtonContext);
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
@@ -157,15 +157,16 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                   }),
                 ),
                 Expanded(
-                  child: SizedBox(
+                  child: 
+                  SizedBox(
                     height: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PaymentScreen()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => PaymentScreen()),
+                        // );
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
@@ -200,7 +201,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
           actions: [
             InkWell(
               onTap: () {
-                showShareBottomSheet(context);
+                // showShareBottomSheet(context);
               },
               child: Icon(
                 Icons.share,
@@ -335,15 +336,15 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ChatScreen(
-                                        name: "Annie Steve",
-                                        imageUrl: AppAssets.annieprofile,
-                                      ),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => ChatScreen(
+                                  //       name: "Annie Steve",
+                                  //       imageUrl: AppAssets.annieprofile,
+                                  //     ),
+                                  //   ),
+                                  // );
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(8),

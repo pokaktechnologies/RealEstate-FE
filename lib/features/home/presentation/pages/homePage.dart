@@ -64,6 +64,7 @@ class _HomepageState extends State<Homepage> {
                   height: 35,
                   width: 200,
                   child: TextField(
+                    enabled: false, // you want to type , please remove that
                     controller: _searchController,
                     onSubmitted: (value) {
                       if (value.isNotEmpty) {
@@ -91,11 +92,11 @@ class _HomepageState extends State<Homepage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NotificationsScreen()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => NotificationsScreen()),
+                    // );
                   },
                   child: Icon(
                     Icons.notifications_sharp,

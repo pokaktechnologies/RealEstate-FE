@@ -5,6 +5,7 @@ import 'package:realestate_fe/features/Deals/presentation/pages/Deals.dart';
 import 'package:realestate_fe/features/home/presentation/pages/homePage.dart';
 import 'package:realestate_fe/features/message/presentation/pages/message.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile/user_profile.dart';
+import 'package:realestate_fe/features/saved/presentation/pages/empty_saved.dart';
 import 'package:realestate_fe/features/saved/presentation/pages/saved.dart';
 
 class BottomBar extends StatefulWidget {
@@ -21,7 +22,8 @@ class _BottomBarState extends State<BottomBar> {
     const Homepage(),
     const DealsScreen(),
     const MessageScreen(),
-    const SavedScreen(),
+    // const SavedScreen(),
+    EmptySavedScreen(),
     const UserProfileScreen()
   ];
 

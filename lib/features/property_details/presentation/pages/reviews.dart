@@ -122,6 +122,7 @@ class ReviewsScreen extends StatelessWidget {
         ),
         SizedBox(height: 10),
         TextField(
+          enabled: false,
           decoration: InputDecoration(
             hintText: 'Write Review',
             hintStyle: TextStyle(color: AppColors.grey),
@@ -143,10 +144,10 @@ class ReviewsScreen extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => WriteReviewScreen()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => WriteReviewScreen()),
+            // );
           },
         ),
         SizedBox(height: 40),
