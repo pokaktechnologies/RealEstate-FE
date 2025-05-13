@@ -71,6 +71,7 @@ flutter:
   assets:
    - assets/appicon.png
    - assets/logo.png
+   - assets/appicons.png
    - assets/PokakLogowhite.png
    - assets/auth/
    - assets/home/
@@ -85,7 +86,7 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/appicon.png"
+  image_path: "assets/appicons.png"
   adaptive_icon_background: "#FFFFFF" 
 
   #   - images/a_dot_ham.jpeg
