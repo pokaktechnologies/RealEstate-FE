@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/splash_screen.dart';
-import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/presentation/blocs/theme_bloc.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: "assets/.env");
   runApp(const MyApp());
 }
 

@@ -3,13 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/profile/presentation/blocs/theme_bloc.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/mybooking/mybooking_Main.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/profile/edit_profile.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/language.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/logout.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/notification.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/settings.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/transaction/transaction.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
