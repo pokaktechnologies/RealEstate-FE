@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/create_password.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
+import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
 class VerificationPage extends StatefulWidget {
-  const VerificationPage({
-    super.key,
-  });
+  const VerificationPage({super.key});
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();

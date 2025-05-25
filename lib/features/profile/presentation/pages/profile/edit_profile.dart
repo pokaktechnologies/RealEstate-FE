@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/cutome_expand.dart';
+import 'package:realestate_fe/features/auth/widgets/cutome_expand.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});

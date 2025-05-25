@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/splash_screen.dart';
+import 'package:realestate_fe/features/auth/pages/splash_screen.dart';
 import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/presentation/blocs/theme_bloc.dart';
 

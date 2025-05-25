@@ -2,19 +2,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/login_screen.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/custom_textfield.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/custom_icon.dart';
+import 'package:realestate_fe/features/auth/pages/forgot_password.dart';
+import 'package:realestate_fe/features/auth/pages/signup_screen.dart';
+import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
+import 'package:realestate_fe/features/auth/widgets/custom_icon.dart';
+import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
+import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +39,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     right: 10,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
+                          MaterialPageRoute(builder: (context) => BottomBar()),
+                          (route) => false,
                         );
                       },
                       child: Row(
@@ -77,7 +78,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             Text(
-              "Create Your Account",
+              "Login!",
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 26,
@@ -85,21 +86,10 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             Text(
-              "Welcome!",
+              "Welcome back!",
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 16,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                right: 20,
-                left: 20,
-                top: 20,
-              ),
-              child: CustomTextfield(
-                hintText: "Enter Your Name",
-                prefixImg: AppAssets.usernameIcon,
               ),
             ),
             Padding(
@@ -132,11 +122,21 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               child: Align(
                 alignment: Alignment.centerRight,
-                child: Text(
-                  "remember me",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 15,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ForgotPassword(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "forgot password?",
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
               ),
@@ -148,13 +148,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 top: 20,
               ),
               child: CustomButton(
-                buttonText: "Sign up",
+                buttonText: "Login",
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
+                    MaterialPageRoute(builder: (context) => BottomBar()),
+                    (route) => false,
                   );
                 },
               ),
@@ -215,7 +214,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             RichText(
               text: TextSpan(
-                text: "Already have an account? ",
+                text: "Dont have an account? ",
                 style: const TextStyle(
                   color: AppColors.black,
                   fontSize: 14,
@@ -223,7 +222,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 children: [
                   TextSpan(
-                    text: "Login",
+                    text: "Signup",
                     style: const TextStyle(
                       fontSize: 14,
                       color: AppColors.black,
@@ -234,16 +233,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
+                            builder: (context) => SignupScreen(),
                           ),
                         );
                       },
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 30,
             ),
           ],
         ),

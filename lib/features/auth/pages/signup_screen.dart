@@ -2,21 +2,19 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/forgot_password.dart';
-import 'package:realestate_fe/features/auth/presentation/pages/signup_screen.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/custom_icon.dart';
-import 'package:realestate_fe/features/auth/presentation/widgets/custom_textfield.dart';
-import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
+import 'package:realestate_fe/features/auth/pages/login_screen.dart';
+import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
+import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
+import 'package:realestate_fe/features/auth/widgets/custom_icon.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,10 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     right: 10,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushAndRemoveUntil(
+                        Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => BottomBar()),
-                          (route) => false,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
                         );
                       },
                       child: Row(
@@ -78,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Text(
-              "Login!",
+              "Create Your Account",
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 26,
@@ -86,10 +85,21 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Text(
-              "Welcome back!",
+              "Welcome!",
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 16,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 20,
+                left: 20,
+                top: 20,
+              ),
+              child: CustomTextfield(
+                hintText: "Enter Your Name",
+                prefixImg: AppAssets.usernameIcon,
               ),
             ),
             Padding(
@@ -122,21 +132,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: Align(
                 alignment: Alignment.centerRight,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ForgotPassword(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "forgot password?",
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontSize: 15,
-                    ),
+                child: Text(
+                  "remember me",
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 15,
                   ),
                 ),
               ),
@@ -148,12 +148,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 top: 20,
               ),
               child: CustomButton(
-                buttonText: "Login",
+                buttonText: "Sign up",
                 onPressed: () {
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BottomBar()),
-                    (route) => false,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
                   );
                 },
               ),
@@ -214,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             RichText(
               text: TextSpan(
-                text: "Dont have an account? ",
+                text: "Already have an account? ",
                 style: const TextStyle(
                   color: AppColors.black,
                   fontSize: 14,
@@ -222,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 children: [
                   TextSpan(
-                    text: "Signup",
+                    text: "Login",
                     style: const TextStyle(
                       fontSize: 14,
                       color: AppColors.black,
@@ -233,13 +234,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignupScreen(),
+                            builder: (context) => LoginScreen(),
                           ),
                         );
                       },
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 30,
             ),
           ],
         ),
