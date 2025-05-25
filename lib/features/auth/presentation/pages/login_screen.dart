@@ -32,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Image.asset(
                     AppAssets.authImg,
                     fit: BoxFit.cover,
+                    width: double.infinity,
                   ),
                   Positioned(
                     bottom: 180,
@@ -67,8 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Positioned(
-                    bottom: 70,
-                    child: Image.asset(AppAssets.whiteLogo),
+                    bottom: 100,
+                    child: SizedBox(
+                      width: 300,
+                      child: Image.asset(AppAssets.whitepokaklogo),
+                    ),
                   ),
                 ],
               ),

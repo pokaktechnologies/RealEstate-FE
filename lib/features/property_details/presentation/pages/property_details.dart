@@ -25,6 +25,92 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
     AppAssets.imagethree
   ];
 
+  // -----------send message and call-----------
+
+  void _showContactMenu(BuildContext buttonContext) {
+    // Get button position
+    final RenderBox button = buttonContext.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+        Overlay.of(buttonContext).context.findRenderObject() as RenderBox;
+    final Offset buttonPosition =
+        button.localToGlobal(Offset.zero, ancestor: overlay);
+
+    showDialog(
+      context: buttonContext,
+      barrierColor: Colors.black.withOpacity(0.5),
+      builder: (BuildContext context) {
+        return Stack(
+          children: [
+            Positioned(
+              left: buttonPosition.dx,
+              top: buttonPosition.dy - 180,
+              child: Material(
+                color: Colors.transparent,
+                child: Container(
+                  width: button.size.width + 25,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 10,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: Image.asset(AppAssets.sendmessageIcon),
+                        title: const Text(
+                          "Send Message",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.black,
+                              fontSize: 14),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChatScreen(
+                                name: "Annie",
+                                imageUrl: AppAssets.annieprofile,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      Divider(color: Colors.grey[300]),
+                      ListTile(
+                        leading: Image.asset(AppAssets.callingIcon),
+                        title: const Text(
+                          "Call",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.black,
+                              fontSize: 14),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          // Implement call functionality
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _nextImage() {
     setState(() {
       _currentIndex = (_currentIndex + 1) % images.length;
@@ -44,38 +130,43 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
             child: Row(
               children: [
                 Expanded(
-                  child: SizedBox(
-                    height: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor: AppColors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
+                  child: Builder(builder: (contactButtonContext) {
+                    return SizedBox(
+                      height: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // _showContactMenu(contactButtonContext);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: AppColors.white,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                          ),
+                        ),
+                        child: const Text(
+                          "Contact",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: AppColors.tealBlue,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        "Contact",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: AppColors.tealBlue,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
                 Expanded(
-                  child: SizedBox(
+                  child: 
+                  SizedBox(
                     height: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PaymentScreen()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => PaymentScreen()),
+                        // );
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
@@ -110,7 +201,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
           actions: [
             InkWell(
               onTap: () {
-                showShareBottomSheet(context);
+                // showShareBottomSheet(context);
               },
               child: Icon(
                 Icons.share,
@@ -245,15 +336,15 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ChatScreen(
-                                        name: "Annie Steve",
-                                        imageUrl: AppAssets.annieprofile,
-                                      ),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => ChatScreen(
+                                  //       name: "Annie Steve",
+                                  //       imageUrl: AppAssets.annieprofile,
+                                  //     ),
+                                  //   ),
+                                  // );
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(8),

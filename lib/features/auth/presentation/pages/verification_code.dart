@@ -4,6 +4,7 @@ import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/auth/presentation/pages/create_password.dart';
 import 'package:realestate_fe/features/auth/presentation/widgets/custom_button.dart';
+import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
 class VerificationPage extends StatefulWidget {
   const VerificationPage({
@@ -127,11 +128,22 @@ class _VerificationPageState extends State<VerificationPage> {
                     CustomButton(
                       buttonText: "Verify",
                       onPressed: () {
-                        Navigator.push(
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => CreatePassword(),
+                        //   ),
+                        // );
+                        // Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => BottomBar(),
+                        //   ),
+                        // );
+                        Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => CreatePassword(),
-                          ),
+                          MaterialPageRoute(builder: (context) => BottomBar()),
+                          (route) => false,
                         );
                       },
                     ),

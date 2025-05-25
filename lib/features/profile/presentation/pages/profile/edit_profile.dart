@@ -115,11 +115,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   color: AppColors.mediumGray,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500)),
-                          Text("albertjohn@abc.com",
-                              style: TextStyle(
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "albertjohn@abc.com",
+                                style: TextStyle(
                                   color: AppColors.mediumGray,
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w500)),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.of(context).push(
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => EditProfileScreen(),
+                                  //   ),
+                                  // );
+                                },
+                                child: Image.asset(
+                                  AppAssets.editIcon,
+                                  height: 20,
+                                  width: 25,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),

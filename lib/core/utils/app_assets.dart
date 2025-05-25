@@ -1,5 +1,8 @@
 class AppAssets {
   static const String appLogo = 'assets/auth/logo.png';
+  static const String pokaklogo = 'assets/appicon.png';
+  static const String whitepokaklogo = 'assets/PokakLogowhite.png';
+
   static const String authBottomDesign = 'assets/auth/auth_bottom_design.png';
   static const String bottonDesign = 'assets/auth/bottom_des.png';
   static const String rightArrow = 'assets/auth/right_arrow.png';
@@ -77,6 +80,9 @@ class AppAssets {
   static const sqfeetIcon = 'assets/property/sqfeet.png';
   static const furnishedIcon = 'assets/property/furnished.png';
 
+  static const sendmessageIcon = 'assets/property/message.png';
+  static const callingIcon = 'assets/property/calling.png';
+
   static const minimarketIcon = 'assets/property/shopping-cart.png';
   static const hospitaIcon = 'assets/property/hospital.png';
   static const foodIcon = 'assets/property/food.png';
@@ -108,4 +114,5 @@ class AppAssets {
   static const animationPath =
       'assets/animation/Animation - 1742810730745.json';
   static const nonotification = 'assets/profile/emptyNotification.png';
+  static const nosaved = 'assets/saved/nosaved.png';
 }

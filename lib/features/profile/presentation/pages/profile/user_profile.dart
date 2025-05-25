@@ -24,8 +24,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
-
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: AppColors.lightGray,
       body: SizedBox(
         height: height,
         width: width,
@@ -65,19 +64,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Text(
-                              "+91 856321478",
-                              style: TextStyle(
-                                color: AppColors.mediumGray,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "albertjohn@abc.com",
+                                  "+91 856321478",
                                   style: TextStyle(
                                     color: AppColors.mediumGray,
                                     fontSize: 12,
@@ -87,20 +78,28 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 Spacer(),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            EditProfileScreen(),
-                                      ),
-                                    );
+                                    // Navigator.of(context).push(
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) =>
+                                    //         EditProfileScreen(),
+                                    //   ),
+                                    // );
                                   },
-                                  child: Image.asset(
-                                    AppAssets.editIcon,
-                                    height: 20,
-                                    width: 25,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: AppColors.tealBlue,
+                                    size: 20,
                                   ),
-                                ),
+                                )
                               ],
+                            ),
+                            Text(
+                              "albertjohn@abc.com",
+                              style: TextStyle(
+                                color: AppColors.mediumGray,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ],
                         ),
@@ -115,11 +114,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BookingsScreen()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => BookingsScreen()),
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.tealBlue,
@@ -145,11 +144,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TransactionsScreen()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => TransactionsScreen()),
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.tealBlue,
@@ -174,11 +173,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 const SizedBox(height: 10),
                 _WidgetListTile("Notifications", AppAssets.notificationIcon,
                     () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const NotificationsScreen(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const NotificationsScreen(),
+                  //   ),
+                  // );
                 }),
 
                 BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
@@ -242,21 +241,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 //   ),
                 // ),
                 _WidgetListTile("Settings", AppAssets.settingsIcon, () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SettingsScreen(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const SettingsScreen(),
+                  //   ),
+                  // );
                 }),
                 _WidgetListTile("Language", AppAssets.languageIcon, () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const LanguageSelectionScreen(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const LanguageSelectionScreen(),
+                  //   ),
+                  // );
                 }),
                 _WidgetListTile("Logout", AppAssets.logoutIcon, () {
-                  showLogoutDialog(context);
+                  // showLogoutDialog(context);
                 }),
                 const SizedBox(height: 150),
               ],

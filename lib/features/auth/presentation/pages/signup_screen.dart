@@ -30,6 +30,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   Image.asset(
                     AppAssets.authImg,
                     fit: BoxFit.cover,
+                    width: double.infinity,
                   ),
                   Positioned(
                     bottom: 180,
@@ -66,8 +67,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   Positioned(
-                    bottom: 70,
-                    child: Image.asset(AppAssets.whiteLogo),
+                    bottom: 100,
+                    child: SizedBox(
+                      width: 300,
+                      child: Image.asset(AppAssets.whitepokaklogo),
+                    ),
                   ),
                 ],
               ),
