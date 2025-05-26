@@ -4,10 +4,12 @@ import 'package:realestate_fe/core/utils/app_colors.dart';
 class CustomTextfield extends StatelessWidget {
   final String hintText;
   final String prefixImg;
+  final TextEditingController controller;
   const CustomTextfield({
     super.key,
     required this.hintText,
     required this.prefixImg,
+    required this.controller,
   });
 
   @override
@@ -25,6 +27,7 @@ class CustomTextfield extends StatelessWidget {
           fontSize: 15,
           fontWeight: FontWeight.w400,
         ),
+        controller: controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(
               horizontal: 16, vertical: 13), // Inner padding

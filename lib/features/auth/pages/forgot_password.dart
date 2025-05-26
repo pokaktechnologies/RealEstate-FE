@@ -15,6 +15,20 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  late TextEditingController emailIdTextController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailIdTextController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailIdTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,12 +80,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             CustomTextfield(
               hintText: "Enter Your Email",
               prefixImg: AppAssets.emailIcon,
+              controller: emailIdTextController,
             ),
             const SizedBox(
               height: 30,
             ),
             CustomButton(
-              buttonText: "Send",
+              buttonText: Text("Send"),
               onPressed: () {
                 Navigator.push(
                   context,

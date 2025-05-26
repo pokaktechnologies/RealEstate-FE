@@ -6,7 +6,6 @@ import 'package:realestate_fe/features/home/presentation/pages/homePage.dart';
 import 'package:realestate_fe/features/message/presentation/pages/message.dart';
 import 'package:realestate_fe/features/profile/presentation/pages/profile/user_profile.dart';
 import 'package:realestate_fe/features/saved/presentation/pages/empty_saved.dart';
-import 'package:realestate_fe/features/saved/presentation/pages/saved.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});

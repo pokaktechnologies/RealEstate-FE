@@ -1,7 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/core/utils/navigations.dart';
+import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
+import 'package:realestate_fe/features/auth/bloc/register/register_event.dart';
+import 'package:realestate_fe/features/auth/bloc/register/register_state.dart';
 import 'package:realestate_fe/features/auth/pages/login_screen.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
@@ -15,6 +22,26 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  late TextEditingController nameTextcontroller;
+  late TextEditingController emailIdTextController;
+  late TextEditingController passwordTextController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameTextcontroller = TextEditingController();
+    emailIdTextController = TextEditingController();
+    passwordTextController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    nameTextcontroller.dispose();
+    emailIdTextController.dispose();
+    passwordTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,6 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: CustomTextfield(
                 hintText: "Enter Your Name",
                 prefixImg: AppAssets.usernameIcon,
+                controller: nameTextcontroller,
               ),
             ),
             Padding(
@@ -111,6 +139,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: CustomTextfield(
                 hintText: "Enter Your Email",
                 prefixImg: AppAssets.emailIcon,
+                controller: emailIdTextController,
               ),
             ),
             Padding(
@@ -122,6 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: CustomTextfield(
                 hintText: "Password",
                 prefixImg: AppAssets.passwordIcon,
+                controller: passwordTextController,
               ),
             ),
             Padding(
@@ -147,16 +177,38 @@ class _SignupScreenState extends State<SignupScreen> {
                 left: 40,
                 top: 20,
               ),
-              child: CustomButton(
-                buttonText: "Sign up",
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                  );
+              child: BlocListener<RegisterBloc, RegisterState>(
+                listener: (context, state) {
+                  if (state is RegisterSuccess) {
+                    pushReplacementNavigation(context, LoginScreen());
+                  }
                 },
+                child: BlocBuilder<RegisterBloc, RegisterState>(
+                  builder: (context, state) {
+                    return CustomButton(
+                      buttonText: state is RegisterLoading
+                          ? AppLoadingIndicator()
+                          : Text(
+                              "Sign up",
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                      onPressed: () {
+                        final Map<String, dynamic> registerData = {
+                          "email": emailIdTextController.text,
+                          "name": nameTextcontroller.text,
+                          "password": passwordTextController.text,
+                        };
+                        context
+                            .read<RegisterBloc>()
+                            .add(RegisterUser(registerData));
+                      },
+                    );
+                  },
+                ),
               ),
             ),
             SizedBox(

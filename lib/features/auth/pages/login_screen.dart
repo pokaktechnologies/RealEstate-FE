@@ -17,6 +17,23 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late TextEditingController emailIdTextController;
+  late TextEditingController passwordTextController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailIdTextController = TextEditingController();
+    passwordTextController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailIdTextController.dispose();
+    passwordTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: CustomTextfield(
                 hintText: "Enter Your Email",
                 prefixImg: AppAssets.emailIcon,
+                controller: emailIdTextController,
               ),
             ),
             Padding(
@@ -112,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: CustomTextfield(
                 hintText: "Password",
                 prefixImg: AppAssets.passwordIcon,
+                controller: passwordTextController,
               ),
             ),
             Padding(
@@ -148,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 top: 20,
               ),
               child: CustomButton(
-                buttonText: "Login",
+                buttonText: Text("Login"),
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                     context,

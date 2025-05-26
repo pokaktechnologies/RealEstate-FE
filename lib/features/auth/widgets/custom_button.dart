@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
-  final String buttonText;
+  final Widget buttonText;
   final VoidCallback onPressed;
   const CustomButton({
     super.key,
@@ -24,14 +24,16 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(13),
         ),
         child: Center(
-          child: Text(
-            buttonText,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 17,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          child: buttonText,
+
+          // Text(
+          //   buttonText,
+          //   style: TextStyle(
+          //     color: AppColors.white,
+          //     fontSize: 17,
+          //     fontWeight: FontWeight.w500,
+          //   ),
+          // ),
         ),
       ),
     );

@@ -13,6 +13,23 @@ class CreatePassword extends StatefulWidget {
 }
 
 class _CreatePasswordState extends State<CreatePassword> {
+  late TextEditingController newPasswordTextController;
+  late TextEditingController confirmPasswordTextController;
+
+  @override
+  void initState() {
+    super.initState();
+    newPasswordTextController = TextEditingController();
+    confirmPasswordTextController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    newPasswordTextController.dispose();
+    confirmPasswordTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +84,7 @@ class _CreatePasswordState extends State<CreatePassword> {
             CustomTextfield(
               hintText: "New Password",
               prefixImg: AppAssets.passwordIcon,
+              controller: newPasswordTextController,
             ),
             const SizedBox(
               height: 20,
@@ -74,12 +92,13 @@ class _CreatePasswordState extends State<CreatePassword> {
             CustomTextfield(
               hintText: "Confirm Password",
               prefixImg: AppAssets.passwordIcon,
+              controller: confirmPasswordTextController,
             ),
             const SizedBox(
               height: 30,
             ),
             CustomButton(
-              buttonText: "Update password",
+              buttonText: Text("Update Password"),
               onPressed: () {
                 Navigator.push(
                   context,

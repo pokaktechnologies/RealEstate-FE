@@ -123,7 +123,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     ),
                     const SizedBox(height: 30),
                     CustomButton(
-                      buttonText: "Verify",
+                      buttonText: Text("Verify"),
                       onPressed: () {
                         // Navigator.push(
                         //   context,
