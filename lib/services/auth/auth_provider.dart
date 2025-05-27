@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:realestate_fe/core/api/api_constants.dart';
 
-class RegisterProvider {
+class AuthProvider {
   final Dio _dio = Dio();
   final String _postUrl = ApiConstants.registerEndPoint;
 
