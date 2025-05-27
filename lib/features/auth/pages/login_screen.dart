@@ -1,7 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/core/utils/navigations.dart';
+import 'package:realestate_fe/features/auth/bloc/login/login_bloc.dart';
+import 'package:realestate_fe/features/auth/bloc/login/login_event.dart';
+import 'package:realestate_fe/features/auth/bloc/login/login_state.dart';
 import 'package:realestate_fe/features/auth/pages/forgot_password.dart';
 import 'package:realestate_fe/features/auth/pages/signup_screen.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
@@ -166,15 +172,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 left: 40,
                 top: 20,
               ),
-              child: CustomButton(
-                buttonText: Text("Login"),
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => BottomBar()),
-                    (route) => false,
-                  );
+              child: BlocListener<LoginBloc, LoginState>(
+                listener: (context, state) {
+                  if (state is LoginSuccess) {
+                    // pushAndRemoveUntilFun(context, BottomBar());
+                    print("----------------- login api is success =========>");
+                  }
                 },
+                child: BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    return CustomButton(
+                      buttonText: state is LoginLoading
+                          ? AppLoadingIndicator()
+                          : Text(
+                              "Login",
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                      onPressed: () {
+                        final Map<String, dynamic> loginData = {
+                          "email": emailIdTextController.text,
+                          "password": passwordTextController.text,
+                        };
+                        context.read<LoginBloc>().add(LoginUser(loginData));
+                      },
+                    );
+                  },
+                ),
               ),
             ),
             SizedBox(

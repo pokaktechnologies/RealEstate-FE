@@ -6,4 +6,8 @@ class AuthRespository {
   Future<String> registerUser(Map<String, dynamic> userData) {
     return _provider.registerUser(userData);
   }
+
+  Future<String> loginUser(Map<String, dynamic> loginData) {
+    return _provider.loginUser(loginData);
+  }
 }
