@@ -1,19 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/core/utils/navigations.dart';
+import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_bloc.dart';
+import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_event.dart';
+import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_state.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
 class VerificationPage extends StatefulWidget {
-  const VerificationPage({super.key});
+  final String enteredEmailId;
+  const VerificationPage({super.key, required this.enteredEmailId});
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
 }
 
 class _VerificationPageState extends State<VerificationPage> {
+  late TextEditingController otpController;
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    otpController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      otpController.dispose(); // Dispose after the current frame
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +79,7 @@ class _VerificationPageState extends State<VerificationPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "alanjohn@gmail.com",
+                          widget.enteredEmailId,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -72,9 +95,12 @@ class _VerificationPageState extends State<VerificationPage> {
                     ),
                     const SizedBox(height: 25),
                     PinCodeTextField(
+                      controller: otpController,
+                      autoFocus: true,
                       appContext: context,
                       length: 4,
                       keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       animationType: AnimationType.fade,
                       pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
@@ -107,9 +133,7 @@ class _VerificationPageState extends State<VerificationPage> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {
-                            // Resend OTP logic
-                          },
+                          onTap: () {},
                           child: Text(
                             "Resend OTP",
                             style: TextStyle(
@@ -122,27 +146,40 @@ class _VerificationPageState extends State<VerificationPage> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    CustomButton(
-                      buttonText: Text("Verify"),
-                      onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => CreatePassword(),
-                        //   ),
-                        // );
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => BottomBar(),
-                        //   ),
-                        // );
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => BottomBar()),
-                          (route) => false,
-                        );
+                    BlocListener<VerifyOtpBloc, VerifyOtpState>(
+                      listener: (context, state) {
+                        if (state is VerifyOtpSuccess) {
+                          pushAndRemoveUntilFun(context, BottomBar());
+                        }
                       },
+                      child: BlocBuilder<VerifyOtpBloc, VerifyOtpState>(
+                        builder: (context, state) {
+                          return CustomButton(
+                            buttonText: state is VerifyOtpLoading
+                                ? AppLoadingIndicator()
+                                : Text(
+                                    "Verify",
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                            onPressed: () async {
+                              if (!mounted) return;
+                              final enteredOtp = otpController.text;
+                              final Map<String, dynamic> verifyOtpData = {
+                                "email": widget.enteredEmailId,
+                                "otp": enteredOtp,
+                              };
+
+                              context
+                                  .read<VerifyOtpBloc>()
+                                  .add(VerifyOtpUser(verifyOtpData));
+                            },
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 100),
                   ],

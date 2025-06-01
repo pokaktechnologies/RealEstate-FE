@@ -8,8 +8,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final AuthRespository authRepository = AuthRespository();
 
     on<LoginUser>((event, emit) async {
-      emit(LoginInitial());
+      emit(LoginLoading());
       try {
+        print("bloc function called");
         final message = await authRepository.loginUser(event.accountData);
         emit(LoginSuccess(message));
       } catch (e) {

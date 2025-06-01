@@ -9,6 +9,7 @@ import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_event.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_state.dart';
 import 'package:realestate_fe/features/auth/pages/login_screen.dart';
+import 'package:realestate_fe/features/auth/pages/verification_code.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_icon.dart';
@@ -179,7 +180,10 @@ class _SignupScreenState extends State<SignupScreen> {
               child: BlocListener<RegisterBloc, RegisterState>(
                 listener: (context, state) {
                   if (state is RegisterSuccess) {
-                    pushReplacementNavigation(context, LoginScreen());
+                    pushReplacementNavigation(
+                        context,
+                        VerificationPage(
+                            enteredEmailId: emailIdTextController.text));
                   }
                 },
                 child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -293,9 +297,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: 30),
           ],
         ),
       ),

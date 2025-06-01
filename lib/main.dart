@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:realestate_fe/features/auth/bloc/login/login_bloc.dart';
-import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
+import 'package:realestate_fe/core/bloc_providers.dart';
 import 'package:realestate_fe/features/auth/pages/splash_screen.dart';
-import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/presentation/blocs/theme_bloc.dart';
 
 void main() async {
@@ -19,19 +17,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => HomepageCubit()),
-        BlocProvider(create: (context) => ThemeBloc()),
-        BlocProvider(create: (context) => RegisterBloc()),
-        BlocProvider(create: (context) => LoginBloc()),
-      ],
-      child: BlocBuilder<ThemeBloc, ThemeData>(
-        builder: (context, theme) {
-          return MaterialApp(
-            title: 'Pokak Real-Estate',
-            debugShowCheckedModeBanner: false,
-            theme: theme,
-            home: SplashScreen(),
+      providers: appBlocProviders,
+      child: Builder(
+        builder: (context) {
+          return BlocBuilder<ThemeBloc, ThemeData>(
+            builder: (context, theme) {
+              return MaterialApp(
+                title: 'Pokak Real-Estate',
+                debugShowCheckedModeBanner: false,
+                theme: theme,
+                home: const SplashScreen(),
+              );
+            },
           );
         },
       ),

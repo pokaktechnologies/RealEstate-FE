@@ -10,4 +10,8 @@ class AuthRespository {
   Future<String> loginUser(Map<String, dynamic> loginData) {
     return _provider.loginUser(loginData);
   }
+
+  Future<String> verifyOtp(Map<String, dynamic> verifyData) {
+    return _provider.verifyOtp(verifyData);
+  }
 }

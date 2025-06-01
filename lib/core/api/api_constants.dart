@@ -5,5 +5,6 @@ class ApiConstants {
 
   // Authentication
   static String registerEndPoint = '$serverUrl/accounts/register/request-otp/';
+  static String verifyOtpEndPoint = '$serverUrl/accounts/register/verify-otp/';
   static String loginEndPoint = '$serverUrl/accounts/login/';
 }

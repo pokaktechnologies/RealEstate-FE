@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/core/utils/navigations.dart';
 import 'package:realestate_fe/features/auth/bloc/login/login_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/login/login_event.dart';
 import 'package:realestate_fe/features/auth/bloc/login/login_state.dart';
@@ -177,6 +176,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (state is LoginSuccess) {
                     // pushAndRemoveUntilFun(context, BottomBar());
                     print("----------------- login api is success =========>");
+                  }
+
+                  if (state is LoginError) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.error ?? 'Unknown error')),
+                    );
                   }
                 },
                 child: BlocBuilder<LoginBloc, LoginState>(
