@@ -58,6 +58,7 @@ class AppAssets {
   static const editIcon = 'assets/profile/editIcon.png';
   static const camerplusIcon = 'assets/profile/imagepicker.png';
   static const pgBottomImg = 'assets/home/pg_bottom_img.png';
+  static const blankProfilePic = 'assets/profile/dummy_profile_pic.webp';
 
   static const creditCardIcon = 'assets/profile/credit.png';
   static const paypalIcon = 'assets/profile/addupi.png';

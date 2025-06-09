@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_event.dart';
+import 'package:realestate_fe/features/profile/blocs/profile/profile_state.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -43,78 +45,96 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black12, blurRadius: 5),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage: AssetImage(AppAssets.userProfile),
-                      ),
-                      SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                SizedBox(height: 50),
+                BlocBuilder<ProfileBloc, ProfileState>(
+                  bloc: profileBloc,
+                  builder: (context, state) {
+                    if (state is ProfileLoading) {
+                      return AppLoadingIndicator();
+                    } else if (state is ProfileLoaded) {
+                      final user = state.profileModel.data;
+                      if (user == null) {
+                        return const Text("No user data available");
+                      }
+
+                      return Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black12, blurRadius: 5),
+                          ],
+                        ),
+                        child: Row(
                           children: [
-                            Text(
-                              "Albert John",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage:
+                                  AssetImage(AppAssets.blankProfilePic),
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "+91 856321478",
-                                  style: TextStyle(
-                                    color: AppColors.mediumGray,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
+                            SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    user.fullName,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                                Spacer(),
-                                InkWell(
-                                  onTap: () {
-                                    // Navigator.of(context).push(
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) =>
-                                    //         EditProfileScreen(),
-                                    //   ),
-                                    // );
-                                  },
-                                  child: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: AppColors.tealBlue,
-                                    size: 20,
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "+91 856321478",
+                                        style: TextStyle(
+                                          color: AppColors.mediumGray,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      InkWell(
+                                        onTap: () {
+                                          // Navigator.of(context).push(
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) =>
+                                          //         EditProfileScreen(),
+                                          //   ),
+                                          // );
+                                        },
+                                        child: Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: AppColors.tealBlue,
+                                          size: 20,
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                            Text(
-                              "albertjohn@abc.com",
-                              style: TextStyle(
-                                color: AppColors.mediumGray,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                                  Text(
+                                    user.email,
+                                    style: TextStyle(
+                                      color: AppColors.mediumGray,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
+                      );
+                    } else if (state is ProfileError) {
+                      return const Center(child: Text("Failed to load User"));
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
                 ),
                 SizedBox(height: 10),
                 Row(

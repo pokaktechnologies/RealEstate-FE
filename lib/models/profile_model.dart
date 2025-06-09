@@ -1,6 +1,6 @@
 class ProfileModel {
   String? error;
-  List<PersonalInfoData>? data;
+  PersonalInfoData? data;
 
   ProfileModel({this.data});
 
@@ -10,19 +10,14 @@ class ProfileModel {
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <PersonalInfoData>[];
-      json['data'].forEach((v) {
-        data!.add(PersonalInfoData.fromJson(v));
-      });
+      data = PersonalInfoData.fromJson(json['data']);
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
+    return {
+      'data': data?.toJson(),
+    };
   }
 }
 
@@ -78,7 +73,7 @@ class PersonalInfoData {
       'email': email,
       'role': role,
       'profile_image': profilePic,
-      'full_name': profilePic,
+      'full_name': fullName,
       'dob': dob,
       'gender': gender,
       'occupation': occupation,
