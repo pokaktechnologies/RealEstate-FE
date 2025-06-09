@@ -44,7 +44,7 @@ class AuthProvider {
         throw Exception(response.data['message'] ?? 'Verification failed');
       }
     } catch (error) {
-      print("Login Error: $error");
+      print("Otp Verification Error: $error");
       return 'Error While Verifying Otp';
     }
   }

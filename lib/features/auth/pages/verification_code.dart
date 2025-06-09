@@ -30,13 +30,11 @@ class _VerificationPageState extends State<VerificationPage> {
     otpController = TextEditingController();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      otpController.dispose(); // Dispose after the current frame
-    });
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   otpController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +147,11 @@ class _VerificationPageState extends State<VerificationPage> {
                     BlocListener<VerifyOtpBloc, VerifyOtpState>(
                       listener: (context, state) {
                         if (state is VerifyOtpSuccess) {
-                          pushAndRemoveUntilFun(context, BottomBar());
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            if (mounted) {
+                              pushAndRemoveUntilFun(context, BottomBar());
+                            }
+                          });
                         }
                       },
                       child: BlocBuilder<VerifyOtpBloc, VerifyOtpState>(

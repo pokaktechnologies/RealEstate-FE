@@ -13,6 +13,7 @@ import 'package:realestate_fe/features/auth/pages/verification_code.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_icon.dart';
+import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -25,6 +26,7 @@ class _SignupScreenState extends State<SignupScreen> {
   late TextEditingController nameTextcontroller;
   late TextEditingController emailIdTextController;
   late TextEditingController passwordTextController;
+  String? cachedEmail;
 
   @override
   void initState() {
@@ -179,11 +181,13 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               child: BlocListener<RegisterBloc, RegisterState>(
                 listener: (context, state) {
-                  if (state is RegisterSuccess) {
-                    pushReplacementNavigation(
+                  if (state is RegisterSuccess && cachedEmail != null) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      pushReplacementNavigation(
                         context,
-                        VerificationPage(
-                            enteredEmailId: emailIdTextController.text));
+                        VerificationPage(enteredEmailId: cachedEmail!),
+                      );
+                    });
                   }
                 },
                 child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -200,14 +204,21 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                             ),
                       onPressed: () {
+                        final name = nameTextcontroller.text;
+                        final email = emailIdTextController.text;
+                        final password = passwordTextController.text;
                         final Map<String, dynamic> registerData = {
-                          "email": emailIdTextController.text,
-                          "name": nameTextcontroller.text,
-                          "password": passwordTextController.text,
+                          "email": email,
+                          "name": name,
+                          "password": password,
                         };
                         context
                             .read<RegisterBloc>()
                             .add(RegisterUser(registerData));
+
+                        setState(() {
+                          cachedEmail = email;
+                        });
                       },
                     );
                   },
