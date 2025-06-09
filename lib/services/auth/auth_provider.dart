@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:realestate_fe/core/api/api_constants.dart';
+import 'package:realestate_fe/core/services.dart';
 
 class AuthProvider {
   final Dio _dio = Dio();
@@ -19,12 +20,8 @@ class AuthProvider {
 
   Future<String> loginUser(Map<String, dynamic> loginData) async {
     try {
-      print("login user function called");
-      print("login url => $_loginUrl");
-      print("login data => $loginData");
       final response = await _dio.post(_loginUrl, data: loginData);
-      print("response => $response");
-      if (response.statusCode == 200 && response.data['success'] == true) {
+      if (response.statusCode == 200) {
         return response.data['message'] ?? 'User Login Successfully';
       } else {
         throw Exception(response.data['message'] ?? 'Login failed');
@@ -38,7 +35,11 @@ class AuthProvider {
   Future<String> verifyOtp(Map<String, dynamic> verifyData) async {
     try {
       final response = await _dio.post(_verifyOtpUrl, data: verifyData);
-      if (response.statusCode == 200 && response.data['success'] == true) {
+      if (response.statusCode == 200) {
+        SecureStorageService secureStorage = SecureStorageService();
+        final accessToken = response.data['access'];
+
+        await secureStorage.storeToken(accessToken);
         return response.data['message'] ?? 'Otp Verified Successfully';
       } else {
         throw Exception(response.data['message'] ?? 'Verification failed');
