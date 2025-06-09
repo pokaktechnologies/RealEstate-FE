@@ -4,7 +4,7 @@ import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/message/presentation/pages/chat_screen.dart';
 import 'package:realestate_fe/features/payment/presentation/pages/payment_screen.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/mybooking/share_bottomsheet.dart';
+import 'package:realestate_fe/features/profile/pages/mybooking/share_bottomsheet.dart';
 import 'package:realestate_fe/features/property_details/presentation/blocs/wishlist.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/reviews.dart';
 import 'package:realestate_fe/features/property_details/presentation/widgets/property_details/details.dart';

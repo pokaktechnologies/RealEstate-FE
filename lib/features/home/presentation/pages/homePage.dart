@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/notification.dart';
+import 'package:realestate_fe/features/profile/pages/profile_tile/notification.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Homepage extends StatefulWidget {

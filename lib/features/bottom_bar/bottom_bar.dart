@@ -4,7 +4,7 @@ import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/Deals/presentation/pages/Deals.dart';
 import 'package:realestate_fe/features/home/presentation/pages/homePage.dart';
 import 'package:realestate_fe/features/message/presentation/pages/message.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/profile/user_profile.dart';
+import 'package:realestate_fe/features/profile/pages/profile/user_profile.dart';
 import 'package:realestate_fe/features/saved/presentation/pages/empty_saved.dart';
 
 class BottomBar extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/mybooking/mybooking_details.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/mybooking/share_bottomsheet.dart';
+import 'package:realestate_fe/features/profile/pages/mybooking/mybooking_details.dart';
+import 'package:realestate_fe/features/profile/pages/mybooking/share_bottomsheet.dart';
 
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({super.key});

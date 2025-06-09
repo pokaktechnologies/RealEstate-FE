@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/mybooking/mybooking_cancel/cancellation_details.dart';
+import 'package:realestate_fe/features/profile/pages/mybooking/mybooking_cancel/cancellation_details.dart';
 
 void showCancelDialog(BuildContext context) {
   showDialog(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/profile/presentation/pages/profile_tile/notification.dart';
+import 'package:realestate_fe/features/profile/pages/profile_tile/notification.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

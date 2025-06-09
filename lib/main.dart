@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:realestate_fe/core/bloc_providers.dart';
 import 'package:realestate_fe/features/auth/pages/splash_screen.dart';
-import 'package:realestate_fe/features/profile/presentation/blocs/theme_bloc.dart';
+import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

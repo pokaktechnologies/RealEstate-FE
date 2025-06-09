@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/profile/presentation/blocs/theme_bloc.dart';
+import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
+import 'package:realestate_fe/features/profile/blocs/profile/profile_event.dart';
+import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -12,6 +14,20 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  final ProfileBloc profileBloc = ProfileBloc();
+
+  @override
+  void initState() {
+    profileBloc.add(GetUserProfileList());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    profileBloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;

@@ -22,6 +22,10 @@ class AuthProvider {
     try {
       final response = await _dio.post(_loginUrl, data: loginData);
       if (response.statusCode == 200) {
+        SecureStorageService secureStorage = SecureStorageService();
+        final accessToken = response.data['access'];
+
+        await secureStorage.storeToken(accessToken);
         return response.data['message'] ?? 'User Login Successfully';
       } else {
         throw Exception(response.data['message'] ?? 'Login failed');
