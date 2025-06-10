@@ -175,7 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
               child: BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is LoginSuccess) {
-                    // pushAndRemoveUntilFun(context, BottomBar());
                     pushAndRemoveUntilFun(context, BottomBar());
                   }
 

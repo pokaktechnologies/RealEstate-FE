@@ -4,9 +4,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/auth/widgets/cutome_expand.dart';
+import 'package:realestate_fe/models/profile_model.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  final PersonalInfoData user;
+  const EditProfileScreen({super.key, required this.user});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -15,6 +17,40 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
+  late TextEditingController emailIdTextController;
+  late TextEditingController primaryPhoneCodeController;
+  late TextEditingController primaryPhoneNumberController;
+  late TextEditingController secondaryPhoneCodeController;
+  late TextEditingController secondaryPhoneNumberController;
+  late TextEditingController addressController;
+  late TextEditingController stateController;
+  late TextEditingController countryController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailIdTextController = TextEditingController(text: widget.user.email);
+    primaryPhoneCodeController = TextEditingController();
+    primaryPhoneNumberController = TextEditingController();
+    secondaryPhoneCodeController = TextEditingController();
+    secondaryPhoneNumberController = TextEditingController();
+    addressController = TextEditingController();
+    stateController = TextEditingController();
+    countryController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailIdTextController.dispose();
+    primaryPhoneCodeController.dispose();
+    primaryPhoneNumberController.dispose();
+    secondaryPhoneCodeController.dispose();
+    secondaryPhoneNumberController.dispose();
+    addressController.dispose();
+    stateController.dispose();
+    countryController.dispose();
+    super.dispose();
+  }
 
   Future<void> _pickImage() async {
     final XFile? pickedFile =
@@ -41,22 +77,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Image.asset(AppAssets.arrowbackIcon),
         ),
         backgroundColor: AppColors.white,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: InkWell(
-              onTap: () {},
-              child: Text(
-                "Save",
-                style: TextStyle(
-                  color: AppColors.tealBlue,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
       body: SizedBox(
         height: height,
@@ -107,7 +127,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Albert John",
+                          Text(widget.user.fullName,
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500)),
                           Text("+91 856321478",
@@ -119,7 +139,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "albertjohn@abc.com",
+                                widget.user.email,
                                 style: TextStyle(
                                   color: AppColors.mediumGray,
                                   fontSize: 12,
@@ -150,101 +170,106 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              ExpandableSection(
-                title: "Personal Info",
-                content: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildLabel("Name", true),
-                    buildTextField("Enter Name"),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              buildLabel("DOB", true),
-                              buildTextField("DD/MM/YYYY"),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 15),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              buildLabel("Gender", true),
-                              buildDropdown(["Male", "Female", "Other"]),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              buildLabel("Occupation", true),
-                              buildTextField("Enter Occupation"),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 15),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              buildLabel("Nationality", true),
-                              buildDropdown(
-                                  ["India", "United States ", "Canada"]),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: buildLabel("Government ID", true),
-                        ),
-                        SizedBox(width: 15),
-                        Expanded(
-                          child: buildDropdown(
-                              ["Passport", "Pan Card ", "Aadhaar"]),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    buildTextField("Upload Document", showCloseIcon: true),
-                    SizedBox(height: 10),
-                    Text(
-                      "File should be in jpg/pdf format, Max 3mb",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(height: 20),
-                    Center(
-                      child: InkWell(
-                        onTap: () {},
-                        child: Text(
-                          "Save",
-                          style: TextStyle(
-                            color: AppColors.tealBlue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              ),
+
+              // ----- personal info ---------------------------------------------------
+
+              // ExpandableSection(
+              //   title: "Personal Info",
+              //   content: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       buildLabel("Name", true),
+              //       buildTextField("Enter Name"),
+              //       SizedBox(height: 10),
+              //       Row(
+              //         children: [
+              //           Expanded(
+              //             child: Column(
+              //               crossAxisAlignment: CrossAxisAlignment.start,
+              //               children: [
+              //                 buildLabel("DOB", true),
+              //                 buildTextField("DD/MM/YYYY"),
+              //               ],
+              //             ),
+              //           ),
+              //           SizedBox(width: 15),
+              //           Expanded(
+              //             child: Column(
+              //               crossAxisAlignment: CrossAxisAlignment.start,
+              //               children: [
+              //                 buildLabel("Gender", true),
+              //                 buildDropdown(["Male", "Female", "Other"]),
+              //               ],
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //       SizedBox(height: 10),
+              //       Row(
+              //         children: [
+              //           Expanded(
+              //             child: Column(
+              //               crossAxisAlignment: CrossAxisAlignment.start,
+              //               children: [
+              //                 buildLabel("Occupation", true),
+              //                 buildTextField("Enter Occupation"),
+              //               ],
+              //             ),
+              //           ),
+              //           SizedBox(width: 15),
+              //           Expanded(
+              //             child: Column(
+              //               crossAxisAlignment: CrossAxisAlignment.start,
+              //               children: [
+              //                 buildLabel("Nationality", true),
+              //                 buildDropdown(
+              //                     ["India", "United States ", "Canada"]),
+              //               ],
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //       SizedBox(height: 10),
+              //       Row(
+              //         children: [
+              //           Expanded(
+              //             child: buildLabel("Government ID", true),
+              //           ),
+              //           SizedBox(width: 15),
+              //           Expanded(
+              //             child: buildDropdown(
+              //                 ["Passport", "Pan Card ", "Aadhaar"]),
+              //           ),
+              //         ],
+              //       ),
+              //       SizedBox(height: 10),
+              //       buildTextField("Upload Document", showCloseIcon: true),
+              //       SizedBox(height: 10),
+              //       Text(
+              //         "File should be in jpg/pdf format, Max 3mb",
+              //         style:
+              //             TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              //       ),
+              //       SizedBox(height: 20),
+              //       Center(
+              //         child: InkWell(
+              //           onTap: () {},
+              //           child: Text(
+              //             "Save",
+              //             style: TextStyle(
+              //               color: AppColors.tealBlue,
+              //               fontSize: 16,
+              //               fontWeight: FontWeight.w600,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       SizedBox(height: 20),
+              //     ],
+              //   ),
+              // ),
+
+              // -------------------- personal info end --------------------------------
 
               // Contact Details Section
               ExpandableSection(
@@ -253,7 +278,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildLabel("Email", true),
-                    buildTextField("Enter your email"),
+                    buildTextField("Enter your email", emailIdTextController),
                     SizedBox(height: 10),
                     Row(
                       children: [
@@ -263,18 +288,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildLabel("Phone", true),
-                              buildTextField("+91"),
+                              buildTextField("+91", primaryPhoneCodeController),
                             ],
                           ),
                         ),
                         SizedBox(width: 10),
                         Expanded(
-                          flex: 7, // Adjusted to maintain balance
+                          flex: 7,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildLabel("", false),
-                              buildTextField("Enter your number"),
+                              buildTextField("Enter your number",
+                                  primaryPhoneNumberController),
                             ],
                           ),
                         ),
@@ -284,23 +310,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     Row(
                       children: [
                         Expanded(
-                          flex: 2, // Same size for alternate phone
+                          flex: 2,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildLabel("Alternate", false),
-                              buildTextField("+91"),
+                              buildTextField(
+                                  "+91", secondaryPhoneNumberController),
                             ],
                           ),
                         ),
                         SizedBox(width: 10),
                         Expanded(
-                          flex: 7, // Keeping it balanced
+                          flex: 7,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildLabel("", false),
-                              buildTextField("Enter your number"),
+                              buildTextField("Enter your number",
+                                  secondaryPhoneNumberController),
                             ],
                           ),
                         ),
@@ -308,7 +336,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     SizedBox(height: 10),
                     buildLabel("Address", true),
-                    buildTextField("Enter your address"),
+                    buildTextField("Enter your address", addressController),
                     SizedBox(height: 10),
                     Row(
                       children: [
@@ -317,7 +345,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildLabel("State", true),
-                              buildTextField("Select")
+                              buildTextField("Select", stateController)
                             ],
                           ),
                         ),
@@ -327,7 +355,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildLabel("Country", true),
-                              buildTextField("Select")
+                              buildTextField("Select", countryController)
                             ],
                           ),
                         ),
@@ -410,10 +438,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget buildTextField(String hint, {bool showCloseIcon = false}) {
+  Widget buildTextField(String hint, controller, {bool showCloseIcon = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           border: OutlineInputBorder(

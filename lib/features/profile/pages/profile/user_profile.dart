@@ -7,6 +7,7 @@ import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_event.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_state.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
+import 'package:realestate_fe/features/profile/pages/profile/edit_profile.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -100,12 +101,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                       Spacer(),
                                       InkWell(
                                         onTap: () {
-                                          // Navigator.of(context).push(
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) =>
-                                          //         EditProfileScreen(),
-                                          //   ),
-                                          // );
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditProfileScreen(user: user),
+                                            ),
+                                          );
                                         },
                                         child: Icon(
                                           Icons.arrow_forward_ios,
