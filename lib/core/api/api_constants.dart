@@ -10,4 +10,11 @@ class ApiConstants {
 
   // Profile
   static String profileEndPoint = '$serverUrl/profiles/personal-info/';
+
+  // country
+  static String countryEndPoint = '$serverUrl/accounts/country/';
+
+  // state
+  static String getStateByCountryId(String countryId) =>
+      "$serverUrl/accounts/country/$countryId/state/";
 }

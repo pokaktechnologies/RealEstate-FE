@@ -1,4 +1,6 @@
+import 'package:realestate_fe/models/country_model.dart';
 import 'package:realestate_fe/models/profile_model.dart';
+import 'package:realestate_fe/models/state_model.dart';
 import 'package:realestate_fe/services/profile/profile_provider.dart';
 
 class ProfileRepository {
@@ -7,4 +9,11 @@ class ProfileRepository {
   Future<ProfileModel> getProfile() {
     return _provider.getUserProfile();
   }
+
+  Future<CountryModel> getCountries() {
+    return _provider.getCountry();
+  }
+
+  Future<StateModel> getStatesByCountry(String countryId) =>
+      _provider.getStatesByCountryId(countryId);
 }
