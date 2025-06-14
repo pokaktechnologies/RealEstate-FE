@@ -1,3 +1,5 @@
+import 'package:realestate_fe/models/contact_info_model.dart';
+import 'package:realestate_fe/models/contact_model.dart';
 import 'package:realestate_fe/models/country_model.dart';
 import 'package:realestate_fe/models/profile_model.dart';
 import 'package:realestate_fe/models/state_model.dart';
@@ -16,4 +18,12 @@ class ProfileRepository {
 
   Future<StateModel> getStatesByCountry(String countryId) =>
       _provider.getStatesByCountryId(countryId);
+
+  Future<void> postContact(ContactData data) async {
+    await _provider.postContact(data);
+  }
+
+  Future<ContactInfoModel> getContact() {
+    return _provider.getContact();
+  }
 }

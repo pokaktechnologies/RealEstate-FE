@@ -1,33 +1,3 @@
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:realestate_fe/features/profile/blocs/country/country_event.dart';
-// import 'package:realestate_fe/features/profile/blocs/country/country_state.dart';
-// import 'package:realestate_fe/services/profile/profile_repository.dart';
-
-// class CountryBloc extends Bloc<CountryEvent, CountryState> {
-//   CountryBloc() : super(CountryInitial()) {
-//     final ProfileRepository profileRepository = ProfileRepository();
-
-//     on<GetCountryList>((event, emit) async {
-//       try {
-//         emit(CountryLoading());
-//         final countryList = await profileRepository.getCountries();
-
-//         if (countryList.error != null) {
-//           emit(CountryError(countryList.error));
-//         }
-//       } catch (e) {
-//         print(e);
-//       }
-//     });
-
-//     on<SelectCountry>((event, emit) {
-//       final currentState = state;
-//       if (currentState is CountryLoaded) {
-//         emit(currentState.copyWith(selectedCountryId: event.selectedCountryId));
-//       }
-//     });
-//   }
-// }
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/country/country_event.dart';
 import 'package:realestate_fe/features/profile/blocs/country/country_state.dart';
