@@ -10,4 +10,5 @@ class ApiConstants {
 
   // Profile
   static String profileEndPoint = '$serverUrl/profiles/personal-info/';
+  static String logoutEndPoint = '$serverUrl/accounts/logout/';
 }

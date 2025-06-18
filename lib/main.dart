@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
                 title: 'Pokak Real-Estate',
                 debugShowCheckedModeBanner: false,
                 theme: theme,
-                // home: const SplashScreen(),
-                home: const BottomBar(),
+                home: const SplashScreen(),
+                // home: const BottomBar(),
               );
             },
           );

@@ -7,4 +7,8 @@ class ProfileRepository {
   Future<ProfileModel> getProfile() {
     return _provider.getUserProfile();
   }
+
+  Future<String> logoutUser() {
+    return _provider.logoutUser();
+  }
 }

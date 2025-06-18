@@ -8,6 +8,7 @@ import 'package:realestate_fe/features/profile/blocs/profile/profile_event.dart'
 import 'package:realestate_fe/features/profile/blocs/profile/profile_state.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
 import 'package:realestate_fe/features/profile/pages/profile/edit_profile.dart';
+import 'package:realestate_fe/features/profile/widgets/logout_popup.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -201,7 +202,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                _WidgetListTile("Notifications", AppAssets.notificationIcon,
+                widgetListTile("Notifications", AppAssets.notificationIcon,
                     () {
                   // Navigator.of(context).push(
                   //   MaterialPageRoute(
@@ -270,22 +271,22 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 //     },
                 //   ),
                 // ),
-                _WidgetListTile("Settings", AppAssets.settingsIcon, () {
+                widgetListTile("Settings", AppAssets.settingsIcon, () {
                   // Navigator.of(context).push(
                   //   MaterialPageRoute(
                   //     builder: (context) => const SettingsScreen(),
                   //   ),
                   // );
                 }),
-                _WidgetListTile("Language", AppAssets.languageIcon, () {
+                widgetListTile("Language", AppAssets.languageIcon, () {
                   // Navigator.of(context).push(
                   //   MaterialPageRoute(
                   //     builder: (context) => const LanguageSelectionScreen(),
                   //   ),
                   // );
                 }),
-                _WidgetListTile("Logout", AppAssets.logoutIcon, () {
-                  // showLogoutDialog(context);
+                widgetListTile("Logout", AppAssets.logoutIcon, () {
+                  showLogoutPopup(context);
                 }),
                 const SizedBox(height: 150),
               ],
@@ -297,7 +298,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 }
 
-Widget _WidgetListTile(String title, String imagePath, VoidCallback onTap,
+Widget widgetListTile(String title, String imagePath, VoidCallback onTap,
     {Widget? trailing}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 4),
@@ -335,8 +336,7 @@ class CustomSwitch extends StatefulWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
 
-  const CustomSwitch({Key? key, required this.value, required this.onChanged})
-      : super(key: key);
+  const CustomSwitch({super.key, required this.value, required this.onChanged});
 
   @override
   _CustomSwitchState createState() => _CustomSwitchState();
