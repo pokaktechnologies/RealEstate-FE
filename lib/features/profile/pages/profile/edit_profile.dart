@@ -12,6 +12,7 @@ import 'package:realestate_fe/features/profile/blocs/contact/contact_state.dart'
 import 'package:realestate_fe/features/profile/blocs/country/country_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/country/country_event.dart';
 import 'package:realestate_fe/features/profile/blocs/country/country_state.dart';
+import 'package:realestate_fe/features/profile/blocs/personal_info/personalinfo_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/state/state_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/state/state_event.dart';
 import 'package:realestate_fe/features/profile/blocs/state/state_state.dart';
@@ -53,6 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
+
     emailIdTextController = TextEditingController(text: widget.user.email);
     primaryPhoneCodeController = TextEditingController();
     primaryPhoneNumberController = TextEditingController();
@@ -69,6 +71,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     documentController = TextEditingController();
     context.read<CountryBloc>().add(GetCountryList());
     context.read<ContactBloc>().add(GetContactEvent());
+    context.read<PersonalinfoBloc>().add(GetPersonalInfo());
   }
 
   @override
@@ -265,96 +268,107 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
                 SizedBox(height: 10),
-                ExpandableSection(
-                  title: "Personal Info",
-                  content: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      buildLabel("Name", true),
-                      buildTextField("Enter Name", nameController),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                buildLabel("DOB", true),
-                                buildTextField("DD/MM/YYYY", dobController),
-                              ],
+                BlocListener<PersonalinfoBloc, PersonalinfoState>(
+                  listener: (context, state) {
+                    if (state is PersonalLoaded) {
+                      final user = state.personalInfoModel.data;
+                      if (user != null) {
+                        setState(() {
+                          nameController.text = user.fullName;
+                          dobController.text = user.dob;
+                          genderController.text = user.gender;
+                          occupationController.text = user.occupation;
+                          nationController.text = user.nationality;
+                          documentController.text = user.profileImage;
+                          emailIdTextController.text = user.email;
+                        });
+                      }
+                    }
+                  },
+                  child: ExpandableSection(
+                    title: "Personal Info",
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildLabel("Name", true),
+                        buildTextField("Enter Name", nameController),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  buildLabel("DOB", true),
+                                  buildTextField("DD/MM/YYYY", dobController),
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 15),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                buildLabel("Gender", true),
-                                buildTextField("Select", genderController),
-                              ],
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  buildLabel("Gender", true),
+                                  buildTextField("Select", genderController),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                buildLabel("Occupation", true),
-                                buildTextField(
-                                    "Enter Occupation", occupationController),
-                              ],
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  buildLabel("Occupation", true),
+                                  buildTextField(
+                                      "Enter Occupation", occupationController),
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 15),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                buildLabel("Nationality", true),
-                                buildTextField("Select", nationController),
-                              ],
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  buildLabel("Nationality", true),
+                                  buildTextField("Select", nationController),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: buildLabel("Government ID", true),
-                          ),
-                          SizedBox(width: 15),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      buildTextField("Upload Document", documentController,
-                          showCloseIcon: true),
-                      SizedBox(height: 10),
-                      Text(
-                        "File should be in jpg/pdf format, Max 3mb",
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w400),
-                      ),
-                      SizedBox(height: 20),
-                      Center(
-                        child: InkWell(
-                          onTap: () {},
-                          child: Text(
-                            "Save",
-                            style: TextStyle(
-                              color: AppColors.tealBlue,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        buildLabel("Government ID", true),
+                        const SizedBox(height: 10),
+                        buildTextField("Upload Document", documentController,
+                            showCloseIcon: true),
+                        const SizedBox(height: 10),
+                        const Text(
+                          "File should be in jpg/pdf format, Max 3mb",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w400),
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: InkWell(
+                            onTap: () {},
+                            child: const Text(
+                              "Save",
+                              style: TextStyle(
+                                color: AppColors.tealBlue,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 20),
-                    ],
+                        const SizedBox(height: 20),
+                      ],
+                    ),
                   ),
                 ),
                 ExpandableSection(
