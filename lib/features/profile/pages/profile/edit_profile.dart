@@ -39,6 +39,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController addressController;
   late TextEditingController stateController;
   late TextEditingController countryController;
+  late TextEditingController nameController;
+  late TextEditingController dobController;
+  late TextEditingController genderController;
+  late TextEditingController occupationController;
+  late TextEditingController nationController;
+  late TextEditingController documentController;
+
   String selectedState = '';
   int? selectedCountryId;
   int? selectedStateId;
@@ -54,6 +61,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     addressController = TextEditingController();
     stateController = TextEditingController();
     countryController = TextEditingController();
+    nameController = TextEditingController();
+    dobController = TextEditingController();
+    genderController = TextEditingController();
+    occupationController = TextEditingController();
+    nationController = TextEditingController();
+    documentController = TextEditingController();
     context.read<CountryBloc>().add(GetCountryList());
     context.read<ContactBloc>().add(GetContactEvent());
   }
@@ -252,106 +265,98 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
                 SizedBox(height: 10),
-                // ----- personal info ---------------------------------------------------
-
-                // ExpandableSection(
-                //   title: "Personal Info",
-                //   content: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       buildLabel("Name", true),
-                //       buildTextField("Enter Name"),
-                //       SizedBox(height: 10),
-                //       Row(
-                //         children: [
-                //           Expanded(
-                //             child: Column(
-                //               crossAxisAlignment: CrossAxisAlignment.start,
-                //               children: [
-                //                 buildLabel("DOB", true),
-                //                 buildTextField("DD/MM/YYYY"),
-                //               ],
-                //             ),
-                //           ),
-                //           SizedBox(width: 15),
-                //           Expanded(
-                //             child: Column(
-                //               crossAxisAlignment: CrossAxisAlignment.start,
-                //               children: [
-                //                 buildLabel("Gender", true),
-                //                 buildDropdown(["Male", "Female", "Other"]),
-                //               ],
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(height: 10),
-                //       Row(
-                //         children: [
-                //           Expanded(
-                //             child: Column(
-                //               crossAxisAlignment: CrossAxisAlignment.start,
-                //               children: [
-                //                 buildLabel("Occupation", true),
-                //                 buildTextField("Enter Occupation"),
-                //               ],
-                //             ),
-                //           ),
-                //           SizedBox(width: 15),
-                //           Expanded(
-                //             child: Column(
-                //               crossAxisAlignment: CrossAxisAlignment.start,
-                //               children: [
-                //                 buildLabel("Nationality", true),
-                //                 buildDropdown(
-                //                     ["India", "United States ", "Canada"]),
-                //               ],
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(height: 10),
-                //       Row(
-                //         children: [
-                //           Expanded(
-                //             child: buildLabel("Government ID", true),
-                //           ),
-                //           SizedBox(width: 15),
-                //           Expanded(
-                //             child: buildDropdown(
-                //                 ["Passport", "Pan Card ", "Aadhaar"]),
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(height: 10),
-                //       buildTextField("Upload Document", showCloseIcon: true),
-                //       SizedBox(height: 10),
-                //       Text(
-                //         "File should be in jpg/pdf format, Max 3mb",
-                //         style:
-                //             TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-                //       ),
-                //       SizedBox(height: 20),
-                //       Center(
-                //         child: InkWell(
-                //           onTap: () {},
-                //           child: Text(
-                //             "Save",
-                //             style: TextStyle(
-                //               color: AppColors.tealBlue,
-                //               fontSize: 16,
-                //               fontWeight: FontWeight.w600,
-                //             ),
-                //           ),
-                //         ),
-                //       ),
-                //       SizedBox(height: 20),
-                //     ],
-                //   ),
-                // ),
-                //--------------------end-------------------
-
-                // Contact Details Section
+                ExpandableSection(
+                  title: "Personal Info",
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildLabel("Name", true),
+                      buildTextField("Enter Name", nameController),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildLabel("DOB", true),
+                                buildTextField("DD/MM/YYYY", dobController),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildLabel("Gender", true),
+                                buildTextField("Select", genderController),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildLabel("Occupation", true),
+                                buildTextField(
+                                    "Enter Occupation", occupationController),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildLabel("Nationality", true),
+                                buildTextField("Select", nationController),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: buildLabel("Government ID", true),
+                          ),
+                          SizedBox(width: 15),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      buildTextField("Upload Document", documentController,
+                          showCloseIcon: true),
+                      SizedBox(height: 10),
+                      Text(
+                        "File should be in jpg/pdf format, Max 3mb",
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w400),
+                      ),
+                      SizedBox(height: 20),
+                      Center(
+                        child: InkWell(
+                          onTap: () {},
+                          child: Text(
+                            "Save",
+                            style: TextStyle(
+                              color: AppColors.tealBlue,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                    ],
+                  ),
+                ),
                 ExpandableSection(
                   title: "Contact Details",
                   content: Column(
@@ -645,7 +650,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ],
                   ),
                 ),
-
                 ExpandableSection(
                   title: "Payment Methods",
                   content: Column(
@@ -695,7 +699,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     children: [],
                   ),
                 ),
-
                 SizedBox(height: 10),
               ],
             ),
