@@ -2,13 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/login/login_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_bloc.dart';
-<<<<<<< HEAD
-import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/blocs/logout/logout_bloc.dart';
-=======
 import 'package:realestate_fe/features/home/blocs/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/blocs/contact/contact_bloc.dart';
->>>>>>> sajidh-changes
 import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/state/state_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
@@ -21,11 +17,8 @@ List<BlocProvider> appBlocProviders = [
   BlocProvider<LoginBloc>(create: (_) => LoginBloc()),
   BlocProvider<VerifyOtpBloc>(create: (_) => VerifyOtpBloc()),
   BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
-<<<<<<< HEAD
   BlocProvider<LogoutBloc>(create: (_) => LogoutBloc()),
-=======
   BlocProvider<CountryBloc>(create: (_) => CountryBloc()),
   BlocProvider<StateBloc>(create: (_) => StateBloc()),
   BlocProvider<ContactBloc>(create: (_) => ContactBloc()),
->>>>>>> sajidh-changes
 ];

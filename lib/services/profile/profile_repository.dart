@@ -12,10 +12,6 @@ class ProfileRepository {
     return _provider.getUserProfile();
   }
 
-<<<<<<< HEAD
-  Future<String> logoutUser() {
-    return _provider.logoutUser();
-=======
   Future<CountryModel> getCountries() {
     return _provider.getCountry();
   }
@@ -29,6 +25,9 @@ class ProfileRepository {
 
   Future<ContactInfoModel> getContact() {
     return _provider.getContact();
->>>>>>> sajidh-changes
+  }
+
+  Future<String> logoutUser() {
+    return _provider.logoutUser();
   }
 }

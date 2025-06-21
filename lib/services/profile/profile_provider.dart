@@ -1,24 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:realestate_fe/core/api/api_constants.dart';
 import 'package:realestate_fe/core/api/dio_client.dart';
-<<<<<<< HEAD
 import 'package:realestate_fe/core/services.dart';
-=======
 import 'package:realestate_fe/models/contact_info_model.dart';
 import 'package:realestate_fe/models/contact_model.dart';
 import 'package:realestate_fe/models/country_model.dart';
->>>>>>> sajidh-changes
 import 'package:realestate_fe/models/profile_model.dart';
 import 'package:realestate_fe/models/state_model.dart';
 
 class ProfileProvider {
   final String profileUrl = ApiConstants.profileEndPoint;
-<<<<<<< HEAD
-  final String logoutUrl = ApiConstants.logoutEndPoint;
-=======
   final String countryUrl = ApiConstants.countryEndPoint;
   final String contactUrl = ApiConstants.contactEndPoint;
->>>>>>> sajidh-changes
+  final String logoutUrl = ApiConstants.logoutEndPoint;
 
   Future<ProfileModel> getUserProfile() async {
     try {
@@ -32,38 +26,6 @@ class ProfileProvider {
     }
   }
 
-<<<<<<< HEAD
-  Future<String> logoutUser() async {
-    try {
-      final refreshToken = await SecureStorageService().getRefreshToken();
-      if (refreshToken == null || refreshToken.isEmpty) {
-        print("no refresh token");
-        return 'No refresh token found';
-      }
-
-      final dio = await DioClient().getAuthorizedDio();
-      final response = await dio.post(
-        logoutUrl,
-        data: {
-          "refresh": refreshToken,
-        },
-        options: Options(
-          headers: {
-            "Content-Type": "application/json",
-          },
-        ),
-      );
-
-      print("status code ==> $response");
-
-      return response.data['message'] ?? 'Logout Successfully Completed';
-    } on DioException catch (error) {
-      print("Logout Error: ${error.response?.data}");
-      return 'Logout Failed: ${error.response?.data["detail"] ?? "Unknown error"}';
-    } catch (error) {
-      print("Logout Error: $error");
-      return 'Error While Logout User';
-=======
   Future<CountryModel> getCountry() async {
     try {
       final dio = await DioClient().getAuthorizedDio();
@@ -120,7 +82,39 @@ class ProfileProvider {
       print("Contact fetch error: $error stackTrace: $stacktrace");
       return ContactInfoModel.withError(
           "Contact info not found / connection issue");
->>>>>>> sajidh-changes
+    }
+  }
+
+  Future<String> logoutUser() async {
+    try {
+      final refreshToken = await SecureStorageService().getRefreshToken();
+      if (refreshToken == null || refreshToken.isEmpty) {
+        print("no refresh token");
+        return 'No refresh token found';
+      }
+
+      final dio = await DioClient().getAuthorizedDio();
+      final response = await dio.post(
+        logoutUrl,
+        data: {
+          "refresh": refreshToken,
+        },
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+          },
+        ),
+      );
+
+      print("status code ==> $response");
+
+      return response.data['message'] ?? 'Logout Successfully Completed';
+    } on DioException catch (error) {
+      print("Logout Error: ${error.response?.data}");
+      return 'Logout Failed: ${error.response?.data["detail"] ?? "Unknown error"}';
+    } catch (error) {
+      print("Logout Error: $error");
+      return 'Error While Logout User';
     }
   }
 }

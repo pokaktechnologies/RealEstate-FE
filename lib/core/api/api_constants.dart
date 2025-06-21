@@ -10,9 +10,7 @@ class ApiConstants {
 
   // Profile
   static String profileEndPoint = '$serverUrl/profiles/personal-info/';
-<<<<<<< HEAD
   static String logoutEndPoint = '$serverUrl/accounts/logout/';
-=======
   static String countryEndPoint = '$serverUrl/accounts/country/';
   static String getStateByCountryId(String countryId) =>
       "$serverUrl/accounts/country/$countryId/state/";
@@ -21,5 +19,4 @@ class ApiConstants {
   // home
   static String propertiesRentalEndPoint =
       '$serverUrl/property/user/best-properties-for-rental/';
->>>>>>> sajidh-changes
 }
