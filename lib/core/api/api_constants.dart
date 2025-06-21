@@ -14,4 +14,8 @@ class ApiConstants {
   static String getStateByCountryId(String countryId) =>
       "$serverUrl/accounts/country/$countryId/state/";
   static String contactEndPoint = '$serverUrl/profiles/contact-info/';
+
+  // home
+  static String propertiesRentalEndPoint =
+      '$serverUrl/property/user/best-properties-for-rental/';
 }

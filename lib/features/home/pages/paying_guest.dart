@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/buy/buy_banner.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/buy/trending_properties.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/foryou/bottom_image.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/viewmore_common.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
+import 'package:realestate_fe/features/home/widgets/paying_guest/paying_banner.dart';
+import 'package:realestate_fe/features/home/widgets/paying_guest/top_pics.dart';
+import 'package:realestate_fe/features/home/widgets/viewmore_common.dart';
 
-class BuyPage extends StatelessWidget {
-  const BuyPage({super.key});
+class PayingGuest extends StatelessWidget {
+  const PayingGuest({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,9 @@ class BuyPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 10),
-          BuyBanner(),
+          PayingBanner(),
           SizedBox(height: 10),
-          TrendingProperties(),
+          TopPics(),
           BottomImage(
             isForyou: false,
           ),

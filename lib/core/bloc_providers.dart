@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/login/login_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_bloc.dart';
-import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
+import 'package:realestate_fe/features/home/blocs/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/blocs/contact/contact_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/state/state_bloc.dart';
