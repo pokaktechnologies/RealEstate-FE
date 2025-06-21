@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/home/presentation/blocs/homepage_cubit.dart';
-import 'package:realestate_fe/features/profile/pages/profile_tile/notification.dart';
+import 'package:realestate_fe/features/home/blocs/homepage_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Homepage extends StatefulWidget {
@@ -20,7 +19,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    void _openGoogleMaps(String searchQuery) async {
+    void openGoogleMaps(String searchQuery) async {
       final query = Uri.encodeComponent(searchQuery);
       final googleMapsUrl =
           Uri.parse("https://www.google.com/maps/search/?api=1&query=$query");
@@ -68,7 +67,7 @@ class _HomepageState extends State<Homepage> {
                     controller: _searchController,
                     onSubmitted: (value) {
                       if (value.isNotEmpty) {
-                        _openGoogleMaps(value);
+                        openGoogleMaps(value);
                       }
                     },
                     decoration: InputDecoration(

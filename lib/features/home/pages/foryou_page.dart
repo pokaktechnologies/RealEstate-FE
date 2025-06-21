@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/foryou/banner.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/foryou/best_properties.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/foryou/bottom_image.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/foryou/stay_finder_screen.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/foryou/top_agents.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/foryou/trending_properties.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/banner.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/best_properties.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/stay_finder_screen.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/top_agents.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/trending_properties.dart';
 
 class ForyouPage extends StatelessWidget {
   const ForyouPage({super.key});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/foryou/bottom_image.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/rent/rent_banner.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/rent/trending_properties.dart';
-import 'package:realestate_fe/features/home/presentation/widgets/viewmore_common.dart';
+import 'package:realestate_fe/features/home/widgets/buy/buy_banner.dart';
+import 'package:realestate_fe/features/home/widgets/buy/trending_properties.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
+import 'package:realestate_fe/features/home/widgets/viewmore_common.dart';
 
-class RentPage extends StatelessWidget {
-  const RentPage({super.key});
+class BuyPage extends StatelessWidget {
+  const BuyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +14,21 @@ class RentPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 10),
-          RentBanner(),
+          BuyBanner(),
           SizedBox(height: 10),
           TrendingProperties(),
           BottomImage(
             isForyou: false,
           ),
-          SizedBox(
-            height: 10,
-          ),
           Container(
             height: 450,
             color: AppColors.white,
             child: Padding(
-              padding: const EdgeInsets.only(top: 10, left: 15, right: 15,),
+              padding: const EdgeInsets.only(
+                top: 10,
+                left: 15,
+                right: 15,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
