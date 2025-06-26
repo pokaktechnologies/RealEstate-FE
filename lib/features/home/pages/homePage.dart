@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/home/blocs/homepage_cubit.dart';
+import 'package:realestate_fe/features/home/pages/buy_page.dart';
+import 'package:realestate_fe/features/home/pages/foryou_page.dart';
+import 'package:realestate_fe/features/home/pages/paying_guest.dart';
+import 'package:realestate_fe/features/home/pages/rent_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Homepage extends StatefulWidget {
@@ -14,23 +16,40 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final TextEditingController _searchController = TextEditingController();
+  int _selectedIndex = 0;
+
+  Widget _getScreen(int index) {
+    switch (index) {
+      case 0:
+        return const ForyouPage();
+      case 1:
+        return const RentPage();
+      case 2:
+        return const BuyPage();
+      case 3:
+        return const PayingGuest();
+      default:
+        return const ForyouPage();
+    }
+  }
+
+  void openGoogleMaps(String searchQuery) async {
+    final query = Uri.encodeComponent(searchQuery);
+    final googleMapsUrl =
+        Uri.parse("https://www.google.com/maps/search/?api=1&query=$query");
+
+    if (await canLaunchUrl(googleMapsUrl)) {
+      await launchUrl(googleMapsUrl, mode: LaunchMode.externalApplication);
+      _searchController.clear(); // Clear text after navigation
+    } else {
+      print("Could not open Google Maps");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    void openGoogleMaps(String searchQuery) async {
-      final query = Uri.encodeComponent(searchQuery);
-      final googleMapsUrl =
-          Uri.parse("https://www.google.com/maps/search/?api=1&query=$query");
-
-      if (await canLaunchUrl(googleMapsUrl)) {
-        await launchUrl(googleMapsUrl, mode: LaunchMode.externalApplication);
-        _searchController.clear(); // Clear text after navigation
-      } else {
-        print("Could not open Google Maps");
-      }
-    }
 
     return Scaffold(
       backgroundColor: AppColors.lightMint,
@@ -44,14 +63,11 @@ class _HomepageState extends State<Homepage> {
               height: screenHeight * 0.05,
               width: screenWidth * 0.25,
               child: Row(
-                children: [
+                children: const [
                   Icon(Icons.location_on_sharp),
                   Text(
                     "Kochi",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                   ),
                   Icon(Icons.keyboard_arrow_down_sharp)
                 ],
@@ -63,7 +79,7 @@ class _HomepageState extends State<Homepage> {
                   height: 35,
                   width: 200,
                   child: TextField(
-                    enabled: false, // you want to type , please remove that
+                    enabled: false,
                     controller: _searchController,
                     onSubmitted: (value) {
                       if (value.isNotEmpty) {
@@ -77,7 +93,7 @@ class _HomepageState extends State<Homepage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       prefixIconColor: AppColors.mediumGray,
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                       contentPadding: const EdgeInsets.symmetric(vertical: 7),
                       hintText: "search",
                       hintStyle: TextStyle(
@@ -86,22 +102,8 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 3,
-                ),
-                InkWell(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => NotificationsScreen()),
-                    // );
-                  },
-                  child: Icon(
-                    Icons.notifications_sharp,
-                    size: 26,
-                  ),
-                ),
+                const SizedBox(width: 3),
+                const Icon(Icons.notifications_sharp, size: 26),
               ],
             )
           ],
@@ -112,68 +114,30 @@ class _HomepageState extends State<Homepage> {
           Container(
             height: 60,
             color: AppColors.white,
-            child: BlocBuilder<HomepageCubit, int>(
-              builder: (context, selectedIndex) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    navItem(
-                      context,
-                      selectedIndex,
-                      0,
-                      AppAssets.foryouIcon,
-                      "For You",
-                    ),
-                    navItem(
-                      context,
-                      selectedIndex,
-                      1,
-                      AppAssets.rentIcon,
-                      "Rent",
-                    ),
-                    navItem(
-                      context,
-                      selectedIndex,
-                      2,
-                      AppAssets.buyIcon,
-                      "Buy",
-                    ),
-                    navItem(
-                      context,
-                      selectedIndex,
-                      3,
-                      AppAssets.payingGuest,
-                      "Paying Guest",
-                    )
-                  ],
-                );
-              },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                navItem(0, AppAssets.foryouIcon, "For You"),
+                navItem(1, AppAssets.rentIcon, "Rent"),
+                navItem(2, AppAssets.buyIcon, "Buy"),
+                navItem(3, AppAssets.payingGuest, "Paying Guest"),
+              ],
             ),
           ),
-          Expanded(
-            child: BlocBuilder<HomepageCubit, int>(
-              builder: (context, state) {
-                return context.read<HomepageCubit>().getScreen(state);
-              },
-            ),
-          ),
+          Expanded(child: _getScreen(_selectedIndex)),
         ],
       ),
     );
   }
 
-  Widget navItem(
-    BuildContext context,
-    int selectedIndex,
-    int index,
-    String iconPath,
-    String label,
-  ) {
-    bool isSelected = selectedIndex == index;
+  Widget navItem(int index, String iconPath, String label) {
+    bool isSelected = _selectedIndex == index;
 
     return InkWell(
       onTap: () {
-        context.read<HomepageCubit>().changeTab(index);
+        setState(() {
+          _selectedIndex = index;
+        });
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -183,7 +147,7 @@ class _HomepageState extends State<Homepage> {
               iconPath,
               color: isSelected ? AppColors.tealBlue : AppColors.grey,
             ),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
             Text(
               label,
               style: TextStyle(

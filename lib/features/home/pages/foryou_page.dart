@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/banner.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/best_properties.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/stay_finder_screen.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/top_agents.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/trending_properties.dart';
+import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
+import 'package:realestate_fe/features/home/blocs/properties/properties_event.dart';
 
-class ForyouPage extends StatelessWidget {
+class ForyouPage extends StatefulWidget {
   const ForyouPage({super.key});
+
+  @override
+  State<ForyouPage> createState() => _ForyouPageState();
+}
+
+class _ForyouPageState extends State<ForyouPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<PropertiesBloc>().add(LoadProperties());
+  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: [
+        children: const [
           SizedBox(height: 10),
           SponsoredScreen(),
           SizedBox(height: 15),
@@ -25,9 +39,7 @@ class ForyouPage extends StatelessWidget {
           SizedBox(height: 40),
           TopAgents(),
           SizedBox(height: 10),
-          BottomImage(
-            isForyou: true,
-          ),
+          BottomImage(isForyou: true),
         ],
       ),
     );

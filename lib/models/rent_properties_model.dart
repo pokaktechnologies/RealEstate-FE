@@ -15,6 +15,7 @@ class RentPropertiesModel {
   double overallRatings;
   int reviewCount;
   bool isPropertySaved;
+  List<ImageModel> images;
 
   RentPropertiesModel({
     required this.id,
@@ -33,6 +34,7 @@ class RentPropertiesModel {
     required this.overallRatings,
     required this.reviewCount,
     required this.isPropertySaved,
+    required this.images,
   });
 
   factory RentPropertiesModel.fromJson(Map<String, dynamic> json) =>
@@ -53,6 +55,10 @@ class RentPropertiesModel {
         overallRatings: json['overall_rating'] ?? 0.0,
         reviewCount: json['review_count'] ?? 0,
         isPropertySaved: json['is_property_saved'] ?? false,
+        images: (json['images'] as List<dynamic>?)
+                ?.map((img) => ImageModel.fromJson(img))
+                .toList() ??
+            [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -72,6 +78,7 @@ class RentPropertiesModel {
         "overall_rating": overallRatings,
         "review_count": reviewCount,
         "is_property_saved": isPropertySaved,
+        "images": images.map((e) => e.toJson()).toList(),
       };
 }
 
