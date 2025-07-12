@@ -24,8 +24,10 @@ class AuthProvider {
       if (response.statusCode == 200) {
         SecureStorageService secureStorage = SecureStorageService();
         final accessToken = response.data['access'];
+        final refreshToken = response.data['refresh'];
 
         await secureStorage.storeToken(accessToken);
+        await secureStorage.storeRefreshToken(refreshToken);
         return response.data['message'] ?? 'User Login Successfully';
       } else {
         throw Exception(response.data['message'] ?? 'Login failed');
@@ -42,8 +44,10 @@ class AuthProvider {
       if (response.statusCode == 200) {
         SecureStorageService secureStorage = SecureStorageService();
         final accessToken = response.data['access'];
+        final refreshToken = response.data['refresh'];
 
         await secureStorage.storeToken(accessToken);
+        await secureStorage.storeRefreshToken(refreshToken);
         return response.data['message'] ?? 'Otp Verified Successfully';
       } else {
         throw Exception(response.data['message'] ?? 'Verification failed');

@@ -9,17 +9,17 @@ class PersonalinfoBloc extends Bloc<PersonalinfoEvent, PersonalinfoState> {
   PersonalinfoBloc() : super(PersonalinfoInitial()) {
     final ProfileRepository profileRepository = ProfileRepository();
 
-    on<GetPersonalInfo>((event, emit) async {
-      try {
-        emit(PersonalLoading());
-        final personList = await profileRepository.getPersonalInfo();
-        emit(PersonalLoaded(personList));
-        if (personList.error != null) {
-          emit(PersonalError(personList.error));
-        }
-      } catch (error) {
-        print(error);
-      }
-    });
+    // on<GetPersonalInfo>((event, emit) async {
+    //   try {
+    //     emit(PersonalLoading());
+    //     final personList = await profileRepository.getPersonalInfo();
+    //     emit(PersonalLoaded(personList));
+    //     if (personList.error != null) {
+    //       emit(PersonalError(personList.error));
+    //     }
+    //   } catch (error) {
+    //     print(error);
+    //   }
+    // });
   }
 }

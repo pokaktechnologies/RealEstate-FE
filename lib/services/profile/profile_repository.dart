@@ -28,7 +28,11 @@ class ProfileRepository {
     return _provider.getContact();
   }
 
-  Future<PersonalInfoModel> getPersonalInfo() {
-    return _provider.getPersonalInfo();
+  Future<String> logoutUser() {
+    return _provider.logoutUser();
   }
+
+  // Future<PersonalInfoModel> getPersonalInfo() {
+  //   return _provider.getPersonalInfo();
+  // }
 }

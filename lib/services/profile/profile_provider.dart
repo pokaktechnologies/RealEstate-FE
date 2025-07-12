@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:realestate_fe/core/api/api_constants.dart';
 import 'package:realestate_fe/core/api/dio_client.dart';
+import 'package:realestate_fe/core/services.dart';
 import 'package:realestate_fe/models/contact_info_model.dart';
 import 'package:realestate_fe/models/contact_model.dart';
 import 'package:realestate_fe/models/country_model.dart';
@@ -14,7 +15,6 @@ class ProfileProvider {
   final String profileUrl = ApiConstants.profileEndPoint;
   final String countryUrl = ApiConstants.countryEndPoint;
   final String contactUrl = ApiConstants.contactEndPoint;
-  final String personalUrl = ApiConstants.personalEndPoint;
 
   Future<ProfileModel> getUserProfile() async {
     try {
@@ -88,59 +88,19 @@ class ProfileProvider {
     }
   }
 
-  // Personal Info- create,edit,update
-
-  Future<PersonalInfoModel> getPersonalInfo() async {
+  Future<String> logoutUser() async {
     try {
       final dio = await DioClient().getAuthorizedDio();
-      final response = await dio.get(personalUrl);
-      return PersonalInfoModel.fromJson(response.data);
+      final response = await dio.post(ApiConstants.logoutEndPoint);
+
+      if (response.statusCode == 200) {
+        return "Logout successful";
+      } else {
+        return "Logout failed with status: ${response.statusCode}";
+      }
     } catch (error, stacktrace) {
-      print("Personal Info fetch error: $error stackTrace: $stacktrace");
-      return PersonalInfoModel.withError(
-          "Personal info not found / connection issue");
-    }
-  }
-
-  Future<PersonalInfoModel> updatePersonalInfo(
-    Map<String, dynamic> data, {
-    required String fullName,
-    required String dob,
-    required String gender,
-    required String occupation,
-    required int nationalityId,
-    File? profileImageFile,
-  }) async {
-    try {
-      final dio = await DioClient().getAuthorizedDio();
-
-      final formData = FormData.fromMap({
-        "full_name": fullName,
-        "dob": dob,
-        "gender": gender,
-        "occupation": occupation,
-        "nationality": nationalityId,
-        if (profileImageFile != null)
-          "profile_image": await MultipartFile.fromFile(
-            profileImageFile.path,
-            filename: profileImageFile.path.split('/').last,
-          ),
-      });
-
-      final response = await dio.patch(
-        ApiConstants.personalEndPoint,
-        data: formData,
-        options: Options(
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        ),
-      );
-
-      return PersonalInfoModel.fromJson(response.data);
-    } catch (error, stacktrace) {
-      print("❌ Personal Info update error: $error stackTrace: $stacktrace");
-      return PersonalInfoModel.withError("Failed to update personal info");
+      print("Logout error: $error stackTrace: $stacktrace");
+      return "Logout error: ${error.toString()}";
     }
   }
 }
