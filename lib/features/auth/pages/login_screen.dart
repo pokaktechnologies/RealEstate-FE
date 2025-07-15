@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 top: 20,
               ),
               child: CustomTextfield(
-                hintText: "Enter Your Email",
+                hintText: "Enter your email",
                 prefixImg: AppAssets.emailIcon,
                 controller: emailIdTextController,
               ),
@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   },
                   child: Text(
-                    "forgot password?",
+                    "Forgot Password?",
                     style: TextStyle(
                       color: AppColors.black,
                       fontSize: 15,
@@ -223,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Text(
-                  "Or Continue with ",
+                  "Or Continue With ",
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColors.black,

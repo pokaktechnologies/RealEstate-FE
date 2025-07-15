@@ -13,7 +13,6 @@ import 'package:realestate_fe/features/auth/pages/verification_code.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_icon.dart';
-import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -27,6 +26,7 @@ class _SignupScreenState extends State<SignupScreen> {
   late TextEditingController emailIdTextController;
   late TextEditingController passwordTextController;
   String? cachedEmail;
+  bool isRememberMeChecked = false;
 
   @override
   void initState() {
@@ -127,7 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 top: 20,
               ),
               child: CustomTextfield(
-                hintText: "Enter Your Name",
+                hintText: "Enter your Name",
                 prefixImg: AppAssets.usernameIcon,
                 controller: nameTextcontroller,
               ),
@@ -139,7 +139,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 top: 20,
               ),
               child: CustomTextfield(
-                hintText: "Enter Your Email",
+                hintText: "Enter your Email",
                 prefixImg: AppAssets.emailIcon,
                 controller: emailIdTextController,
               ),
@@ -156,22 +156,28 @@ class _SignupScreenState extends State<SignupScreen> {
                 controller: passwordTextController,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                right: 40,
-                left: 20,
-                top: 15,
-              ),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "remember me",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 15,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Checkbox(
+                  value: isRememberMeChecked,
+                  onChanged: (bool? newValue) {
+                    setState(() {
+                      isRememberMeChecked = newValue!;
+                    });
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 40),
+                  child: Text(
+                    "Remember me",
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -196,7 +202,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       buttonText: state is RegisterLoading
                           ? AppLoadingIndicator()
                           : Text(
-                              "Sign up",
+                              "Sign Up",
                               style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 17,
