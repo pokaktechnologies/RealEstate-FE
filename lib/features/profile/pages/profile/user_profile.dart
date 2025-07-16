@@ -7,10 +7,12 @@ import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_event.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_state.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
+import 'package:realestate_fe/features/profile/pages/mybooking/mybooking_Main.dart';
 import 'package:realestate_fe/features/profile/pages/profile/edit_profile.dart';
 import 'package:realestate_fe/features/profile/pages/profile_tile/language.dart';
 import 'package:realestate_fe/features/profile/pages/profile_tile/notification.dart';
 import 'package:realestate_fe/features/profile/pages/profile_tile/settings.dart';
+import 'package:realestate_fe/features/profile/pages/transaction/transaction.dart';
 import 'package:realestate_fe/features/profile/widgets/logout_popup.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -148,11 +150,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => BookingsScreen()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookingsScreen()),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.tealBlue,
@@ -178,11 +180,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => TransactionsScreen()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TransactionsScreen()),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.tealBlue,
@@ -246,9 +248,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             child: Switch(
                               value: theme.brightness == Brightness.dark,
                               activeColor: AppColors.black,
-                              onChanged: (bool value) {
-                                // context.read<ThemeBloc>().toggleTheme();
-                              },
+                              onChanged: (bool value) {},
                             ),
                           ),
                         ),

@@ -25,26 +25,6 @@ class AuthProvider {
     }
   }
 
-  Future<String> loginUser(Map<String, dynamic> loginData) async {
-    try {
-      final response = await _dio.post(_loginUrl, data: loginData);
-      if (response.statusCode == 200) {
-        SecureStorageService secureStorage = SecureStorageService();
-        final accessToken = response.data['access'];
-        final refreshToken = response.data['refresh'];
-
-        await secureStorage.storeToken(accessToken);
-        await secureStorage.storeRefreshToken(refreshToken);
-        return response.data['message'] ?? 'User Login Successfully';
-      } else {
-        throw Exception(response.data['message'] ?? 'Login failed');
-      }
-    } catch (error) {
-      print("Login Error: $error");
-      return 'Error While Login User';
-    }
-  }
-
   Future<String> verifyOtp(Map<String, dynamic> verifyData) async {
     final response = await _dio.post(_verifyOtpUrl, data: verifyData);
 
@@ -59,6 +39,20 @@ class AuthProvider {
       return response.data['message'] ?? 'Otp Verified Successfully';
     } else {
       throw Exception(response.data['error'] ?? 'Verification failed');
+    }
+  }
+
+  Future<String> loginUser(Map<String, dynamic> loginData) async {
+    final response = await _dio.post(_loginUrl, data: loginData);
+    if (response.statusCode == 200) {
+      SecureStorageService secureStorage = SecureStorageService();
+      final accessToken = response.data['access'];
+      final refreshToken = response.data['refresh'];
+      await secureStorage.storeToken(accessToken);
+      await secureStorage.storeRefreshToken(refreshToken);
+      return response.data['message'] ?? 'User Login Successfully';
+    } else {
+      throw Exception(response.data['message'] ?? 'Invalid credentials');
     }
   }
 }

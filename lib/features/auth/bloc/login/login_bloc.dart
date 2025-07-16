@@ -12,8 +12,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         final message = await authRepository.loginUser(event.accountData);
         emit(LoginSuccess(message));
-      } catch (e) {
-        emit(LoginError('Failed to Login'));
+      } catch (error) {
+        emit(LoginError(error.toString()));
       }
     });
   }

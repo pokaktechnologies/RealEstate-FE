@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:realestate_fe/core/api/api_constants.dart';
 import 'package:realestate_fe/core/api/dio_client.dart';
+import 'package:realestate_fe/core/services.dart';
 import 'package:realestate_fe/models/contact_info_model.dart';
 import 'package:realestate_fe/models/contact_model.dart';
 import 'package:realestate_fe/models/country_model.dart';
@@ -87,15 +88,28 @@ class ProfileProvider {
   Future<String> logoutUser() async {
     try {
       final dio = await DioClient().getAuthorizedDio();
-      final response = await dio.post(ApiConstants.logoutEndPoint);
+      final secureStorage = SecureStorageService();
 
+      final refreshToken = await secureStorage.getRefreshToken();
+
+      if (refreshToken == null) {
+        return "No refresh token found";
+      }
+
+      final response = await dio.post(
+        ApiConstants.logoutEndPoint,
+        data: {
+          "refresh": refreshToken,
+        },
+      );
       if (response.statusCode == 200) {
+        await secureStorage.clearTokens();
         return "Logout successful";
       } else {
         return "Logout failed with status: ${response.statusCode}";
       }
     } catch (error, stacktrace) {
-      print("Logout error: $error stackTrace: $stacktrace");
+      print("Logout error: $error\nStackTrace: $stacktrace");
       return "Logout error: ${error.toString()}";
     }
   }
