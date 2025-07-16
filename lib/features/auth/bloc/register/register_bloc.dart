@@ -6,14 +6,15 @@ import 'package:realestate_fe/services/auth/auth_respository.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(RegisterInitial()) {
     final AuthRespository authRepository = AuthRespository();
-
     on<RegisterUser>((event, emit) async {
       emit(RegisterLoading());
-      try {
-        final message = await authRepository.registerUser(event.accountData);
+      final message = await authRepository.registerUser(event.accountData);
+      final lowerMessage = message.toLowerCase();
+      if (lowerMessage.contains('otp sent') ||
+          lowerMessage.contains('success')) {
         emit(RegisterSuccess(message));
-      } catch (e) {
-        emit(RegisterError('Failed to add account'));
+      } else {
+        emit(RegisterError(message));
       }
     });
   }

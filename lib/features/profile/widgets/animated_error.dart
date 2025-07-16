@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 
-void showAnimatedError(BuildContext context, String message) {
+void showAnimatedError(BuildContext context, String message,
+    {bool isError = false}) {
   final overlay = Overlay.of(context);
   final overlayEntry = OverlayEntry(builder: (context) {
     return Positioned(
       bottom: 50,
       left: 20,
       right: 20,
-      child: AnimatedErrorBubble(message: message),
+      child: AnimatedErrorBubble(message: message, isError: isError),
     );
   });
 
   overlay.insert(overlayEntry);
 
-  Future.delayed(const Duration(seconds: 3), () {
+  Future.delayed(const Duration(seconds: 5), () {
     overlayEntry.remove();
   });
 }
 
 class AnimatedErrorBubble extends StatefulWidget {
   final String message;
+  final bool isError;
 
-  const AnimatedErrorBubble({super.key, required this.message});
+  const AnimatedErrorBubble({
+    super.key,
+    required this.message,
+    this.isError = false,
+  });
 
   @override
   State<AnimatedErrorBubble> createState() => _AnimatedErrorBubbleState();
@@ -70,15 +75,18 @@ class _AnimatedErrorBubbleState extends State<AnimatedErrorBubble>
         scale: _scaleAnimation,
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                AppColors.tealBlue,
-                AppColors.aquaTeal,
-                AppColors.tealBlue
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: widget.isError
+                ? null
+                : LinearGradient(
+                    colors: [
+                      AppColors.tealBlue,
+                      AppColors.aquaTeal,
+                      AppColors.tealBlue,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+            color: widget.isError ? Colors.red : null,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Material(
@@ -90,7 +98,12 @@ class _AnimatedErrorBubbleState extends State<AnimatedErrorBubble>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.error_outline, color: AppColors.white),
+                  Icon(
+                    widget.isError
+                        ? Icons.error_outline
+                        : Icons.check_circle_outline,
+                    color: AppColors.white,
+                  ),
                   const SizedBox(width: 10),
                   Flexible(
                     child: Text(

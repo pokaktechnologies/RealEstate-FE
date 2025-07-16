@@ -1,13 +1,9 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:realestate_fe/core/api/api_constants.dart';
 import 'package:realestate_fe/core/api/dio_client.dart';
-import 'package:realestate_fe/core/services.dart';
 import 'package:realestate_fe/models/contact_info_model.dart';
 import 'package:realestate_fe/models/contact_model.dart';
 import 'package:realestate_fe/models/country_model.dart';
-import 'package:realestate_fe/models/personal_info_model.dart';
 import 'package:realestate_fe/models/profile_model.dart';
 import 'package:realestate_fe/models/state_model.dart';
 

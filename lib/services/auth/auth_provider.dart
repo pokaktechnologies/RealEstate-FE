@@ -12,9 +12,16 @@ class AuthProvider {
     try {
       final response = await _dio.post(_registerUrl, data: userData);
       return response.data['message'] ?? 'User Created Successfully';
+    } on DioError catch (error) {
+      if (error.response != null) {
+        final data = error.response?.data;
+        if (data is Map<String, dynamic> && data['message'] is String) {
+          return data['message'];
+        }
+      }
+      return 'Email already exists';
     } catch (error) {
-      print("POST Error: $error");
-      return 'Error While Creating User';
+      return 'Unexpected error occurred';
     }
   }
 

@@ -78,7 +78,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               height: 40,
             ),
             CustomTextfield(
-              hintText: "Enter Your Email",
+              hintText: "Enter your email",
               prefixImg: AppAssets.emailIcon,
               controller: emailIdTextController,
             ),
@@ -86,7 +86,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               height: 30,
             ),
             CustomButton(
-              buttonText: Text("Send"),
+              buttonText: Text(
+                "Send",
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -119,7 +126,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        // Navigate to SignupScreen
                         Navigator.push(
                           context,
                           MaterialPageRoute(

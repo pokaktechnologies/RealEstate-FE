@@ -8,6 +8,9 @@ import 'package:realestate_fe/features/profile/blocs/profile/profile_event.dart'
 import 'package:realestate_fe/features/profile/blocs/profile/profile_state.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
 import 'package:realestate_fe/features/profile/pages/profile/edit_profile.dart';
+import 'package:realestate_fe/features/profile/pages/profile_tile/language.dart';
+import 'package:realestate_fe/features/profile/pages/profile_tile/notification.dart';
+import 'package:realestate_fe/features/profile/pages/profile_tile/settings.dart';
 import 'package:realestate_fe/features/profile/widgets/logout_popup.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -202,15 +205,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                widgetListTile("Notifications", AppAssets.notificationIcon,
-                    () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const NotificationsScreen(),
-                  //   ),
-                  // );
+                widgetListTile("Notifications", AppAssets.notificationIcon, () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationsScreen(),
+                    ),
+                  );
                 }),
-
                 BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4),
@@ -255,35 +256,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                   );
                 }),
-
-                // _WidgetListTile(
-                //   "Dark Mode",
-                //   AppAssets.darkmodeIcon,
-                //   () {
-                //     print("button pressed");
-                //   },
-                //   trailing: CustomSwitch(
-                //     value: isDarkMode,
-                //     onChanged: (value) {
-                //       setState(() {
-                //         isDarkMode = value;
-                //       });
-                //     },
-                //   ),
-                // ),
                 widgetListTile("Settings", AppAssets.settingsIcon, () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const SettingsScreen(),
-                  //   ),
-                  // );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsScreen(),
+                    ),
+                  );
                 }),
                 widgetListTile("Language", AppAssets.languageIcon, () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const LanguageSelectionScreen(),
-                  //   ),
-                  // );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LanguageSelectionScreen(),
+                    ),
+                  );
                 }),
                 widgetListTile("Logout", AppAssets.logoutIcon, () {
                   showLogoutPopup(context);

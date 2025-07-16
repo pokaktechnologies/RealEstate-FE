@@ -66,6 +66,7 @@ void showLogoutPopup(BuildContext context) {
                   onPressed: () {
                     context.read<LogoutBloc>().add(LogoutUser());
                     Navigator.pop(context);
+                    pushAndRemoveUntilFun(context, LoginScreen());
                   },
                   child: state is LogoutLoading
                       ? AppLoadingIndicator()

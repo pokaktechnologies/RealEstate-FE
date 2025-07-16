@@ -15,8 +15,7 @@ class RegisterSuccess extends RegisterState {
   final String message;
   const RegisterSuccess(this.message);
 }
-
 class RegisterError extends RegisterState {
-  final String? message;
+  final String message;
   const RegisterError(this.message);
 }

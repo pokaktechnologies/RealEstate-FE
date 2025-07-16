@@ -1,55 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:realestate_fe/core/utils/app_colors.dart';
 
-class CustomTextfield extends StatelessWidget {
+class CustomTextfield extends StatefulWidget {
   final String hintText;
   final String prefixImg;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
+
   const CustomTextfield({
     super.key,
     required this.hintText,
     required this.prefixImg,
     required this.controller,
+    this.validator,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.lightGray, // Background color
-        borderRadius: BorderRadius.circular(10), // Rounded corners
-      ),
-      child: TextFormField(
-        style: TextStyle(
-          color: AppColors.black, // Text color
-          fontSize: 15,
-          fontWeight: FontWeight.w400,
-        ),
-        controller: controller,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(
-              horizontal: 16, vertical: 13), // Inner padding
-          border: InputBorder.none, // Removes default border
-          hintText: hintText,
-          hintStyle: TextStyle(
-            color: AppColors.black.withOpacity(0.6), // Faded text for hint
-            fontSize: 15,
-            fontWeight: FontWeight.w400,
-          ),
+  State<CustomTextfield> createState() => _CustomTextfieldState();
+}
 
-          // 🔹 Add an Image on the Left (Prefix)
-          prefixIcon: Padding(
-            padding: const EdgeInsets.all(12), // Adjust spacing
-            child: Image.asset(
-              prefixImg,
-              width: 20,
-              height: 20,
+class _CustomTextfieldState extends State<CustomTextfield> {
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final isPasswordField = widget.hintText.toLowerCase().contains("password");
+
+    return FormField<String>(
+      validator: widget.validator,
+      builder: (FormFieldState<String> field) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: TextField(
+                controller: widget.controller,
+                obscureText: isPasswordField ? _obscureText : false,
+                onChanged: (value) => field.didChange(value),
+                decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Image.asset(
+                      widget.prefixImg,
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+                  suffixIcon: isPasswordField
+                      ? IconButton(
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                        )
+                      : null,
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
+            if (field.hasError)
+              Padding(
+                padding: const EdgeInsets.only(top: 4, left: 12),
+                child: Text(
+                  field.errorText ?? '',
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }
