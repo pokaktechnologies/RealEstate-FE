@@ -46,22 +46,19 @@ class AuthProvider {
   }
 
   Future<String> verifyOtp(Map<String, dynamic> verifyData) async {
-    try {
-      final response = await _dio.post(_verifyOtpUrl, data: verifyData);
-      if (response.statusCode == 200) {
-        SecureStorageService secureStorage = SecureStorageService();
-        final accessToken = response.data['access'];
-        final refreshToken = response.data['refresh'];
+    final response = await _dio.post(_verifyOtpUrl, data: verifyData);
 
-        await secureStorage.storeToken(accessToken);
-        await secureStorage.storeRefreshToken(refreshToken);
-        return response.data['message'] ?? 'Otp Verified Successfully';
-      } else {
-        throw Exception(response.data['message'] ?? 'Verification failed');
-      }
-    } catch (error) {
-      print("Otp Verification Error: $error");
-      return 'Error While Verifying Otp';
+    if (response.statusCode == 200) {
+      final accessToken = response.data['access'];
+      final refreshToken = response.data['refresh'];
+      SecureStorageService secureStorage = SecureStorageService();
+
+      await secureStorage.storeToken(accessToken);
+      await secureStorage.storeRefreshToken(refreshToken);
+
+      return response.data['message'] ?? 'Otp Verified Successfully';
+    } else {
+      throw Exception(response.data['error'] ?? 'Verification failed');
     }
   }
 }

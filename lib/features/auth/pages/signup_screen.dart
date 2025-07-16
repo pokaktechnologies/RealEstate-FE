@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/core/utils/navigations.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_event.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_state.dart';
@@ -219,8 +218,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 child: BlocListener<RegisterBloc, RegisterState>(
                   listener: (context, state) {
                     if (state is RegisterSuccess && cachedEmail != null) {
-                      showAnimatedError(context, state.message);
                       WidgetsBinding.instance.addPostFrameCallback((_) {
+                        FocusScope.of(context).unfocus();
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -228,11 +227,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                 VerificationPage(enteredEmailId: cachedEmail!),
                           ),
                         );
+                        showAnimatedError(context, state.message);
                       });
                     } else if (state is RegisterError) {
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   SnackBar(content: Text(state.message)),
-                      // );
+                      FocusScope.of(context).unfocus();
                       showAnimatedError(context, state.message, isError: true);
                     }
                   },
@@ -250,6 +248,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                         onPressed: () {
+                          FocusScope.of(context).unfocus();
                           if (_formKey.currentState!.validate()) {
                             final email = emailIdTextController.text.trim();
                             final name = nameTextcontroller.text.trim();

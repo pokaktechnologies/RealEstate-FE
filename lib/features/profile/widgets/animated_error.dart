@@ -4,18 +4,22 @@ import 'package:realestate_fe/core/utils/app_colors.dart';
 void showAnimatedError(BuildContext context, String message,
     {bool isError = false}) {
   final overlay = Overlay.of(context);
-  final overlayEntry = OverlayEntry(builder: (context) {
-    return Positioned(
-      bottom: 50,
-      left: 20,
-      right: 20,
-      child: AnimatedErrorBubble(message: message, isError: isError),
-    );
-  });
+  final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
+  final overlayEntry = OverlayEntry(
+    builder: (context) {
+      return Positioned(
+        bottom: keyboardHeight > 0 ? keyboardHeight + 20 : 50,
+        left: 20,
+        right: 20,
+        child: AnimatedErrorBubble(message: message, isError: isError),
+      );
+    },
+  );
 
   overlay.insert(overlayEntry);
 
-  Future.delayed(const Duration(seconds: 5), () {
+  Future.delayed(const Duration(seconds: 3), () {
     overlayEntry.remove();
   });
 }
@@ -75,6 +79,7 @@ class _AnimatedErrorBubbleState extends State<AnimatedErrorBubble>
         scale: _scaleAnimation,
         child: Container(
           decoration: BoxDecoration(
+            color: widget.isError ? Colors.red : null,
             gradient: widget.isError
                 ? null
                 : LinearGradient(
@@ -86,7 +91,6 @@ class _AnimatedErrorBubbleState extends State<AnimatedErrorBubble>
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-            color: widget.isError ? Colors.red : null,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Material(

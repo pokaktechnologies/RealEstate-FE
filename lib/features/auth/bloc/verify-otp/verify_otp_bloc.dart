@@ -13,7 +13,7 @@ class VerifyOtpBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
         final message = await authRepository.verifyOtp(event.verifyOtpData);
         emit(VerifyOtpSuccess(message));
       } catch (e) {
-        emit(VerifyOtpError('Failed to Verify Otp'));
+        emit(VerifyOtpError(e.toString()));
       }
     });
   }

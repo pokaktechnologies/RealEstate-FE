@@ -11,6 +11,7 @@ import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_event.dar
 import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_state.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
+import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
 class VerificationPage extends StatefulWidget {
   final String enteredEmailId;
@@ -30,11 +31,11 @@ class _VerificationPageState extends State<VerificationPage> {
     otpController = TextEditingController();
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   otpController.dispose();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    otpController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,10 +149,13 @@ class _VerificationPageState extends State<VerificationPage> {
                       listener: (context, state) {
                         if (state is VerifyOtpSuccess) {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
-                            if (mounted) {
+                            if (context.mounted) {
                               pushAndRemoveUntilFun(context, BottomBar());
                             }
                           });
+                        } else if (state is VerifyOtpError) {
+                          showAnimatedError(context, state.message ?? "",
+                              isError: true);
                         }
                       },
                       child: BlocBuilder<VerifyOtpBloc, VerifyOtpState>(
@@ -159,7 +163,7 @@ class _VerificationPageState extends State<VerificationPage> {
                           return CustomButton(
                             buttonText: state is VerifyOtpLoading
                                 ? AppLoadingIndicator()
-                                : Text(
+                                : const Text(
                                     "Verify",
                                     style: TextStyle(
                                       color: AppColors.white,
@@ -167,9 +171,11 @@ class _VerificationPageState extends State<VerificationPage> {
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                            onPressed: () async {
-                              if (!mounted) return;
-                              final enteredOtp = otpController.text;
+                            onPressed: () {
+                              FocusScope.of(context).unfocus(); // Hide keyboard
+
+                              final enteredOtp = otpController.text.trim();
+
                               final Map<String, dynamic> verifyOtpData = {
                                 "email": widget.enteredEmailId,
                                 "otp": enteredOtp,

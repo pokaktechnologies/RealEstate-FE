@@ -14,6 +14,7 @@ import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_icon.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
 import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
+import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -138,8 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return 'Please enter a valid email';
                       }
                       return null;
-                    }
-                    ),
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -199,12 +199,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   listener: (context, state) {
                     if (state is LoginSuccess) {
                       pushAndRemoveUntilFun(context, BottomBar());
+                      //showAnimatedError(context, state.message);
                     }
 
                     if (state is LoginError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(state.error ?? 'Unknown error')),
-                      );
+                      showAnimatedError(context, state.error ?? "Unknown error",
+                          isError: true);
                     }
                   },
                   child: BlocBuilder<LoginBloc, LoginState>(
