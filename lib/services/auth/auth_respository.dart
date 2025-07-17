@@ -14,4 +14,17 @@ class AuthRespository {
   Future<String> verifyOtp(Map<String, dynamic> verifyData) {
     return _provider.verifyOtp(verifyData);
   }
+
+// forgot
+  Future<void> requestOtp(String email) {
+    return _provider.requestOtp(email);
+  }
+
+  Future<void> forgotVerifyOtp(String email, int otp) {
+    return _provider.forgotverifyOtp(email, otp);
+  }
+
+  Future<void> resetPassword(String email, int otp, String newPassword) {
+    return _provider.resetPassword(email, otp, newPassword);
+  }
 }

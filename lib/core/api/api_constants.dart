@@ -8,6 +8,14 @@ class ApiConstants {
   static String verifyOtpEndPoint = '$serverUrl/accounts/register/verify-otp/';
   static String loginEndPoint = '$serverUrl/accounts/login/';
 
+// Forgot password
+  static String forgotPasswordRequestOtp =
+      '$serverUrl/accounts/forgot-password/request-otp/';
+  static String forgotPasswordVerifyOtp =
+      '$serverUrl/accounts/forgot-password/verify-otp/';
+  static String forgotPasswordReset =
+      '$serverUrl/accounts/forgot-password/reset-password/';
+
   // Profile
   static String profileEndPoint = '$serverUrl/profiles/personal-info/';
   static String logoutEndPoint = '$serverUrl/accounts/logout/';

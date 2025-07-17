@@ -195,22 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   left: 40,
                   top: 20,
                 ),
-                child:
-                    // BlocListener<LoginBloc, LoginState>(
-                    //   listener: (context, state) {
-                    //     if (state is LoginSuccess) {
-                    //       FocusScope.of(context).unfocus();
-                    //       showAnimatedError(context, state.message);
-                    //       pushAndRemoveUntilFun(context, BottomBar());
-                    //     }
-
-                    //     if (state is LoginError) {
-                    //       FocusScope.of(context).unfocus();
-                    //       showAnimatedError(context, state.error ?? "Unknown error",
-                    //           isError: true);
-                    //     }
-                    //   },
-                    BlocListener<LoginBloc, LoginState>(
+                child: BlocListener<LoginBloc, LoginState>(
                   listener: (context, state) {
                     FocusScope.of(context).unfocus();
 

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/login/login_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_bloc.dart';
@@ -6,7 +7,6 @@ import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dar
 import 'package:realestate_fe/features/profile/blocs/logout/logout_bloc.dart';
 import 'package:realestate_fe/features/home/blocs/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/blocs/contact/contact_bloc.dart';
-import 'package:realestate_fe/features/profile/blocs/personal_info/personalinfo_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/state/state_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
@@ -27,4 +27,5 @@ List<BlocProvider> appBlocProviders = [
   BlocProvider<StateBloc>(create: (_) => StateBloc()),
   BlocProvider<ContactBloc>(create: (_) => ContactBloc()),
   BlocProvider<PropertiesBloc>(create: (_) => PropertiesBloc(_homeRepository)),
+  BlocProvider<ForgotPasswordBloc>(create: (_) => ForgotPasswordBloc()),
 ];
