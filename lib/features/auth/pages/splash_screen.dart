@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
+import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/auth/pages/splash_screen_2.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

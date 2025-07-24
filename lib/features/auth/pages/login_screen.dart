@@ -204,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       pushAndRemoveUntilFun(context, BottomBar());
                     } else if (state is LoginError) {
                       showAnimatedError(
-                          context, state.error ?? "Invalid credentials",
+                          context, "User not registered, please register.",
                           isError: true);
                     }
                   },

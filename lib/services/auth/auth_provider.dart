@@ -3,7 +3,14 @@ import 'package:realestate_fe/core/api/api_constants.dart';
 import 'package:realestate_fe/core/services.dart';
 
 class AuthProvider {
-  final Dio _dio = Dio();
+  final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: ApiConstants.serverUrl,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
   final String _registerUrl = ApiConstants.registerEndPoint;
   final String _loginUrl = ApiConstants.loginEndPoint;
   final String _verifyOtpUrl = ApiConstants.verifyOtpEndPoint;
@@ -43,16 +50,25 @@ class AuthProvider {
   }
 
   Future<String> loginUser(Map<String, dynamic> loginData) async {
-    final response = await _dio.post(_loginUrl, data: loginData);
-    if (response.statusCode == 200) {
-      SecureStorageService secureStorage = SecureStorageService();
-      final accessToken = response.data['access'];
-      final refreshToken = response.data['refresh'];
-      await secureStorage.storeToken(accessToken);
-      await secureStorage.storeRefreshToken(refreshToken);
-      return response.data['message'] ?? 'User Login Successfully';
-    } else {
-      throw Exception(response.data['message'] ?? 'Invalid credentials');
+    try {
+      final response = await _dio.post(_loginUrl, data: loginData);
+
+      if (response.statusCode == 200) {
+        final secureStorage = SecureStorageService();
+        await secureStorage.storeToken(response.data['access']);
+        await secureStorage.storeRefreshToken(response.data['refresh']);
+        return response.data['message'] ?? 'User Login Successfully';
+      } else {
+        throw Exception('Invalid credentials');
+      }
+    } on DioError catch (error) {
+      final data = error.response?.data;
+      final serverMessage = data?['detail'] ??
+          data?['message'] ??
+          'User not registered, please register.';
+      throw Exception(serverMessage);
+    } catch (_) {
+      throw Exception('Something went wrong. Please try again.');
     }
   }
 
