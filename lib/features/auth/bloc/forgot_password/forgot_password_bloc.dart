@@ -27,6 +27,8 @@ class ForgotPasswordBloc
       emit(ForgotPasswordLoading());
       try {
         await authRepository.forgotVerifyOtp(event.email, event.otp);
+        print('📢 ForgotPasswordRequestOtpEvent triggered');
+
         emit(ForgotPasswordOtpVerified("OTP verified"));
       } catch (error) {
         emit(ForgotPasswordError(error.toString()));

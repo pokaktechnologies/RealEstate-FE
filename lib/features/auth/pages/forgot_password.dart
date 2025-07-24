@@ -7,8 +7,8 @@ import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_state.dart';
 import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_event.dart';
+import 'package:realestate_fe/features/auth/pages/forgot_verificationpage.dart';
 import 'package:realestate_fe/features/auth/pages/login_screen.dart';
-import 'package:realestate_fe/features/auth/pages/verification_code.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
 import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
@@ -108,16 +108,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => VerificationPage(
+                          builder: (context) => ForgotVerificationPage(
                             enteredEmailId: cachedEmail!,
                           ),
                         ),
                       );
-                      //showAnimatedError(context, state.message);
                     });
                   } else if (state is ForgotPasswordError) {
                     FocusScope.of(context).unfocus();
-                    showAnimatedError(context, state.error, isError: true);
+                    showAnimatedError(context, "Invalid OTP or Email21", isError: true);
                   }
                 },
                 child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(

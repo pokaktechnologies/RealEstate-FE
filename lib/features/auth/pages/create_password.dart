@@ -6,7 +6,7 @@ import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
 
 class CreatePassword extends StatefulWidget {
-  const CreatePassword({super.key});
+  const CreatePassword({super.key, required String email, required int otp});
 
   @override
   State<CreatePassword> createState() => _CreatePasswordState();

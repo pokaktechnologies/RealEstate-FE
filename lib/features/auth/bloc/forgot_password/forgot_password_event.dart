@@ -15,5 +15,9 @@ class ForgotPasswordResetEvent extends ForgotPasswordEvent {
   final String email;
   final int otp;
   final String newPassword;
-  ForgotPasswordResetEvent(this.email, this.otp, this.newPassword);
+  ForgotPasswordResetEvent(
+    this.email,
+    this.otp,
+    this.newPassword,
+  );
 }

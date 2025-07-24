@@ -65,7 +65,9 @@ class AuthProvider {
         data: {"email": email},
       );
 
-      if (response.statusCode != 200) {
+      if (response.statusCode == null ||
+          response.statusCode! < 200 ||
+          response.statusCode! >= 300) {
         final errorMessage = response.data['message'] ?? "Failed to send OTP";
         throw Exception(errorMessage);
       }
@@ -83,11 +85,34 @@ class AuthProvider {
   }
 
   Future<void> forgotverifyOtp(String email, int otp) async {
-    final response = await _dio.post(
-      ApiConstants.forgotPasswordVerifyOtp,
-      data: {"email": email, "otp": otp},
-    );
-    if (response.statusCode != 200) throw Exception("Invalid OTP");
+    try {
+      final response = await _dio.post(
+        ApiConstants.forgotPasswordVerifyOtp,
+        data: {"email": email, "otp": otp},
+      );
+
+      if (response.statusCode == null ||
+          response.statusCode! < 200 ||
+          response.statusCode! >= 300) {
+        final errorMessage = response.data['error'] ?? "Invalid OTP";
+        throw Exception(errorMessage);
+      }
+    } on DioError catch (error) {
+      if (error.response != null) {
+        final data = error.response?.data;
+        if (data is Map<String, dynamic>) {
+          if (data['error'] is String) {
+            throw Exception(data['error']);
+          }
+          if (data['message'] is String) {
+            throw Exception(data['message']);
+          }
+        }
+      }
+      throw Exception('Network error while verifying OTP');
+    } catch (error) {
+      throw Exception('Unexpected error while verifying OTP');
+    }
   }
 
   Future<void> resetPassword(String email, int otp, String newPassword) async {
