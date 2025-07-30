@@ -7,4 +7,18 @@ class HomeRepository {
   Future<List<RentPropertiesModel>> getAllProperties() {
     return _provider.getProperties();
   }
+
+  Future<List<RentPropertiesModel>> getTrendingPropertiesNearYou({
+    required double latitude,
+    required double longitude,
+    required int radius,
+    required String category,
+  }) {
+    return _provider.getTrendingPropertiesNearYou(
+      latitude: latitude,
+      longitude: longitude,
+      radius: radius,
+      category: category,
+    );
+  }
 }

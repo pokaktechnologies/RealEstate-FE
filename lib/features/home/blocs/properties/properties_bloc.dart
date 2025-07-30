@@ -16,5 +16,19 @@ class PropertiesBloc extends Bloc<PropertiesEvent, PropertiesState> {
         emit(PropertiesError("Failed to Fetch Properties"));
       }
     });
+    on<LoadTrendingPropertiesNearYou>((event, emit) async {
+      emit(PropertiesLoading());
+      try {
+        final properties = await homeRepository.getTrendingPropertiesNearYou(
+          latitude: event.latitude,
+          longitude: event.longitude,
+          radius: event.radius,
+          category: event.category,
+        );
+        emit(PropertiesSuccess(properties));
+      } catch (e) {
+        emit(PropertiesError("Failed to fetch trending properties"));
+      }
+    });
   }
 }

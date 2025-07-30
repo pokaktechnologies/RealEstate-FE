@@ -25,7 +25,10 @@ class ApiConstants {
   static String contactEndPoint = '$serverUrl/profiles/contact-info/';
 
   // home
+  static String trendingPropertiesNearYouEndPoint =
+      '$serverUrl/property/user/trending-properties-near-you/';
   static String propertiesRentalEndPoint =
       '$serverUrl/property/user/best-properties-for-rental/';
+
   static String personalEndPoint = '$serverUrl/profiles/personal-info/';
 }

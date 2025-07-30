@@ -1,226 +1,233 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:realestate_fe/core/utils/app_assets.dart';
+import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
+import 'package:realestate_fe/features/home/blocs/properties/properties_event.dart';
+import 'package:realestate_fe/features/home/blocs/properties/properties_state.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/property_details.dart';
 
-class TrendingProperties extends StatelessWidget {
+class TrendingProperties extends StatefulWidget {
   const TrendingProperties({super.key});
 
   @override
+  State<TrendingProperties> createState() => _TrendingPropertiesState();
+}
+
+class _TrendingPropertiesState extends State<TrendingProperties> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<PropertiesBloc>().add(
+          LoadTrendingPropertiesNearYou(
+            latitude: 11.32,
+            longitude: 75.92,
+            radius: 19,
+            category: 'all',
+          ),
+        );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<String> roomImg = [
-      AppAssets.sampleImg3,
-      AppAssets.sampleImg4,
-      AppAssets.sampleImg3,
-      AppAssets.sampleImg4,
-      AppAssets.sampleImg3,
-    ];
-    return Container(
-      height: 290,
-      color: AppColors.white,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 22,
-              right: 22,
-              top: 15,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<PropertiesBloc, PropertiesState>(
+      builder: (context, state) {
+        if (state is PropertiesLoading) {
+          return const AppLoadingIndicator();
+        } else if (state is PropertiesError) {
+          return Center(child: Text("Error: ${state.message}"));
+        } else if (state is PropertiesSuccess) {
+          final properties = state.propertiesList;
+
+          if (properties.isEmpty) {
+            return const Center(child: Text("No trending properties found."));
+          }
+
+          return Container(
+            height: 290,
+            color: AppColors.white,
+            child: Column(
               children: [
-                Text(
-                  "Trending Properties Near You",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 17,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    height: 38,
-                    width: 65,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.grey),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "View all",
+                Padding(
+                  padding: const EdgeInsets.only(left: 22, right: 22, top: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Trending Properties Near You",
                         style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.tealBlue,
+                          color: AppColors.black,
                           fontWeight: FontWeight.w500,
+                          fontSize: 17,
                         ),
                       ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-
-          // ------------------------------start =============
-
-          MediaQuery.removePadding(
-            context: context,
-            removeBottom: false,
-            removeLeft: false,
-            removeRight: false,
-            removeTop: false,
-            child: SizedBox(
-              width: double.infinity,
-              height: 220,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.fromLTRB(
-                  12,
-                  10,
-                  12,
-                  0,
-                ),
-                itemCount: 5,
-                itemBuilder: (context, i) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PropertyDetailsScreen()),
-                      );
-                    },
-                    child: SizedBox(
-                      width: 170,
-                      height: 195,
-                      child: Card(
-                        color: AppColors.white,
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: AppColors.blackTranslucent,
-                            width: 0.5,
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: 38,
+                          width: 65,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.grey),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 2,
-                            right: 4,
-                            left: 4,
-                            bottom: 2,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: SizedBox(
-                                  height: 120,
-                                  width: double.infinity,
-                                  child: Image.asset(
-                                    roomImg[i],
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                          child: const Center(
+                            child: Text(
+                              "View all",
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.tealBlue,
+                                fontWeight: FontWeight.w500,
                               ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 12,
-                                    right: 12,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+
+                // Trending properties list
+                SizedBox(
+                  width: double.infinity,
+                  height: 220,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+                    itemCount: properties.length,
+                    itemBuilder: (context, i) {
+                      final property = properties[i];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const PropertyDetailsScreen(),
+                            ),
+                          );
+                        },
+                        child: SizedBox(
+                          width: 170,
+                          height: 195,
+                          child: Card(
+                            color: AppColors.white,
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                color: AppColors.blackTranslucent,
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 120,
+                                    width: double.infinity,
+                                    child: Image.network(
+                                      property.images.isNotEmpty
+                                          ? property.images[0].imageName
+                                          : '',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        "₹50 Lakh",
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 12),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
+                                          const SizedBox(height: 4),
                                           Text(
-                                            "3BHK House ",
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              color: AppColors.black,
-                                              fontSize: 13,
+                                            "₹${property.price}",
+                                            style: const TextStyle(
+                                              fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                             ),
-                                            textAlign: TextAlign.center,
                                           ),
                                           Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              RatingBar.builder(
-                                                initialRating: 1,
-                                                minRating: 1,
-                                                direction: Axis.horizontal,
-                                                allowHalfRating: true,
-                                                itemCount: 1,
-                                                ignoreGestures: true,
-                                                itemSize: 14,
-                                                itemBuilder: (context, _) =>
-                                                    const Icon(
-                                                  Icons.star,
-                                                  color: AppColors.ratingColor,
-                                                ),
-                                                onRatingUpdate: (rating) {},
-                                              ),
                                               Text(
-                                                "4.5",
-                                                style: TextStyle(
+                                                property.name.length > 10
+                                                    ? '${property.name.substring(0, 10)}...'
+                                                    : property.name,
+                                                style: const TextStyle(
+                                                  color: AppColors.black,
+                                                  fontSize: 13,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
                                                 ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  RatingBar.builder(
+                                                    initialRating:
+                                                        property.overallRatings,
+                                                    minRating: 1,
+                                                    direction: Axis.horizontal,
+                                                    allowHalfRating: true,
+                                                    itemCount: 1,
+                                                    ignoreGestures: true,
+                                                    itemSize: 14,
+                                                    itemBuilder: (context, _) =>
+                                                        const Icon(
+                                                      Icons.star,
+                                                      color:
+                                                          AppColors.ratingColor,
+                                                    ),
+                                                    onRatingUpdate: (_) {},
+                                                  ),
+                                                  Text(
+                                                    property.overallRatings
+                                                        .toStringAsFixed(1),
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
+                                          Text(
+                                            "${property.city}, ${property.state}",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              color: AppColors.lightBlack,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          const Spacer(),
                                         ],
                                       ),
-
-                                      //-----
-                                      Text(
-                                        "Kakkanad, Kochi",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          color: AppColors.lightBlack,
-                                          fontSize: 12,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      const Spacer(),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-
-          // ============= end ============ .
-        ],
-      ),
+          );
+        } else {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

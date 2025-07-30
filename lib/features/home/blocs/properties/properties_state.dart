@@ -14,6 +14,7 @@ class PropertiesLoading extends PropertiesState {}
 
 class PropertiesSuccess extends PropertiesState {
   final List<RentPropertiesModel> propertiesList;
+
   const PropertiesSuccess(this.propertiesList);
 
   @override
