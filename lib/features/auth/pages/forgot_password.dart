@@ -116,7 +116,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     });
                   } else if (state is ForgotPasswordError) {
                     FocusScope.of(context).unfocus();
-                    showAnimatedError(context, "Invalid OTP or Email21", isError: true);
+                    showAnimatedError(context, "Invalid OTP or Email",
+                        isError: true);
                   }
                 },
                 child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(

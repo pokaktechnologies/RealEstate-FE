@@ -139,7 +139,13 @@ class AuthProvider {
         "otp": otp,
         "new_password": newPassword,
       },
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
     );
+
     if (response.statusCode != 200) throw Exception("Reset failed");
   }
 }

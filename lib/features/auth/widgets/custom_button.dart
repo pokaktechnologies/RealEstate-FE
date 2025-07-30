@@ -3,7 +3,7 @@ import 'package:realestate_fe/core/utils/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final Widget buttonText;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   const CustomButton({
     super.key,
     required this.buttonText,
@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onPressed();
+        onPressed!();
       },
       child: Container(
         height: 43,
