@@ -30,7 +30,7 @@ class _StayFinderScreenState extends State<StayFinderScreen> {
           return const AppLoadingIndicator();
         }
         if (state.idealPGList.isEmpty) {
-          return const Center(child: Text("No PG data found"));
+          return const Center(child: Text("No Paying Guest Properties found"));
         }
 
         final properties = state.idealPGList;

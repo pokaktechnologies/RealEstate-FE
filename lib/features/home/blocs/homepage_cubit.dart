@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/home/blocs/page/foryou_page.dart';
 import 'package:realestate_fe/features/home/pages/buy_page.dart';
 import 'package:realestate_fe/features/home/pages/foryou_page.dart';
 import 'package:realestate_fe/features/home/pages/paying_guest.dart';

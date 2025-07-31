@@ -37,7 +37,7 @@ class _TrendingPropertiesState extends State<TrendingProperties> {
           return const AppLoadingIndicator();
         }
         if (state.trendingProperties.isEmpty) {
-          return const Text("No trending properties found");
+          return const Text("No Trending Properties found near you.");
         }
         final properties = state.trendingProperties;
 
