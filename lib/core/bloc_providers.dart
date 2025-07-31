@@ -11,9 +11,12 @@ import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/state/state_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/country/country_bloc.dart';
+import 'package:realestate_fe/features/property_details/bloc/propertydetails_bloc.dart';
 import 'package:realestate_fe/services/home/home_repository.dart';
+import 'package:realestate_fe/services/property/property_repository.dart';
 
 final HomeRepository _homeRepository = HomeRepository();
+final PropertyRepository _propertyRepository = PropertyRepository();
 
 List<BlocProvider> appBlocProviders = [
   BlocProvider<HomepageCubit>(create: (_) => HomepageCubit()),
@@ -28,4 +31,6 @@ List<BlocProvider> appBlocProviders = [
   BlocProvider<ContactBloc>(create: (_) => ContactBloc()),
   BlocProvider<PropertiesBloc>(create: (_) => PropertiesBloc(_homeRepository)),
   BlocProvider<ForgotPasswordBloc>(create: (_) => ForgotPasswordBloc()),
+  BlocProvider<PropertydetailsBloc>(
+      create: (_) => PropertydetailsBloc(_propertyRepository)),
 ];

@@ -86,12 +86,12 @@ class TrendingProperties extends StatelessWidget {
                 itemBuilder: (context, i) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PropertyDetailsScreen(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => PropertyDetailsScreen(),
+                      //   ),
+                      // );
                     },
                     child: SizedBox(
                       width: 170,

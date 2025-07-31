@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/models/propertydetails_model.dart';
 
 class PropertyDetailsWidgets {
-  static Widget buildPriceAndRating() {
+  static Widget buildPriceAndRating(PropertyDetailsModel property) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          "₹50,00,000",
+        Text(
+          "₹${property.price}",
           style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w600,
               color: AppColors.tealBlue),
         ),
         Row(
-          children: const [
+          children: [
             Icon(Icons.star, color: AppColors.ratingColor, size: 25),
             SizedBox(width: 4),
             Text(
-              "4.5",
+              "${property.storedRating ?? 0}",
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                   color: AppColors.black),
             ),
             SizedBox(width: 4),
-            Text("(73)",
+            Text("(${property.reviewCount ?? 0})",
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
@@ -37,12 +38,12 @@ class PropertyDetailsWidgets {
     );
   }
 
-  static Widget buildPropertyDetails() {
+  static Widget buildPropertyDetails(PropertyDetailsModel property) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         Text(
-          "Furnished 2BHK apartment in a prime location",
+          property.name,
           style: TextStyle(
               fontSize: 16,
               color: AppColors.black,
@@ -50,7 +51,7 @@ class PropertyDetailsWidgets {
         ),
         SizedBox(height: 8),
         Text(
-          "Kakkanad- Kochi, Eranakulam, Kerala",
+          "${property.cityName},${property.stateName},${property.countryName}",
           style: TextStyle(
               fontSize: 14,
               color: AppColors.mediumGray,
@@ -60,7 +61,7 @@ class PropertyDetailsWidgets {
     );
   }
 
-  static Widget buildFacilityContainer() {
+  static Widget buildFacilityContainer(PropertyDetailsModel property) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -73,8 +74,10 @@ class PropertyDetailsWidgets {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildDetail(AppAssets.bedroomIcon, "Bedroom", "2"),
-              buildDetail(AppAssets.bathroomIcon, "Bathroom", "2"),
+              buildDetail(AppAssets.bedroomIcon, "Bedroom",
+                  property.bedroomCount?.toString() ?? "-"),
+              buildDetail(AppAssets.bathroomIcon, "Bathroom",
+                  property.bathroomCount?.toString() ?? "-"),
             ],
           ),
           const SizedBox(height: 12),
@@ -126,7 +129,7 @@ class PropertyDetailsWidgets {
     );
   }
 
-  static Widget buildNearestPublicFacilities() {
+  static Widget buildNearestPublicFacilities(PropertyDetailsModel property) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -194,10 +197,10 @@ class PropertyDetailsWidgets {
     );
   }
 
-  static Widget buildAboutProperty() {
+  static Widget buildAboutProperty(PropertyDetailsModel property) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         SizedBox(height: 10),
         Text(
           "About the property",
@@ -208,9 +211,7 @@ class PropertyDetailsWidgets {
         ),
         SizedBox(height: 5),
         Text(
-          "Furnished 2BHK apartment in a prime location, offering modern amenities like a gym, parking, "
-          "and easy access to public transport. Perfect for families or individuals seeking a comfortable, "
-          "long-term rental. Includes furniture like Refrigerator, Washing Machine, Air Conditioner, Tables and chairs.",
+          property.propertyDescription ?? '',
           style: TextStyle(
               fontSize: 14,
               color: AppColors.black,
@@ -221,16 +222,22 @@ class PropertyDetailsWidgets {
     );
   }
 
-  static Widget buildPropertySpecs() {
+  static Widget buildPropertySpecs(PropertyDetailsModel property) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        buildPropertyRow("Property ID", "R11234", "Ownership", "Single",
-            "Deposit", "₹50,000"),
+        buildPropertyRow("Property ID", "${property.id}", "Ownership", "Single",
+            "Deposit", "₹${property.securityDeposit ?? 0}"),
         buildPropertyRow(
             "Total Floors", "02", "Constructed In", "2019", "State", "Kerala"),
-        buildPropertyRow("District", "Eranakulam", "Town", "Kakkanad", "Street",
-            "Gandhi Nagar"),
+        buildPropertyRow(
+          "District",
+          property.cityName ?? "-",
+          "Town",
+          property.countryName ?? "-",
+          "Street",
+          property.stateName ?? "-",
+        ),
       ],
     );
   }

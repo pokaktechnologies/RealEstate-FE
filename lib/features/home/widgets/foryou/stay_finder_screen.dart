@@ -96,8 +96,9 @@ class _StayFinderScreenState extends State<StayFinderScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const PropertyDetailsScreen()),
+                              builder: (context) => PropertyDetailsScreen(
+                                    propertyId: properties[i].id,
+                                  )),
                         );
                       },
                       child: SizedBox(

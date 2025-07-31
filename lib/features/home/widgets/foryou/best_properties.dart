@@ -107,7 +107,9 @@ class _BestPropertiesState extends State<BestProperties> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PropertyDetailsScreen()),
+                                builder: (context) => PropertyDetailsScreen(
+                                      propertyId: properties[i].id,
+                                    )),
                           );
                         },
                         child: SizedBox(

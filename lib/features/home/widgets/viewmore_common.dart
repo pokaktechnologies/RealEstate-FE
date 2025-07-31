@@ -118,12 +118,12 @@ class ViewmoreCommon extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PropertyDetailsScreen(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => PropertyDetailsScreen(),
+                    //   ),
+                    // );
                   },
                   child: Container(
                     height: height * 0.055,

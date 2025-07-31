@@ -99,7 +99,7 @@ class _TrendingPropertiesState extends State<TrendingProperties> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const PropertyDetailsScreen(),
+                            builder: (context) => PropertyDetailsScreen(propertyId: property.id,),
                           ),
                         );
                       },
