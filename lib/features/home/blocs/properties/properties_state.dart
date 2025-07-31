@@ -1,31 +1,40 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:realestate_fe/models/rent_properties_model.dart';
+import 'package:realestate_fe/models/ideal_pg_model.dart';
 
-abstract class PropertiesState extends Equatable {
-  const PropertiesState();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class PropertiesInitial extends PropertiesState {}
-
-class PropertiesLoading extends PropertiesState {}
-
-class PropertiesSuccess extends PropertiesState {
+class PropertiesState extends Equatable {
+  final bool isLoading;
+  final String? error;
   final List<RentPropertiesModel> propertiesList;
+  final List<RentPropertiesModel> trendingProperties;
+  final List<IdealPgModel> idealPGList;
 
-  const PropertiesSuccess(this.propertiesList);
+  const PropertiesState({
+    this.isLoading = false,
+    this.error,
+    this.propertiesList = const [],
+    this.trendingProperties = const [],
+    this.idealPGList = const [],
+  });
+
+  PropertiesState copyWith({
+    bool? isLoading,
+    String? error,
+    List<RentPropertiesModel>? propertiesList,
+    List<RentPropertiesModel>? trendingProperties,
+    List<IdealPgModel>? idealPGList,
+  }) {
+    return PropertiesState(
+      isLoading: isLoading ?? this.isLoading,
+      error: error,
+      propertiesList: propertiesList ?? this.propertiesList,
+      trendingProperties: trendingProperties ?? this.trendingProperties,
+      idealPGList: idealPGList ?? this.idealPGList,
+    );
+  }
 
   @override
-  List<Object?> get props => [propertiesList];
-}
-
-class PropertiesError extends PropertiesState {
-  final String message;
-
-  const PropertiesError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  List<Object?> get props =>
+      [isLoading, error, propertiesList, trendingProperties, idealPGList];
 }

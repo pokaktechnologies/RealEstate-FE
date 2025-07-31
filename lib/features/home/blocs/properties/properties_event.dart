@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 
 abstract class PropertiesEvent extends Equatable {
@@ -26,4 +27,11 @@ class LoadTrendingPropertiesNearYou extends PropertiesEvent {
 
   @override
   List<Object?> get props => [latitude, longitude, radius, category];
+}
+
+class LoadIdealPGProperties extends PropertiesEvent {
+  const LoadIdealPGProperties();
+
+  @override
+  List<Object?> get props => [];
 }

@@ -20,7 +20,9 @@ class _ForyouPageState extends State<ForyouPage> {
   @override
   void initState() {
     super.initState();
-    context.read<PropertiesBloc>().add(LoadProperties());
+    final bloc = context.read<PropertiesBloc>();
+    bloc.add(LoadProperties());
+    bloc.add(LoadIdealPGProperties());
   }
 
   @override
