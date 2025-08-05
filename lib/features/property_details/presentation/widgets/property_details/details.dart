@@ -45,7 +45,7 @@ class PropertyDetailsWidgets {
         Text(
           property.name,
           style: TextStyle(
-              fontSize: 16,
+              fontSize: 17,
               color: AppColors.black,
               fontWeight: FontWeight.w700),
         ),
@@ -61,6 +61,37 @@ class PropertyDetailsWidgets {
     );
   }
 
+  // static Widget buildFacilityContainer(PropertyDetailsModel property) {
+  //   return Container(
+  //     padding: const EdgeInsets.all(16),
+  //     decoration: BoxDecoration(
+  //       color: const Color(0xFFEAF8F9),
+  //       borderRadius: BorderRadius.circular(12),
+  //     ),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //           children: [
+  //             buildDetail(AppAssets.bedroomIcon, "Bedroom",
+  //                 property.bedroomCount?.toString() ?? "-"),
+  //             buildDetail(AppAssets.bathroomIcon, "Bathroom",
+  //                 property.bathroomCount?.toString() ?? "-"),
+  //           ],
+  //         ),
+  //         const SizedBox(height: 12),
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //           children: [
+  //             buildDetail(AppAssets.sqfeetIcon, "Build Up Area", "1250 sq-ft"),
+  //             buildDetail(AppAssets.furnishedIcon, "Furnished", ""),
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
   static Widget buildFacilityContainer(PropertyDetailsModel property) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -71,25 +102,34 @@ class PropertyDetailsWidgets {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              buildDetail(AppAssets.bedroomIcon, "Bedroom",
-                  property.bedroomCount?.toString() ?? "-"),
-              buildDetail(AppAssets.bathroomIcon, "Bathroom",
-                  property.bathroomCount?.toString() ?? "-"),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              buildDetail(AppAssets.sqfeetIcon, "Build Up Area", "1250 sq-ft"),
-              buildDetail(AppAssets.furnishedIcon, "Furnished", ""),
-            ],
+          Wrap(
+            spacing: 16,
+            runSpacing: 12,
+            children: property.keyFeatures.map((feature) {
+              return buildKeyFeature(feature);
+            }).toList(),
           ),
         ],
       ),
+    );
+  }
+
+  static Widget buildKeyFeature(KeyFeature feature) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          feature.icon,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        ),
+        // Icon(Icons.check,
+        //     size: 16), // Or use FontAwesome if you map `feature.icon`
+        const SizedBox(width: 8),
+        Text(
+          feature.label,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        ),
+      ],
     );
   }
 
@@ -228,15 +268,15 @@ class PropertyDetailsWidgets {
       children: [
         buildPropertyRow("Property ID", "${property.id}", "Ownership", "Single",
             "Deposit", "₹${property.securityDeposit ?? 0}"),
+        // buildPropertyRow(
+        //     "Total Floors", "02", "Constructed In", "2019", "State", "Kerala"),
         buildPropertyRow(
-            "Total Floors", "02", "Constructed In", "2019", "State", "Kerala"),
-        buildPropertyRow(
-          "District",
-          property.cityName ?? "-",
-          "Town",
-          property.countryName ?? "-",
-          "Street",
-          property.stateName ?? "-",
+          "City",
+          property.cityName ?? "",
+          "State",
+          property.stateName ?? "",
+          "Country",
+          property.countryName ?? "",
         ),
       ],
     );
