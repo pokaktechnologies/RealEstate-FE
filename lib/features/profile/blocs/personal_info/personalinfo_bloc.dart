@@ -20,6 +20,6 @@ class PersonalinfoBloc extends Bloc<PersonalinfoEvent, PersonalinfoState> {
     //   } catch (error) {
     //     print(error);
     //   }
-    // });
+   // });
   }
 }
