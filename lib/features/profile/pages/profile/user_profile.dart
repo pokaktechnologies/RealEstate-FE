@@ -97,7 +97,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "+91 856321478",
+                                        // "+91 856321478",
+                                        user.email,
                                         style: TextStyle(
                                           color: AppColors.mediumGray,
                                           fontSize: 12,
@@ -122,14 +123,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                       )
                                     ],
                                   ),
-                                  Text(
-                                    user.email,
-                                    style: TextStyle(
-                                      color: AppColors.mediumGray,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
+                                  // Text(
+                                  //   user.email,
+                                  //   style: TextStyle(
+                                  //     color: AppColors.mediumGray,
+                                  //     fontSize: 12,
+                                  //     fontWeight: FontWeight.w500,
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),

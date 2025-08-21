@@ -54,8 +54,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-
     emailIdTextController = TextEditingController(text: widget.user.email);
+    nameController = TextEditingController(text: widget.user.fullName);
+    dobController = TextEditingController(text: widget.user.dob);
+    genderController = TextEditingController(text: widget.user.gender);
+    occupationController = TextEditingController(text: widget.user.occupation);
+    nationController = TextEditingController(text: widget.user.nationality);
+    documentController = TextEditingController(text: widget.user.profilePic);
+
     primaryPhoneCodeController = TextEditingController();
     primaryPhoneNumberController = TextEditingController();
     secondaryPhoneCodeController = TextEditingController();
@@ -63,15 +69,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     addressController = TextEditingController();
     stateController = TextEditingController();
     countryController = TextEditingController();
-    nameController = TextEditingController();
-    dobController = TextEditingController();
-    genderController = TextEditingController();
-    occupationController = TextEditingController();
-    nationController = TextEditingController();
-    documentController = TextEditingController();
+
     context.read<CountryBloc>().add(GetCountryList());
     context.read<ContactBloc>().add(GetContactEvent());
-    context.read<PersonalinfoBloc>().add(GetPersonalInfo());
   }
 
   @override
@@ -234,11 +234,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Text(widget.user.fullName,
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500)),
-                            Text("+91 856321478",
+                            if (primaryPhoneNumberController.text.isNotEmpty)
+                              Text(
+                                "${primaryPhoneCodeController.text} ${primaryPhoneNumberController.text}",
                                 style: TextStyle(
-                                    color: AppColors.mediumGray,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500)),
+                                  color: AppColors.mediumGray,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
