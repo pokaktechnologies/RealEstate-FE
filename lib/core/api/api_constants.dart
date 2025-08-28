@@ -24,10 +24,9 @@ class ApiConstants {
       "$serverUrl/accounts/country/$countryId/state/";
   static String contactEndPoint = '$serverUrl/profiles/contact-info/';
 
-
   // Get personal info
-   static String personalInfoEndPoint = '$serverUrl/profiles/personal-info/';
-   static String contactiInfoEndPoint = '$serverUrl/profiles/contact-info/';
+  static String personalInfoEndPoint = '$serverUrl/profiles/personal-info/';
+  static String contactiInfoEndPoint = '$serverUrl/profiles/contact-info/';
 
   // home
   static String idealPayingGusetEndPoint =
@@ -40,4 +39,5 @@ class ApiConstants {
 
   //property
   static String propertyByIdEndPoint = '$serverUrl/property/user';
+  static String dealsEndPoint= '$serverUrl/property/user/deals/';
 }

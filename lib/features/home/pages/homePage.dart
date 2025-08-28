@@ -40,7 +40,7 @@ class _HomepageState extends State<Homepage> {
 
     if (await canLaunchUrl(googleMapsUrl)) {
       await launchUrl(googleMapsUrl, mode: LaunchMode.externalApplication);
-      _searchController.clear(); // Clear text after navigation
+      _searchController.clear();
     } else {
       print("Could not open Google Maps");
     }
