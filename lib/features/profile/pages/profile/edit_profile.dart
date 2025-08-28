@@ -72,6 +72,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     context.read<CountryBloc>().add(GetCountryList());
     context.read<ContactBloc>().add(GetContactEvent());
+    context.read<PersonalinfoBloc>().add(GetPersonalInfo());
   }
 
   @override
@@ -287,6 +288,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           emailIdTextController.text = user.email;
                         });
                       }
+                    } else if (state is PersonalUpdated) {
+                      // after update, re-fetch latest data
+                      context.read<PersonalinfoBloc>().add(GetPersonalInfo());
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text("Profile updated successfully!")),
+                      );
+                    } else if (state is PersonalError) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Error: ${state.message}")),
+                      );
                     }
                   },
                   child: ExpandableSection(
@@ -359,7 +372,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         const SizedBox(height: 20),
                         Center(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              final updatedData = {
+                                "id": widget.user.id,
+                                "full_name": nameController.text,
+                                "dob": dobController.text,
+                                "gender": genderController.text,
+                                "occupation": occupationController.text,
+                                // "nationality": nationController.text,
+                                "profile_image": documentController.text,
+                                "email": emailIdTextController.text,
+                              };
+                              context
+                                  .read<PersonalinfoBloc>()
+                                  .add(UpdatePersonalInfo(updatedData));
+                            },
                             child: const Text(
                               "Save",
                               style: TextStyle(

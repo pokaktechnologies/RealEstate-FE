@@ -6,20 +6,32 @@ part 'personalinfo_event.dart';
 part 'personalinfo_state.dart';
 
 class PersonalinfoBloc extends Bloc<PersonalinfoEvent, PersonalinfoState> {
-  PersonalinfoBloc() : super(PersonalinfoInitial()) {
-    final ProfileRepository profileRepository = ProfileRepository();
+  final ProfileRepository profileRepository;
 
-    // on<GetPersonalInfo>((event, emit) async {
-    //   try {
-    //     emit(PersonalLoading());
-    //     final personList = await profileRepository.getPersonalInfo();
-    //     emit(PersonalLoaded(personList));
-    //     if (personList.error != null) {
-    //       emit(PersonalError(personList.error));
-    //     }
-    //   } catch (error) {
-    //     print(error);
-    //   }
-   // });
+  PersonalinfoBloc(this.profileRepository) : super(PersonalinfoInitial()) {
+    on<GetPersonalInfo>((event, emit) async {
+      try {
+        emit(PersonalLoading());
+        final data = await profileRepository.getPersonalInfo();
+        if (data.error != null) {
+          emit(PersonalError(data.error));
+        } else {
+          emit(PersonalLoaded(data));
+        }
+      } catch (e) {
+        emit(PersonalError(e.toString()));
+      }
+    });
+
+    on<UpdatePersonalInfo>((event, emit) async {
+      try {
+        emit(PersonalLoading());
+        await profileRepository.updatePersonalInfo(event.data);
+        final updatedData = await profileRepository.getPersonalInfo();
+        emit(PersonalLoaded(updatedData));
+      } catch (e) {
+        emit(PersonalError(e.toString()));
+      }
+    });
   }
 }

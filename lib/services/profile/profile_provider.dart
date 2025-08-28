@@ -5,6 +5,7 @@ import 'package:realestate_fe/core/services.dart';
 import 'package:realestate_fe/models/contact_info_model.dart';
 import 'package:realestate_fe/models/contact_model.dart';
 import 'package:realestate_fe/models/country_model.dart';
+import 'package:realestate_fe/models/personal_info_model.dart';
 import 'package:realestate_fe/models/profile_model.dart';
 import 'package:realestate_fe/models/state_model.dart';
 
@@ -12,6 +13,7 @@ class ProfileProvider {
   final String profileUrl = ApiConstants.profileEndPoint;
   final String countryUrl = ApiConstants.countryEndPoint;
   final String contactUrl = ApiConstants.contactEndPoint;
+  final String personalUrl = ApiConstants.personalInfoEndPoint;
 
   Future<ProfileModel> getUserProfile() async {
     try {
@@ -111,6 +113,93 @@ class ProfileProvider {
     } catch (error, stacktrace) {
       print("Logout error: $error\nStackTrace: $stacktrace");
       return "Logout error: ${error.toString()}";
+    }
+  }
+
+  // ✅ GET Personal Info
+  Future<PersonalInfoModel> getPersonalInfo() async {
+    try {
+      final dio = await DioClient().getAuthorizedDio();
+      final response = await dio.get(personalUrl);
+      return PersonalInfoModel.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Personal info fetch error: $error stackTrace: $stacktrace");
+      return PersonalInfoModel.withError(
+          "Personal info not found / connection issue");
+    }
+  }
+
+  // // PATCH Personal Info
+  // Future<void> updatePersonalInfo(Map<String, dynamic> data) async {
+  //   try {
+  //     final dio = await DioClient().getAuthorizedDio();
+  //     final response = await dio.patch(personalUrl, data: data);
+
+  //     if (response.statusCode != 200) {
+  //       throw Exception(
+  //           "Failed to update personal info: ${response.statusCode}");
+  //     }
+  //     print("Personal info updated successfully");
+  //   } on DioException catch (e) {
+  //     print("Dio error: ${e.response?.data}");
+  //     rethrow;
+  //   }
+  // }
+  Future<void> updatePersonalInfo(Map<String, dynamic> data) async {
+    try {
+      final dio = await DioClient().getAuthorizedDio();
+
+      final formData = FormData.fromMap(data);
+
+      final response = await dio.patch(
+        personalUrl,
+        data: formData,
+        options: Options(
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        ),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception(
+            "Failed to update personal info: ${response.statusCode}");
+      }
+      print("Personal info updated successfully");
+    } on DioException catch (e) {
+      print("Dio error: ${e.response?.data}");
+      rethrow;
+    }
+  }
+
+  // ✅ GET Contact Info
+  Future<ContactInfoModel> getContactInfo() async {
+    try {
+      final dio = await DioClient().getAuthorizedDio();
+      final response = await dio.get(contactUrl);
+      return ContactInfoModel.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Contact info fetch error: $error stackTrace: $stacktrace");
+      return ContactInfoModel.withError(
+          "Contact info not found / connection issue");
+    }
+  }
+
+  // ✅ PATCH Contact Info
+  Future<void> updateContactInfo(int id, Map<String, dynamic> data) async {
+    try {
+      final dio = await DioClient().getAuthorizedDio();
+      final url = "$contactUrl$id/";
+      final response = await dio.patch(url, data: data);
+
+      if (response.statusCode != 200) {
+        throw Exception(
+            "Failed to update contact info: ${response.statusCode}");
+      }
+      print("Contact info updated successfully");
+    } on DioException catch (e) {
+      print("Dio error: ${e.response?.data}");
+      rethrow;
     }
   }
 }

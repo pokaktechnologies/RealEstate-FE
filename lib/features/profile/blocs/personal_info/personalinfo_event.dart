@@ -8,3 +8,11 @@ abstract class PersonalinfoEvent extends Equatable {
 }
 
 class GetPersonalInfo extends PersonalinfoEvent {}
+
+class UpdatePersonalInfo extends PersonalinfoEvent {
+  final Map<String, dynamic> data;
+  const UpdatePersonalInfo(this.data);
+
+  @override
+  List<Object> get props => [data];
+}

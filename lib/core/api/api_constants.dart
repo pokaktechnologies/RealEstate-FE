@@ -26,7 +26,7 @@ class ApiConstants {
 
 
   // Get personal info
-   static String getPersonalInfoEndPoint = '$serverUrl/profiles/personal-info/';
+   static String personalInfoEndPoint = '$serverUrl/profiles/personal-info/';
    static String contactiInfoEndPoint = '$serverUrl/profiles/contact-info/';
 
   // home
