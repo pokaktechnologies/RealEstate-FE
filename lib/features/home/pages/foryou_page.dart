@@ -38,10 +38,6 @@ class _ForyouPageState extends State<ForyouPage> {
           TrendingProperties(),
           SizedBox(height: 15),
           BestProperties(),
-          SizedBox(height: 40),
-          TopAgents(),
-          SizedBox(height: 10),
-          BottomImage(isForyou: true),
         ],
       ),
     );
