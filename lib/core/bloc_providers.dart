@@ -3,6 +3,7 @@ import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password
 import 'package:realestate_fe/features/auth/bloc/login/login_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
 import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_bloc.dart';
+import 'package:realestate_fe/features/deals/bloc/deals_bloc.dart';
 import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/logout/logout_bloc.dart';
 import 'package:realestate_fe/features/home/blocs/homepage_cubit.dart';
@@ -13,6 +14,7 @@ import 'package:realestate_fe/features/profile/blocs/state/state_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/country/country_bloc.dart';
 import 'package:realestate_fe/features/property_details/bloc/propertydetails_bloc.dart';
+import 'package:realestate_fe/services/deal/deals_repository.dart';
 import 'package:realestate_fe/services/home/home_repository.dart';
 import 'package:realestate_fe/services/profile/profile_repository.dart';
 import 'package:realestate_fe/services/property/property_repository.dart';
@@ -20,6 +22,7 @@ import 'package:realestate_fe/services/property/property_repository.dart';
 final HomeRepository _homeRepository = HomeRepository();
 final PropertyRepository _propertyRepository = PropertyRepository();
 final ProfileRepository _profileRepository = ProfileRepository();
+final DealRepository _dealRepository = DealRepository();
 
 List<BlocProvider> appBlocProviders = [
   BlocProvider<HomepageCubit>(create: (_) => HomepageCubit()),
@@ -36,7 +39,7 @@ List<BlocProvider> appBlocProviders = [
   BlocProvider<ForgotPasswordBloc>(create: (_) => ForgotPasswordBloc()),
   BlocProvider<PropertydetailsBloc>(
       create: (_) => PropertydetailsBloc(_propertyRepository)),
-  //BlocProvider<PersonalinfoBloc>(create: (_) => PersonalinfoBloc()),
   BlocProvider<PersonalinfoBloc>(
       create: (_) => PersonalinfoBloc(_profileRepository)),
+  BlocProvider<DealBloc>(create: (_) => DealBloc(_dealRepository)),
 ];

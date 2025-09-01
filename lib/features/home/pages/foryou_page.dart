@@ -4,7 +4,6 @@ import 'package:realestate_fe/features/home/widgets/foryou/banner.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/best_properties.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/stay_finder_screen.dart';
-import 'package:realestate_fe/features/home/widgets/foryou/top_agents.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/trending_properties.dart';
 import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
 import 'package:realestate_fe/features/home/blocs/properties/properties_event.dart';
@@ -38,6 +37,10 @@ class _ForyouPageState extends State<ForyouPage> {
           TrendingProperties(),
           SizedBox(height: 15),
           BestProperties(),
+<<<<<<< HEAD
+=======
+          BottomImage(isForyou: true),
+>>>>>>> silpa-realestate
         ],
       ),
     );
