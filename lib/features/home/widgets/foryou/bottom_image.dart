@@ -24,7 +24,8 @@ class _BottomImageState extends State<BottomImage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.isForyou ? AppColors.white : AppColors.lightMint,
+      color: AppColors.lightMint,
+     
       padding: const EdgeInsets.all(18),
       child: BlocBuilder<DealBloc, DealState>(
         builder: (context, state) {
