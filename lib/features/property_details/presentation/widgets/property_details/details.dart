@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/core/utils/flutter_icons.dart';
 import 'package:realestate_fe/models/propertydetails_model.dart';
 
 class PropertyDetailsWidgets {
@@ -61,37 +62,6 @@ class PropertyDetailsWidgets {
     );
   }
 
-  // static Widget buildFacilityContainer(PropertyDetailsModel property) {
-  //   return Container(
-  //     padding: const EdgeInsets.all(16),
-  //     decoration: BoxDecoration(
-  //       color: const Color(0xFFEAF8F9),
-  //       borderRadius: BorderRadius.circular(12),
-  //     ),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //           children: [
-  //             buildDetail(AppAssets.bedroomIcon, "Bedroom",
-  //                 property.bedroomCount?.toString() ?? "-"),
-  //             buildDetail(AppAssets.bathroomIcon, "Bathroom",
-  //                 property.bathroomCount?.toString() ?? "-"),
-  //           ],
-  //         ),
-  //         const SizedBox(height: 12),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //           children: [
-  //             buildDetail(AppAssets.sqfeetIcon, "Build Up Area", "1250 sq-ft"),
-  //             buildDetail(AppAssets.furnishedIcon, "Furnished", ""),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
   static Widget buildFacilityContainer(PropertyDetailsModel property) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -118,12 +88,11 @@ class PropertyDetailsWidgets {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          feature.icon,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        Icon(
+          getFlutterIcon(feature.flutterIcon), // ✅ actual icon image
+          size: 20,
+          color: Colors.blueGrey,
         ),
-        // Icon(Icons.check,
-        //     size: 16), // Or use FontAwesome if you map `feature.icon`
         const SizedBox(width: 8),
         Text(
           feature.label,
@@ -179,59 +148,31 @@ class PropertyDetailsWidgets {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              buildNearestDetails(
-                  AppAssets.minimarketIcon, "Minimarket", "200m"),
-              buildNearestDetails(AppAssets.hospitaIcon, "Hospital", "130m"),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              buildNearestDetails(AppAssets.foodIcon, "Cafe", "400m"),
-              buildNearestDetails(AppAssets.trainIcon, "Train station", "500m"),
-            ],
+          Wrap(
+            spacing: 16,
+            runSpacing: 12,
+            children: property.nearestFacilities.map((facilities) {
+              return buildNearestDetails(facilities);
+            }).toList(),
           ),
         ],
       ),
     );
   }
 
-  static Widget buildNearestDetails(
-      String imagePath, String label, String value) {
+  static Widget buildNearestDetails(NearestFacility facilities) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          imagePath,
-          width: 28,
-          height: 25,
-          fit: BoxFit.contain,
+        Icon(
+          getFlutterIcon(facilities.flutterIcon), // ✅ actual icon image
+          size: 20,
+          color: Colors.blueGrey,
         ),
-        SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              label,
-              style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-            if (value.isNotEmpty)
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.mediumGray,
-                ),
-              ),
-          ],
+        const SizedBox(width: 8),
+        Text(
+          facilities.label,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
       ],
     );
@@ -266,8 +207,8 @@ class PropertyDetailsWidgets {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        buildPropertyRow("Property ID", "${property.id}", "Ownership", "Single",
-            "Deposit", "₹${property.securityDeposit ?? 0}"),
+        buildPropertyRow("Property ID", "${property.id}", "Status",
+            "${property.status}", "Deposit", "₹${property.securityDeposit}"),
         // buildPropertyRow(
         //     "Total Floors", "02", "Constructed In", "2019", "State", "Kerala"),
         buildPropertyRow(

@@ -25,7 +25,6 @@ class _BottomImageState extends State<BottomImage> {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.lightMint,
-     
       padding: const EdgeInsets.all(18),
       child: BlocBuilder<DealBloc, DealState>(
         builder: (context, state) {

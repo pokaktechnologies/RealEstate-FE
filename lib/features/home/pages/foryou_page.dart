@@ -37,10 +37,7 @@ class _ForyouPageState extends State<ForyouPage> {
           TrendingProperties(),
           SizedBox(height: 15),
           BestProperties(),
-<<<<<<< HEAD
-=======
           BottomImage(isForyou: true),
->>>>>>> silpa-realestate
         ],
       ),
     );

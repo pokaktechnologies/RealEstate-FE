@@ -114,8 +114,12 @@ class PropertyDetailsModel {
       priceTypeDisplay: json['price_type_display'] ?? '',
       overallRating: (json['overall_rating'] ?? 0).toDouble(),
       isPropertySaved: json['is_property_saved'] ?? false,
-      dealPrice: json['deal_price'] != null ? double.tryParse(json['deal_price'].toString()) : null,
-      dealDiscountPercentage: json['deal_discount_percentage'] != null ? double.tryParse(json['deal_discount_percentage'].toString()) : null,
+      dealPrice: json['deal_price'] != null
+          ? double.tryParse(json['deal_price'].toString())
+          : null,
+      dealDiscountPercentage: json['deal_discount_percentage'] != null
+          ? double.tryParse(json['deal_discount_percentage'].toString())
+          : null,
       hasActiveDeal: json['has_active_deal'] ?? false,
       name: json['name'] ?? '',
       category: json['category'] ?? '',
@@ -123,8 +127,12 @@ class PropertyDetailsModel {
       preferredOccupants: json['preferred_occupants'] ?? '',
       zipcode: json['zipcode'],
       nearestLandmark: json['nearest_landmark'],
-      latitude: json['latitude'] != null ? double.tryParse(json['latitude'].toString()) : null,
-      longitude: json['longitude'] != null ? double.tryParse(json['longitude'].toString()) : null,
+      latitude: json['latitude'] != null
+          ? double.tryParse(json['latitude'].toString())
+          : null,
+      longitude: json['longitude'] != null
+          ? double.tryParse(json['longitude'].toString())
+          : null,
       propertyDescription: json['property_description'],
       bedroomCount: json['bedroom_count'],
       bathroomCount: json['bathroom_count'],
@@ -168,14 +176,21 @@ class KeyFeature {
   final String key;
   final String label;
   final String icon;
+  final String flutterIcon;
 
-  KeyFeature({required this.key, required this.label, required this.icon});
+  KeyFeature({
+    required this.key,
+    required this.label,
+    required this.icon,
+    required this.flutterIcon,
+  });
 
   factory KeyFeature.fromJson(Map<String, dynamic> json) {
     return KeyFeature(
       key: json['key'],
       label: json['label'],
       icon: json['icon'],
+      flutterIcon: json['flutter_icon'],
     );
   }
 }
@@ -184,14 +199,21 @@ class NearestFacility {
   final String key;
   final String label;
   final String icon;
+  final String flutterIcon;
 
-  NearestFacility({required this.key, required this.label, required this.icon});
+  NearestFacility({
+    required this.key,
+    required this.label,
+    required this.icon,
+    required this.flutterIcon,
+  });
 
   factory NearestFacility.fromJson(Map<String, dynamic> json) {
     return NearestFacility(
       key: json['key'],
       label: json['label'],
       icon: json['icon'],
+      flutterIcon: json['flutter_icon'],
     );
   }
 }

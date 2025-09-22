@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
 import 'package:realestate_fe/features/home/blocs/properties/properties_state.dart';
-import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
 import 'package:realestate_fe/features/home/widgets/paying_guest/paying_banner.dart';
-import 'package:realestate_fe/features/home/widgets/paying_guest/top_pics.dart';
 import 'package:realestate_fe/features/home/widgets/viewmore_common.dart';
 
 class PayingGuest extends StatelessWidget {
@@ -19,10 +17,6 @@ class PayingGuest extends StatelessWidget {
           SizedBox(height: 10),
           PayingBanner(),
           SizedBox(height: 10),
-          TopPics(),
-          BottomImage(
-            isForyou: false,
-          ),
           Container(
             height: 450,
             color: AppColors.white,
