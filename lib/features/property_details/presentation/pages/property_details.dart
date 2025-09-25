@@ -382,7 +382,9 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                                 ),
                               ),
                               Divider(),
-                              ReviewsScreen(),
+                              ReviewsScreen(
+                                propertyId: property.id,
+                              ),
                               const SizedBox(height: 100),
                             ],
                           ),

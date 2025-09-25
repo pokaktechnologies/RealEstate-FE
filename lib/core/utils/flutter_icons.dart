@@ -13,7 +13,13 @@ IconData getFlutterIcon(String name) {
       return FontAwesomeIcons.mugHot;
     case 'train':
       return FontAwesomeIcons.train;
+    case 'hospital':
+      return FontAwesomeIcons.hospital;
+    case 'Parking':
+      return Icons.local_parking;
+    case 'wifi':
+      return FontAwesomeIcons.wifi;
     default:
-      return Icons.help_outline;
+      return Icons.error;
   }
 }

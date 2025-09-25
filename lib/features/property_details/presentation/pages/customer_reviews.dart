@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
+import 'package:realestate_fe/models/reviews_model.dart';
 
 class CustomerReviewScreen extends StatelessWidget {
-  const CustomerReviewScreen({super.key});
+  final List<Review> reviews;
+
+  const CustomerReviewScreen({super.key, required this.reviews});
 
   @override
   Widget build(BuildContext context) {
+    double averageRating = _calculateAverageRating(reviews);
+
     return Scaffold(
       backgroundColor: AppColors.lightGray,
       appBar: AppBar(
         title: Text(
-          "Review",
+          "Reviews",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -28,7 +33,7 @@ class CustomerReviewScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,29 +42,34 @@ class CustomerReviewScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12)),
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     Center(
                       child: Column(
                         children: [
                           Text(
-                            '4.8',
-                            style: TextStyle(
+                            averageRating.toStringAsFixed(1),
+                            style: const TextStyle(
                                 fontSize: 40, fontWeight: FontWeight.w600),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(5, (index) {
-                              return Icon(
-                                index < 4 ? Icons.star : Icons.star_half,
-                                color: Colors.orange,
-                                size: 30,
-                              );
+                              if (index < averageRating.floor()) {
+                                return const Icon(Icons.star,
+                                    color: Colors.orange, size: 30);
+                              } else if (index < averageRating) {
+                                return const Icon(Icons.star_half,
+                                    color: Colors.orange, size: 30);
+                              } else {
+                                return const Icon(Icons.star_border,
+                                    color: Colors.orange, size: 30);
+                              }
                             }),
                           ),
                           Text(
-                            'Based on 20 reviews',
+                            'Based on ${reviews.length} reviews',
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -68,35 +78,45 @@ class CustomerReviewScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 16),
-                    _buildRatingBar('5 Star', 0.8, Colors.green),
-                    _buildRatingBar('4 Star', 0.6, Colors.yellow),
-                    _buildRatingBar('3 Star', 0.4, Colors.orangeAccent),
-                    _buildRatingBar('2 Star', 0.2, Colors.deepOrange),
-                    _buildRatingBar('1 Star', 0.1, Colors.red),
+                    const SizedBox(height: 16),
+                    _buildRatingBar('5 Star',
+                        _calculateStarPercentage(reviews, 5), Colors.green),
+                    _buildRatingBar('4 Star',
+                        _calculateStarPercentage(reviews, 4), Colors.yellow),
+                    _buildRatingBar(
+                        '3 Star',
+                        _calculateStarPercentage(reviews, 3),
+                        Colors.orangeAccent),
+                    _buildRatingBar(
+                        '2 Star',
+                        _calculateStarPercentage(reviews, 2),
+                        Colors.deepOrange),
+                    _buildRatingBar('1 Star',
+                        _calculateStarPercentage(reviews, 1), Colors.red),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
+            // List of reviews
             Expanded(
               child: Card(
                 color: AppColors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
                       Expanded(
                         child: ListView.separated(
-                          itemCount: 2,
+                          itemCount: reviews.length,
                           separatorBuilder: (context, index) => Divider(
                             color: AppColors.grey,
                             thickness: 1,
                           ),
                           itemBuilder: (context, index) {
-                            return _buildReviewCard();
+                            return _buildReviewCard(reviews[index]);
                           },
                         ),
                       ),
@@ -135,6 +155,7 @@ class CustomerReviewScreen extends StatelessWidget {
     );
   }
 
+  // Rating bar row
   Widget _buildRatingBar(String label, double value, Color barColor) {
     return Row(
       children: [
@@ -142,7 +163,7 @@ class CustomerReviewScreen extends StatelessWidget {
             width: 60,
             child: Text(
               label,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
             )),
         Expanded(
           child: LinearProgressIndicator(
@@ -155,16 +176,27 @@ class CustomerReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildReviewCard() {
+  // Single review card
+  Widget _buildReviewCard(Review review) {
+    double rating = double.tryParse(review.rating ?? '0') ?? 0;
+
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage(AppAssets.evemariarofile),
+            radius: 20,
+            backgroundImage: (review.userProfileImage != null &&
+                    review.userProfileImage!.startsWith('http'))
+                ? NetworkImage(review.userProfileImage!)
+                : null,
+            child: (review.userProfileImage == null ||
+                    !review.userProfileImage!.startsWith('http'))
+                ? const Icon(Icons.person, size: 20)
+                : null,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,21 +204,32 @@ class CustomerReviewScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Eva Maria',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      review.userName,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     Row(
                       children: List.generate(
-                          5,
-                          (index) =>
-                              Icon(Icons.star, color: Colors.orange, size: 16)),
+                        5,
+                        (index) => Icon(
+                          index < rating.floor()
+                              ? Icons.star
+                              : Icons.star_border,
+                          color: Colors.orange,
+                          size: 16,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                Text('Nov 2024', style: TextStyle(color: Colors.grey)),
-                SizedBox(height: 4),
                 Text(
-                  'Your communication made the booking process easy. Would definitely recommend!',
-                  style: TextStyle(fontSize: 14),
+                  review.createdAt,
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  review.comment ?? '',
+                  style: const TextStyle(fontSize: 14),
                 ),
               ],
             ),
@@ -194,5 +237,24 @@ class CustomerReviewScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // Calculate average rating
+  double _calculateAverageRating(List<Review> reviews) {
+    if (reviews.isEmpty) return 0;
+    double total = 0;
+    for (var r in reviews) {
+      total += double.tryParse(r.rating) ?? 0;
+    }
+    return total / reviews.length;
+  }
+
+  // Calculate percentage for each star for progress bar
+  double _calculateStarPercentage(List<Review> reviews, int star) {
+    if (reviews.isEmpty) return 0;
+    int count = reviews
+        .where((r) => (double.tryParse(r.rating) ?? 0).floor() == star)
+        .length;
+    return count / reviews.length;
   }
 }
