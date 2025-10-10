@@ -44,4 +44,8 @@ class ApiConstants {
   // property reviews
   static String getPropertyReviews(int propertyId) =>
       "$serverUrl/property/user/$propertyId/reviews/";
+
+  // Saved
+  static String savedProperties = "$serverUrl/property/user/saved/";
+  static String deleteSaved(int id) => "$serverUrl/property/user/saved/$id";
 }

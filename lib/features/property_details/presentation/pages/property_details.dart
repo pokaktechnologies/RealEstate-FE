@@ -9,6 +9,9 @@ import 'package:realestate_fe/features/property_details/bloc/propertydetails_blo
 import 'package:realestate_fe/features/property_details/presentation/blocs/wishlist.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/reviews.dart';
 import 'package:realestate_fe/features/property_details/presentation/widgets/property_details/details.dart';
+import 'package:realestate_fe/features/saved/presentation/bloc/saved_bloc.dart';
+import 'package:realestate_fe/features/saved/presentation/bloc/saved_event.dart';
+import 'package:realestate_fe/features/saved/presentation/bloc/saved_state.dart';
 import 'package:realestate_fe/models/propertydetails_model.dart';
 
 class PropertyDetailsScreen extends StatefulWidget {
@@ -24,12 +27,20 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
   List<String> images = [];
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context
+  //       .read<PropertydetailsBloc>()
+  //       .add(LoadPropertyDetails(widget.propertyId));
+  // }
   @override
   void initState() {
     super.initState();
     context
         .read<PropertydetailsBloc>()
         .add(LoadPropertyDetails(widget.propertyId));
+    context.read<SavedBloc>().add(GetSavedProperties());
   }
 
   void _showContactMenu(BuildContext buttonContext) {
@@ -210,16 +221,50 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                 color: AppColors.tealBlue,
               ),
             ),
-            BlocBuilder<FavoriteBloc, FavoriteState>(
+            // BlocBuilder<FavoriteBloc, FavoriteState>(
+            //   builder: (context, state) {
+            //     return IconButton(
+            //       icon: Icon(
+            //           state is FavoriteFilledState
+            //               ? Icons.favorite
+            //               : Icons.favorite_border,
+            //           color: AppColors.tealBlue),
+            //       onPressed: () {
+            //         context.read<FavoriteBloc>().add(ToggleFavoriteEvent());
+            //       },
+            //     );
+            //   },
+            // ),
+            // ❤️ Saved Icon
+            BlocBuilder<SavedBloc, SavedState>(
               builder: (context, state) {
+                bool isSaved = false;
+
+                if (state is SavedLoaded) {
+                  isSaved =
+                      state.savedList.any((p) => p.id == widget.propertyId);
+                }
+
                 return IconButton(
                   icon: Icon(
-                      state is FavoriteFilledState
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: AppColors.tealBlue),
+                    isSaved ? Icons.favorite : Icons.favorite_border,
+                    color: AppColors.tealBlue,
+                  ),
                   onPressed: () {
-                    context.read<FavoriteBloc>().add(ToggleFavoriteEvent());
+                    if (isSaved) {
+                      // remove
+                      final savedItem = (state as SavedLoaded)
+                          .savedList
+                          .firstWhere((p) => p.id == widget.propertyId);
+                      context
+                          .read<SavedBloc>()
+                          .add(RemoveSavedProperty(savedItem.id!));
+                    } else {
+                      // add
+                      context
+                          .read<SavedBloc>()
+                          .add(AddSavedProperty(widget.propertyId));
+                    }
                   },
                 );
               },
