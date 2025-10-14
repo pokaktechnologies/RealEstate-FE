@@ -4,7 +4,6 @@ import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/deals/deals_bloc/deals_bloc.dart';
 import 'package:realestate_fe/features/deals/deals_bloc/deals_event.dart';
 import 'package:realestate_fe/features/deals/deals_bloc/deals_state.dart';
-
 import 'package:realestate_fe/models/dealsmodel.dart';
 
 class DealsScreen extends StatefulWidget {
@@ -54,16 +53,68 @@ class _DealsScreenState extends State<DealsScreen> {
                 separatorBuilder: (_, __) => const SizedBox(height: 16),
                 itemBuilder: (context, index) {
                   final deal = deals[index];
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      deal.bannerImage,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        height: 150,
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.broken_image, size: 40),
+                  return TweenAnimationBuilder(
+                    tween: Tween<double>(begin: 0, end: 1),
+                    duration: Duration(milliseconds: 600 + (index * 120)),
+                    curve: Curves.easeOutBack,
+                    builder: (context, value, child) {
+                      final opacity = value.clamp(0.0, 1.0);
+                      return Opacity(
+                        opacity: opacity,
+                        child: Transform.translate(
+                          offset: Offset(0, (1 - value) * 50),
+                          child: Transform.scale(
+                            scale: 0.9 + (value * 0.1),
+                            child: child,
+                          ),
+                        ),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Stack(
+                        alignment: Alignment.bottomLeft,
+                        children: [
+                          // 📸 Deal banner image
+                          Image.network(
+                            deal.bannerImage,
+                            width: double.infinity,
+                            height: 180,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
+                              height: 180,
+                              color: Colors.grey[300],
+                              child: const Icon(Icons.broken_image, size: 40),
+                            ),
+                          ),
+                          // 🌈 Gradient overlay
+                          Container(
+                            height: 180,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.black.withOpacity(0.5),
+                                  Colors.transparent
+                                ],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                              ),
+                            ),
+                          ),
+                          // 🏷 Deal title
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Text(
+                              deal.title,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
