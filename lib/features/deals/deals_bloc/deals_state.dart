@@ -1,13 +1,4 @@
-// part of 'deals_bloc.dart';
 
-// sealed class DealsState extends Equatable {
-//   const DealsState();
-
-//   @override
-//   List<Object> get props => [];
-// }
-
-// final class DealsInitial extends DealsState {}
 import 'package:equatable/equatable.dart';
 import 'package:realestate_fe/models/dealsmodel.dart';
 

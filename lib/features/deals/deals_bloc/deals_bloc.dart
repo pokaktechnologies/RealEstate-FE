@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/deals/bloc/deals_event.dart';
-import 'package:realestate_fe/features/deals/bloc/deals_state.dart';
+import 'package:realestate_fe/features/deals/deals_bloc/deals_event.dart';
+import 'package:realestate_fe/features/deals/deals_bloc/deals_state.dart';
+
 import 'package:realestate_fe/services/deal/deals_repository.dart';
 
 class DealBloc extends Bloc<DealEvent, DealState> {

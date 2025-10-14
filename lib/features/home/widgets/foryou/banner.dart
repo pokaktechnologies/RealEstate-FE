@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/deals/bloc/deals_bloc.dart';
-import 'package:realestate_fe/features/deals/bloc/deals_event.dart';
-import 'package:realestate_fe/features/deals/bloc/deals_state.dart';
+import 'package:realestate_fe/features/deals/deals_bloc/deals_bloc.dart';
+import 'package:realestate_fe/features/deals/deals_bloc/deals_event.dart';
+import 'package:realestate_fe/features/deals/deals_bloc/deals_state.dart';
 import 'package:realestate_fe/models/dealsmodel.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
