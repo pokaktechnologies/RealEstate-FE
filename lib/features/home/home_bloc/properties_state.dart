@@ -7,7 +7,8 @@ class PropertiesState extends Equatable {
   final String? error;
   final List<RentPropertiesModel> propertiesList;
   final List<RentPropertiesModel> trendingProperties;
-  final List<IdealPgModel> idealPGList;
+  // final List<IdealPgModel> idealPGList;
+   final List<RentPropertiesModel> idealPGList;
   final List<RentPropertiesModel> rentpropertiesList;
 
   const PropertiesState(
@@ -23,7 +24,7 @@ class PropertiesState extends Equatable {
     String? error,
     List<RentPropertiesModel>? propertiesList,
     List<RentPropertiesModel>? trendingProperties,
-    List<IdealPgModel>? idealPGList,
+    List<RentPropertiesModel>? idealPGList,
     List<RentPropertiesModel>? rentpropertiesList,
   }) {
     return PropertiesState(

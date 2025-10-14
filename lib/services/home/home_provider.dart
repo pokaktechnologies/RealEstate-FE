@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/api/api_constants.dart';
 import 'package:realestate_fe/core/api/dio_client.dart';
-import 'package:realestate_fe/models/ideal_pg_model.dart';
 import 'package:realestate_fe/models/rent_properties_model.dart';
 
 class HomeProvider {
@@ -13,12 +12,12 @@ class HomeProvider {
 
   // IDEAL
 
-  Future<List<IdealPgModel>> getIdealPGProperties() async {
+  Future<List<RentPropertiesModel>> getIdealPGProperties() async {
     final dio = await DioClient().getAuthorizedDio();
     final response = await dio.get(idealpgUrl);
     if (response.statusCode == 200) {
       final List<dynamic> data = response.data['data'];
-      return data.map((json) => IdealPgModel.fromJson(json)).toList();
+      return data.map((json) => RentPropertiesModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to fetch ideal PG properties');
     }
