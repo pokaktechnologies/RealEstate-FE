@@ -11,7 +11,7 @@ import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp
 import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp_state.dart';
 
 import 'package:realestate_fe/features/auth_user/widgets/custom_button.dart';
-import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
+import 'package:realestate_fe/features/home_bottom_bar/bottom_bar.dart';
 import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
 class VerificationPage extends StatefulWidget {

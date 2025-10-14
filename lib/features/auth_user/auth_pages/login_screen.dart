@@ -13,7 +13,7 @@ import 'package:realestate_fe/features/auth_user/auth_pages/signup_screen.dart';
 import 'package:realestate_fe/features/auth_user/widgets/custom_button.dart';
 import 'package:realestate_fe/features/auth_user/widgets/custom_icon.dart';
 import 'package:realestate_fe/features/auth_user/widgets/custom_textfield.dart';
-import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
+import 'package:realestate_fe/features/home_bottom_bar/bottom_bar.dart';
 import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
 class LoginScreen extends StatefulWidget {

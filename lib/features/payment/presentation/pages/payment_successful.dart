@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
+import 'package:realestate_fe/features/home_bottom_bar/bottom_bar.dart';
 
 class PaymentSuccessfulScreen extends StatefulWidget {
   const PaymentSuccessfulScreen({super.key});
