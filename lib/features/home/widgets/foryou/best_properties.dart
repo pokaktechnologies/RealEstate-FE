@@ -100,7 +100,7 @@ class _BestPropertiesState extends State<BestProperties> {
                       12,
                       0,
                     ),
-                    itemCount: 5,
+                    itemCount: properties.length,
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         onTap: () {
@@ -140,10 +140,15 @@ class _BestPropertiesState extends State<BestProperties> {
                                     child: SizedBox(
                                       height: 120,
                                       width: double.infinity,
-                                      child: Image.network(
-                                        properties[i].images[0].imageName,
-                                        fit: BoxFit.cover,
-                                      ),
+                                      child: properties[i].images.isNotEmpty
+                                          ? Image.network(
+                                              properties[i].images[0].imageName,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.asset(
+                                              'assets/no-img.jpg',
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                                   Expanded(

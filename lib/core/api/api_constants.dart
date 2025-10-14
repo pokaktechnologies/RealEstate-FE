@@ -40,6 +40,8 @@ class ApiConstants {
   //property
   static String propertyByIdEndPoint = '$serverUrl/property/user';
   static String dealsEndPoint = '$serverUrl/property/user/deals/';
+  //category
+  static String categoryEndpoint = '$serverUrl/property/user/?category=rent';
 
   // property reviews
   static String getPropertyReviews(int propertyId) =>

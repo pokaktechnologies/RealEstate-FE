@@ -78,6 +78,7 @@ flutter:
   assets:
    - assets/appicon.png
    - assets/logo.png
+   - assets/
    - assets/appicons.png
    - assets/PokakLogowhite.png
    - assets/auth/

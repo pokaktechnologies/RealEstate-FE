@@ -132,7 +132,7 @@ class _StayFinderScreenState extends State<StayFinderScreen> {
                                     child: Image.network(
                                       properties[i].images.isNotEmpty
                                           ? properties[i].images[0].imageName
-                                          : 'https://via.placeholder.com/150',
+                                          : 'assets/no-img.jpg',
                                       fit: BoxFit.cover,
                                     ),
                                   ),

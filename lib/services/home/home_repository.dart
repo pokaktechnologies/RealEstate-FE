@@ -25,4 +25,8 @@ class HomeRepository {
       category: category,
     );
   }
+
+  Future<List<RentPropertiesModel>> getAllRentProperties() {
+    return _provider.getcategoryProperties();
+  }
 }

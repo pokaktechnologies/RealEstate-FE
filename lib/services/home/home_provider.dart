@@ -9,6 +9,7 @@ class HomeProvider {
   final String trendingPropertiesUrl =
       ApiConstants.trendingPropertiesNearYouEndPoint;
   final String propertyUrl = ApiConstants.propertiesRentalEndPoint;
+  final String rentUrl = ApiConstants.categoryEndpoint;
 
   // IDEAL
 
@@ -67,6 +68,27 @@ class HomeProvider {
 
       if (response.statusCode == 200) {
         print(response.data); // check this!
+        final List<dynamic> data = response.data['data'] is List
+            ? response.data['data']
+            : response.data['data']['results'];
+
+        return data.map((json) => RentPropertiesModel.fromJson(json)).toList();
+      } else {
+        print("failure");
+        throw Exception('Failed to fetch properties');
+      }
+    } catch (error, stackTrace) {
+      debugPrint("Exception occurred: $error \nStackTrace: $stackTrace");
+      throw Exception('Failed to fetch properties: $error');
+    }
+  }
+
+  Future<List<RentPropertiesModel>> getcategoryProperties() async {
+    try {
+      final dio = await DioClient().getAuthorizedDio();
+      final response = await dio.get(rentUrl);
+
+      if (response.statusCode == 200) {
         final List<dynamic> data = response.data['data'] is List
             ? response.data['data']
             : response.data['data']['results'];

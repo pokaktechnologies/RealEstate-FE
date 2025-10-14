@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
 import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
 import 'package:realestate_fe/features/home/widgets/viewmore_common.dart';
-import 'package:realestate_fe/features/home/widgets/rent/trending_properties.dart';
+import 'package:realestate_fe/features/home/widgets/rent/top_pics.dart';
 import 'package:realestate_fe/features/home/widgets/rent/rent_banner.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
 
@@ -20,7 +19,7 @@ class RentPage extends StatelessWidget {
           const SizedBox(height: 10),
           const RentBanner(),
           const SizedBox(height: 10),
-          const TrendingProperties(),
+          const TopPicksForYou(),
           const BottomImage(isForyou: false),
           const SizedBox(height: 10),
           Container(

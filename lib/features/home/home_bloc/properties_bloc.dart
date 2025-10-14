@@ -44,5 +44,15 @@ class PropertiesBloc extends Bloc<PropertiesEvent, PropertiesState> {
             isLoading: false, error: "Failed to fetch Ideal PG properties"));
       }
     });
+    on<LoadrentProperties>((event, emit) async {
+      emit(state.copyWith(isLoading: true, error: null));
+      try {
+        final rentList = await homeRepository.getAllRentProperties();
+        emit(state.copyWith(isLoading: false, rentpropertiesList: rentList));
+      } catch (_) {
+        emit(state.copyWith(
+            isLoading: false, error: "Failed to fetch Rent properties"));
+      }
+    });
   }
 }
