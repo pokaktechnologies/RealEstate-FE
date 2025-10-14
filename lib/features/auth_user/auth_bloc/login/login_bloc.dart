@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/auth/bloc/login/login_event.dart';
-import 'package:realestate_fe/features/auth/bloc/login/login_state.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/login/login_event.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/login/login_state.dart';
+
 import 'package:realestate_fe/services/auth/auth_respository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {

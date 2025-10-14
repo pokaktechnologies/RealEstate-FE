@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_event.dart';
-import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_state.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/forgot_password/forgot_password_event.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/forgot_password/forgot_password_state.dart';
 import 'package:realestate_fe/services/auth/auth_respository.dart';
+
 
 class ForgotPasswordBloc
     extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {

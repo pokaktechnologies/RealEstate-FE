@@ -4,39 +4,42 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/core/utils/navigations.dart';
-import 'package:realestate_fe/features/auth/bloc/login/login_bloc.dart';
-import 'package:realestate_fe/features/auth/bloc/login/login_event.dart';
-import 'package:realestate_fe/features/auth/bloc/login/login_state.dart';
-import 'package:realestate_fe/features/auth/pages/forgot_password.dart';
-import 'package:realestate_fe/features/auth/pages/signup_screen.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_icon.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
-import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/register/register_bloc.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/register/register_event.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/register/register_state.dart';
+import 'package:realestate_fe/features/auth_user/auth_pages/login_screen.dart';
+import 'package:realestate_fe/features/auth_user/auth_pages/verification_code.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_button.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_textfield.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_icon.dart';
 import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
+  late TextEditingController nameTextcontroller;
   late TextEditingController emailIdTextController;
   late TextEditingController passwordTextController;
+  String? cachedEmail;
+  bool isRememberMeChecked = false;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+    nameTextcontroller = TextEditingController();
     emailIdTextController = TextEditingController();
     passwordTextController = TextEditingController();
   }
 
   @override
   void dispose() {
+    nameTextcontroller.dispose();
     emailIdTextController.dispose();
     passwordTextController.dispose();
     super.dispose();
@@ -66,11 +69,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       right: 10,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushAndRemoveUntil(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BottomBar()),
-                            (route) => false,
+                              builder: (context) => LoginScreen(),
+                            ),
                           );
                         },
                         child: Row(
@@ -106,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               Text(
-                "Login!",
+                "Create Your Account",
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 26,
@@ -114,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               Text(
-                "Welcome back!",
+                "Welcome!",
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 16,
@@ -127,7 +130,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   top: 20,
                 ),
                 child: CustomTextfield(
-                    hintText: "Enter your email",
+                  hintText: "Enter your Name",
+                  prefixImg: AppAssets.usernameIcon,
+                  controller: nameTextcontroller,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please enter your name';
+                    }
+                    if (value.trim().length < 2) {
+                      return 'Name must be at least 2 characters';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 20,
+                  left: 20,
+                  top: 20,
+                ),
+                child: CustomTextfield(
+                    hintText: "Enter your Email",
                     prefixImg: AppAssets.emailIcon,
                     controller: emailIdTextController,
                     validator: (value) {
@@ -162,32 +186,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  right: 40,
-                  left: 20,
-                  top: 15,
-                ),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ForgotPassword(),
-                        ),
-                      );
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Checkbox(
+                    value: isRememberMeChecked,
+                    onChanged: (bool? newValue) {
+                      setState(() {
+                        isRememberMeChecked = newValue!;
+                      });
                     },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 40),
                     child: Text(
-                      "Forgot Password?",
+                      "Remember me",
                       style: TextStyle(
                         color: AppColors.black,
                         fontSize: 15,
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -195,26 +215,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   left: 40,
                   top: 20,
                 ),
-                child: BlocListener<LoginBloc, LoginState>(
+                child: BlocListener<RegisterBloc, RegisterState>(
                   listener: (context, state) {
-                    FocusScope.of(context).unfocus();
-
-                    if (state is LoginSuccess) {
-                      showAnimatedError(context, state.message);
-                      pushAndRemoveUntilFun(context, BottomBar());
-                    } else if (state is LoginError) {
-                      showAnimatedError(
-                          context, "User not registered, please register.",
-                          isError: true);
+                    if (state is RegisterSuccess && cachedEmail != null) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        FocusScope.of(context).unfocus();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                VerificationPage(enteredEmailId: cachedEmail!),
+                          ),
+                        );
+                        showAnimatedError(context, state.message);
+                      });
+                    } else if (state is RegisterError) {
+                      FocusScope.of(context).unfocus();
+                      showAnimatedError(context, state.message, isError: true);
                     }
                   },
-                  child: BlocBuilder<LoginBloc, LoginState>(
+                  child: BlocBuilder<RegisterBloc, RegisterState>(
                     builder: (context, state) {
                       return CustomButton(
-                        buttonText: state is LoginLoading
+                        buttonText: state is RegisterLoading
                             ? AppLoadingIndicator()
                             : Text(
-                                "Login",
+                                "Sign Up",
                                 style: TextStyle(
                                   color: AppColors.white,
                                   fontSize: 17,
@@ -224,11 +250,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           if (_formKey.currentState!.validate()) {
-                            final Map<String, dynamic> loginData = {
-                              "email": emailIdTextController.text,
-                              "password": passwordTextController.text,
+                            final email = emailIdTextController.text.trim();
+                            final name = nameTextcontroller.text.trim();
+                            final password = passwordTextController.text.trim();
+
+                            final registerData = {
+                              "email": email,
+                              "name": name,
+                              "password": password,
                             };
-                            context.read<LoginBloc>().add(LoginUser(loginData));
+
+                            cachedEmail = email;
+                            context
+                                .read<RegisterBloc>()
+                                .add(RegisterUser(registerData));
                           }
                         },
                       );
@@ -250,7 +285,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Text(
-                    "Or Continue With ",
+                    "Or Continue with ",
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.black,
@@ -292,7 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               RichText(
                 text: TextSpan(
-                  text: "Dont have an account? ",
+                  text: "Already have an account? ",
                   style: const TextStyle(
                     color: AppColors.black,
                     fontSize: 14,
@@ -300,7 +335,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   children: [
                     TextSpan(
-                      text: "Signup",
+                      text: "Login",
                       style: const TextStyle(
                         fontSize: 14,
                         color: AppColors.black,
@@ -311,7 +346,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SignupScreen(),
+                              builder: (context) => LoginScreen(),
                             ),
                           );
                         },
@@ -319,6 +354,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 30),
             ],
           ),
         ),

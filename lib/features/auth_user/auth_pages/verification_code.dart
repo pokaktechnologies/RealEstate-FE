@@ -5,23 +5,24 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_bloc.dart';
-import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_event.dart';
-import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_state.dart';
-import 'package:realestate_fe/features/auth/pages/create_password.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
+import 'package:realestate_fe/core/utils/navigations.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp_bloc.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp_event.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp_state.dart';
+
+import 'package:realestate_fe/features/auth_user/widgets/custom_button.dart';
+import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
-class ForgotVerificationPage extends StatefulWidget {
+class VerificationPage extends StatefulWidget {
   final String enteredEmailId;
-
-  const ForgotVerificationPage({super.key, required this.enteredEmailId});
+  const VerificationPage({super.key, required this.enteredEmailId});
 
   @override
-  State<ForgotVerificationPage> createState() => _ForgotVerificationPageState();
+  State<VerificationPage> createState() => _VerificationPageState();
 }
 
-class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
+class _VerificationPageState extends State<VerificationPage> {
   late TextEditingController otpController;
   final _formKey = GlobalKey<FormState>();
 
@@ -33,8 +34,8 @@ class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
 
   @override
   void dispose() {
-    otpController.dispose();
     super.dispose();
+    otpController.dispose();
   }
 
   @override
@@ -46,7 +47,7 @@ class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
           children: [
             const SizedBox(height: 90),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -65,7 +66,7 @@ class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
                     ),
                     const Center(
                       child: Text(
-                        "We sent you an OTP to your mail",
+                        "We send you an OTP to your mail",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -79,7 +80,7 @@ class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
                       children: [
                         Text(
                           widget.enteredEmailId,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: AppColors.black,
@@ -123,7 +124,7 @@ class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const Text(
+                        Text(
                           "Don't receive any code? ",
                           style: TextStyle(
                             color: AppColors.black,
@@ -133,7 +134,7 @@ class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
                         ),
                         InkWell(
                           onTap: () {},
-                          child: const Text(
+                          child: Text(
                             "Resend OTP",
                             style: TextStyle(
                               color: AppColors.tealBlue,
@@ -145,33 +146,24 @@ class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
+                    BlocListener<VerifyOtpBloc, VerifyOtpState>(
                       listener: (context, state) {
-                        if (state is ForgotPasswordOtpVerified) {
+                        if (state is VerifyOtpSuccess) {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
                             if (context.mounted) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => CreatePassword(
-                                    email: widget.enteredEmailId,
-                                    otp: int.parse(otpController.text.trim()),
-                                  ),
-                                ),
-                              );
+                              pushAndRemoveUntilFun(context, BottomBar());
                             }
                           });
-                        } else if (state is ForgotPasswordError) {
-                          showAnimatedError(context, state.error,
+                        } else if (state is VerifyOtpError) {
+                          showAnimatedError(context, state.message ?? "",
                               isError: true);
                         }
                       },
-                      child:
-                          BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                      child: BlocBuilder<VerifyOtpBloc, VerifyOtpState>(
                         builder: (context, state) {
                           return CustomButton(
-                            buttonText: state is ForgotPasswordLoading
-                                ? const AppLoadingIndicator()
+                            buttonText: state is VerifyOtpLoading
+                                ? AppLoadingIndicator()
                                 : const Text(
                                     "Verify",
                                     style: TextStyle(
@@ -181,17 +173,18 @@ class _ForgotVerificationPageState extends State<ForgotVerificationPage> {
                                     ),
                                   ),
                             onPressed: () {
-                              FocusScope.of(context).unfocus();
+                              FocusScope.of(context).unfocus(); // Hide keyboard
 
                               final enteredOtp = otpController.text.trim();
-                              if (enteredOtp.isEmpty) return;
 
-                              context.read<ForgotPasswordBloc>().add(
-                                    ForgotPasswordVerifyOtpEvent(
-                                      widget.enteredEmailId,
-                                      int.parse(enteredOtp),
-                                    ),
-                                  );
+                              final Map<String, dynamic> verifyOtpData = {
+                                "email": widget.enteredEmailId,
+                                "otp": enteredOtp,
+                              };
+
+                              context
+                                  .read<VerifyOtpBloc>()
+                                  .add(VerifyOtpUser(verifyOtpData));
                             },
                           );
                         },

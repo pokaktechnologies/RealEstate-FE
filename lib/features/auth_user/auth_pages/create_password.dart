@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_bloc.dart';
-import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_event.dart';
-import 'package:realestate_fe/features/auth/bloc/forgot_password/forgot_password_state.dart';
-import 'package:realestate_fe/features/auth/pages/login_screen.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/forgot_password/forgot_password_bloc.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/forgot_password/forgot_password_event.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/forgot_password/forgot_password_state.dart';
+import 'package:realestate_fe/features/auth_user/auth_pages/login_screen.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_button.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_textfield.dart';
+
 import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
 class CreatePassword extends StatefulWidget {

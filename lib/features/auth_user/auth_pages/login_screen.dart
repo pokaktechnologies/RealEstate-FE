@@ -4,42 +4,39 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/bloc/register/register_bloc.dart';
-import 'package:realestate_fe/features/auth/bloc/register/register_event.dart';
-import 'package:realestate_fe/features/auth/bloc/register/register_state.dart';
-import 'package:realestate_fe/features/auth/pages/login_screen.dart';
-import 'package:realestate_fe/features/auth/pages/verification_code.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_button.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_textfield.dart';
-import 'package:realestate_fe/features/auth/widgets/custom_icon.dart';
+import 'package:realestate_fe/core/utils/navigations.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/login/login_bloc.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/login/login_event.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/login/login_state.dart';
+import 'package:realestate_fe/features/auth_user/auth_pages/forgot_password.dart';
+import 'package:realestate_fe/features/auth_user/auth_pages/signup_screen.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_button.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_icon.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_textfield.dart';
+import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
-  late TextEditingController nameTextcontroller;
+class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController emailIdTextController;
   late TextEditingController passwordTextController;
-  String? cachedEmail;
-  bool isRememberMeChecked = false;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    nameTextcontroller = TextEditingController();
     emailIdTextController = TextEditingController();
     passwordTextController = TextEditingController();
   }
 
   @override
   void dispose() {
-    nameTextcontroller.dispose();
     emailIdTextController.dispose();
     passwordTextController.dispose();
     super.dispose();
@@ -69,11 +66,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       right: 10,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
-                            ),
+                                builder: (context) => BottomBar()),
+                            (route) => false,
                           );
                         },
                         child: Row(
@@ -109,7 +106,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               Text(
-                "Create Your Account",
+                "Login!",
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 26,
@@ -117,7 +114,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               Text(
-                "Welcome!",
+                "Welcome back!",
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 16,
@@ -130,28 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   top: 20,
                 ),
                 child: CustomTextfield(
-                  hintText: "Enter your Name",
-                  prefixImg: AppAssets.usernameIcon,
-                  controller: nameTextcontroller,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your name';
-                    }
-                    if (value.trim().length < 2) {
-                      return 'Name must be at least 2 characters';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  right: 20,
-                  left: 20,
-                  top: 20,
-                ),
-                child: CustomTextfield(
-                    hintText: "Enter your Email",
+                    hintText: "Enter your email",
                     prefixImg: AppAssets.emailIcon,
                     controller: emailIdTextController,
                     validator: (value) {
@@ -186,28 +162,32 @@ class _SignupScreenState extends State<SignupScreen> {
                   },
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Checkbox(
-                    value: isRememberMeChecked,
-                    onChanged: (bool? newValue) {
-                      setState(() {
-                        isRememberMeChecked = newValue!;
-                      });
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 40,
+                  left: 20,
+                  top: 15,
+                ),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ForgotPassword(),
+                        ),
+                      );
                     },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 40),
                     child: Text(
-                      "Remember me",
+                      "Forgot Password?",
                       style: TextStyle(
                         color: AppColors.black,
                         fontSize: 15,
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -215,32 +195,26 @@ class _SignupScreenState extends State<SignupScreen> {
                   left: 40,
                   top: 20,
                 ),
-                child: BlocListener<RegisterBloc, RegisterState>(
+                child: BlocListener<LoginBloc, LoginState>(
                   listener: (context, state) {
-                    if (state is RegisterSuccess && cachedEmail != null) {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        FocusScope.of(context).unfocus();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                VerificationPage(enteredEmailId: cachedEmail!),
-                          ),
-                        );
-                        showAnimatedError(context, state.message);
-                      });
-                    } else if (state is RegisterError) {
-                      FocusScope.of(context).unfocus();
-                      showAnimatedError(context, state.message, isError: true);
+                    FocusScope.of(context).unfocus();
+
+                    if (state is LoginSuccess) {
+                      showAnimatedError(context, state.message);
+                      pushAndRemoveUntilFun(context, BottomBar());
+                    } else if (state is LoginError) {
+                      showAnimatedError(
+                          context, "User not registered, please register.",
+                          isError: true);
                     }
                   },
-                  child: BlocBuilder<RegisterBloc, RegisterState>(
+                  child: BlocBuilder<LoginBloc, LoginState>(
                     builder: (context, state) {
                       return CustomButton(
-                        buttonText: state is RegisterLoading
+                        buttonText: state is LoginLoading
                             ? AppLoadingIndicator()
                             : Text(
-                                "Sign Up",
+                                "Login",
                                 style: TextStyle(
                                   color: AppColors.white,
                                   fontSize: 17,
@@ -250,20 +224,11 @@ class _SignupScreenState extends State<SignupScreen> {
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           if (_formKey.currentState!.validate()) {
-                            final email = emailIdTextController.text.trim();
-                            final name = nameTextcontroller.text.trim();
-                            final password = passwordTextController.text.trim();
-
-                            final registerData = {
-                              "email": email,
-                              "name": name,
-                              "password": password,
+                            final Map<String, dynamic> loginData = {
+                              "email": emailIdTextController.text,
+                              "password": passwordTextController.text,
                             };
-
-                            cachedEmail = email;
-                            context
-                                .read<RegisterBloc>()
-                                .add(RegisterUser(registerData));
+                            context.read<LoginBloc>().add(LoginUser(loginData));
                           }
                         },
                       );
@@ -285,7 +250,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   Text(
-                    "Or Continue with ",
+                    "Or Continue With ",
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.black,
@@ -327,7 +292,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               RichText(
                 text: TextSpan(
-                  text: "Already have an account? ",
+                  text: "Dont have an account? ",
                   style: const TextStyle(
                     color: AppColors.black,
                     fontSize: 14,
@@ -335,7 +300,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   children: [
                     TextSpan(
-                      text: "Login",
+                      text: "Signup",
                       style: const TextStyle(
                         fontSize: 14,
                         color: AppColors.black,
@@ -346,7 +311,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
+                              builder: (context) => SignupScreen(),
                             ),
                           );
                         },
@@ -354,7 +319,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
             ],
           ),
         ),

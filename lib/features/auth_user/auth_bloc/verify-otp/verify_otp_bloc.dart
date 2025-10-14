@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_event.dart';
-import 'package:realestate_fe/features/auth/bloc/verify-otp/verify_otp_state.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp_event.dart';
+import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp_state.dart';
 import 'package:realestate_fe/services/auth/auth_respository.dart';
 
 class VerifyOtpBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {

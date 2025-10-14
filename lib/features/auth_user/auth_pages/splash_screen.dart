@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/services.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/pages/splash_screen_2.dart';
+import 'package:realestate_fe/features/auth_user/auth_pages/splash_screen_2.dart';
+
 import 'package:realestate_fe/features/bottom_bar/bottom_bar.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/auth/widgets/cutome_expand.dart';
+import 'package:realestate_fe/features/auth_user/widgets/cutome_expand.dart';
 import 'package:realestate_fe/features/profile/blocs/contact/contact_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/contact/contact_event.dart';
 import 'package:realestate_fe/features/profile/blocs/contact/contact_state.dart';
