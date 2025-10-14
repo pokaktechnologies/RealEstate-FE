@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/home/pages/buy_page.dart';
-import 'package:realestate_fe/features/home/pages/foryou_page.dart';
-import 'package:realestate_fe/features/home/pages/paying_guest.dart';
-import 'package:realestate_fe/features/home/pages/rent_page.dart';
+import 'package:realestate_fe/features/home/home_pages/buy_page.dart';
+import 'package:realestate_fe/features/home/home_pages/foryou_page.dart';
+import 'package:realestate_fe/features/home/home_pages/paying_guest.dart';
+import 'package:realestate_fe/features/home/home_pages/rent_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Homepage extends StatefulWidget {

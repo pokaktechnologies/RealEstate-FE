@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/payment/presentation/pages/payment_successful.dart';
+import 'package:realestate_fe/features/payment/payment_pages/payment_successful.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});

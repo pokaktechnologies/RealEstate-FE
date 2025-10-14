@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/home/pages/buy_page.dart';
-import 'package:realestate_fe/features/home/pages/foryou_page.dart';
-import 'package:realestate_fe/features/home/pages/paying_guest.dart';
-import 'package:realestate_fe/features/home/pages/rent_page.dart';
+import 'package:realestate_fe/features/home/home_pages/buy_page.dart';
+import 'package:realestate_fe/features/home/home_pages/foryou_page.dart';
+import 'package:realestate_fe/features/home/home_pages/paying_guest.dart';
+import 'package:realestate_fe/features/home/home_pages/rent_page.dart';
 
 class HomepageCubit extends Cubit<int> {
   HomepageCubit() : super(0);

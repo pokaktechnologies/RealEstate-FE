@@ -1,24 +1,28 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_state.dart';
-import 'package:realestate_fe/features/home/widgets/buy/buy_banner.dart';
-import 'package:realestate_fe/features/home/widgets/buy/trending_properties.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
 import 'package:realestate_fe/features/home/widgets/viewmore_common.dart';
+import 'package:realestate_fe/features/home/widgets/rent/trending_properties.dart';
+import 'package:realestate_fe/features/home/widgets/rent/rent_banner.dart';
+import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
 
-class BuyPage extends StatelessWidget {
-  const BuyPage({super.key});
+class RentPage extends StatelessWidget {
+  const RentPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 10),
-          BuyBanner(),
-          SizedBox(height: 10),
-          TrendingProperties(),
+          const SizedBox(height: 10),
+          const RentBanner(),
+          const SizedBox(height: 10),
+          const TrendingProperties(),
+          const BottomImage(isForyou: false),
+          const SizedBox(height: 10),
           Container(
             height: 450,
             color: AppColors.white,

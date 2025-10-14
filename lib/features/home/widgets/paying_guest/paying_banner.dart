@@ -7,9 +7,9 @@ class PayingBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> roomText = [
-      "Apartment",
-      "Villa",
-      "Independent Houses",
+      "Boys",
+      "Girls",
+      "Family",
       "Fully Furnished",
       "Apartment",
     ];

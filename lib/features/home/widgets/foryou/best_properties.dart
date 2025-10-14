@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_event.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_state.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_event.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/property_details.dart';
 
 class BestProperties extends StatefulWidget {

@@ -4,9 +4,9 @@ import 'package:realestate_fe/features/auth_user/auth_bloc/login/login_bloc.dart
 import 'package:realestate_fe/features/auth_user/auth_bloc/register/register_bloc.dart';
 import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp_bloc.dart';
 import 'package:realestate_fe/features/deals/deals_bloc/deals_bloc.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/logout/logout_bloc.dart';
-import 'package:realestate_fe/features/home/blocs/homepage_cubit.dart';
+import 'package:realestate_fe/features/home/home_bloc/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/blocs/contact/contact_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/personal_info/personalinfo_bloc.dart';
 import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';

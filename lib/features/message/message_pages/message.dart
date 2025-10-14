@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/message/presentation/pages/chat_screen.dart';
+import 'package:realestate_fe/features/message/message_pages/chat_screen.dart';
 
 class MessageScreen extends StatelessWidget {
   const MessageScreen({super.key});

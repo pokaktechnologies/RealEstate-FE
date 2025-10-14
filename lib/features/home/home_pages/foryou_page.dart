@@ -5,8 +5,8 @@ import 'package:realestate_fe/features/home/widgets/foryou/best_properties.dart'
 import 'package:realestate_fe/features/home/widgets/foryou/bottom_image.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/stay_finder_screen.dart';
 import 'package:realestate_fe/features/home/widgets/foryou/trending_properties.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_event.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_event.dart';
 
 class ForyouPage extends StatefulWidget {
   const ForyouPage({super.key});

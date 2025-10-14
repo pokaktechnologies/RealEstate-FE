@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_bloc.dart';
-import 'package:realestate_fe/features/home/blocs/properties/properties_state.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
+import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
 import 'package:realestate_fe/features/home/widgets/paying_guest/paying_banner.dart';
 import 'package:realestate_fe/features/home/widgets/viewmore_common.dart';
 

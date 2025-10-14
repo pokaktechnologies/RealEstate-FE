@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
-import 'package:realestate_fe/features/home/widgets/rent/rent_grid.dart';
+import 'package:realestate_fe/core/utils/navigations.dart';
+import 'package:realestate_fe/features/home/widgets/rent/rent_property_grid.dart';
 
 class RentBanner extends StatelessWidget {
   const RentBanner({super.key});
@@ -44,12 +45,7 @@ class RentBanner extends StatelessWidget {
               itemBuilder: (context, i) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AnimatedRealEstateGrid(),
-                      ),
-                    );
+                    pushNavigation(context, const RentedPropertyGridScreen());
                   },
                   child: SizedBox(
                     width: 100,
