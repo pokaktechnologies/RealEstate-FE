@@ -75,7 +75,6 @@ class _DealsScreenState extends State<DealsScreen> {
                       child: Stack(
                         alignment: Alignment.bottomLeft,
                         children: [
-                          // 📸 Deal banner image
                           Image.network(
                             deal.bannerImage,
                             width: double.infinity,
@@ -88,7 +87,6 @@ class _DealsScreenState extends State<DealsScreen> {
                               child: const Icon(Icons.broken_image, size: 40),
                             ),
                           ),
-                          // 🌈 Gradient overlay
                           Container(
                             height: 180,
                             decoration: BoxDecoration(
@@ -102,13 +100,12 @@ class _DealsScreenState extends State<DealsScreen> {
                               ),
                             ),
                           ),
-                          // 🏷 Deal title
                           Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: Text(
                               deal.title,
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: AppColors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
                               ),

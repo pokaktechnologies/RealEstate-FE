@@ -27,13 +27,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
   List<String> images = [];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   context
-  //       .read<PropertydetailsBloc>()
-  //       .add(LoadPropertyDetails(widget.propertyId));
-  // }
   @override
   void initState() {
     super.initState();

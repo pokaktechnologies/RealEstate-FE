@@ -101,7 +101,7 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                 removeTop: false,
                 child: SizedBox(
                   width: double.infinity,
-                  height: 220,
+                  height: 210,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.fromLTRB(
@@ -114,13 +114,11 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PropertyDetailsScreen(
-                                      propertyId: rentproperties[i].id,
-                                    )),
-                          );
+                          pushNavigation(
+                              context,
+                              PropertyDetailsScreen(
+                                propertyId: rentproperties[i].id,
+                              ));
                         },
                         child: SizedBox(
                           width: 170,
@@ -146,6 +144,7 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  SizedBox(height: 5),
                                   Center(
                                     child: SizedBox(
                                       height: 120,

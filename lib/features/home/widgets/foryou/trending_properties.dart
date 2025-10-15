@@ -87,7 +87,7 @@ class _TrendingPropertiesState extends State<TrendingProperties> {
               // Trending properties list
               SizedBox(
                 width: double.infinity,
-                height: 220,
+                height: 210,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
@@ -122,6 +122,7 @@ class _TrendingPropertiesState extends State<TrendingProperties> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                SizedBox(height: 5),
                                 SizedBox(
                                   height: 120,
                                   width: double.infinity,

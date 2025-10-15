@@ -1,275 +1,6 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:realestate_fe/core/utils/app_colors.dart';
-// import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
-// import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
-// import 'package:realestate_fe/features/property_details/presentation/pages/property_details.dart';
-
-// class PGViewAllScreen extends StatelessWidget {
-//   const PGViewAllScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: AppColors.white,
-//       appBar: AppBar(
-//         backgroundColor: AppColors.white,
-//         elevation: 0,
-//         title: const Text(
-//           'Paying Guest Stays',
-//           style: TextStyle(
-//             color: AppColors.black,
-//             fontWeight: FontWeight.w600,
-//           ),
-//         ),
-//         iconTheme: const IconThemeData(color: AppColors.black),
-//       ),
-//       body: BlocBuilder<PropertiesBloc, PropertiesState>(
-//         builder: (context, state) {
-//           if (state.isLoading) {
-//             return const Center(child: CircularProgressIndicator());
-//           }
-//           if (state.idealPGList.isEmpty) {
-//             return const Center(child: Text("No Paying Guest Properties found"));
-//           }
-
-//           final properties = state.idealPGList;
-
-//           return Padding(
-//             padding: const EdgeInsets.all(10.0),
-//             child: GridView.builder(
-//               itemCount: properties.length,
-//               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                 crossAxisCount: 2, // ✅ 2 items per row
-//                 crossAxisSpacing: 10,
-//                 mainAxisSpacing: 10,
-//                 childAspectRatio: 0.8,
-//               ),
-//               itemBuilder: (context, index) {
-//                 final property = properties[index];
-//                 return GestureDetector(
-//                   onTap: () {
-//                     Navigator.push(
-//                       context,
-//                       MaterialPageRoute(
-//                         builder: (context) => PropertyDetailsScreen(
-//                           propertyId: property.id,
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                   child: Card(
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(12),
-//                       side: const BorderSide(
-//                         color: AppColors.blackTranslucent,
-//                         width: 0.5,
-//                       ),
-//                     ),
-//                     elevation: 3,
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         ClipRRect(
-//                           borderRadius: const BorderRadius.only(
-//                             topLeft: Radius.circular(12),
-//                             topRight: Radius.circular(12),
-//                           ),
-//                           child: Image.network(
-//                             property.images.isNotEmpty
-//                                 ? property.images[0].imageName
-//                                 : 'assets/no-img.jpg',
-//                             height: 100,
-//                             width: double.infinity,
-//                             fit: BoxFit.cover,
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: const EdgeInsets.all(8.0),
-//                           child: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               Text(
-//                                 "₹${property.price}",
-//                                 style: const TextStyle(
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: 14,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 property.name,
-//                                 maxLines: 1,
-//                                 overflow: TextOverflow.ellipsis,
-//                                 style: const TextStyle(
-//                                   fontSize: 13,
-//                                   fontWeight: FontWeight.w500,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 "${property.city}, ${property.state}",
-//                                 style: const TextStyle(
-//                                   fontSize: 11,
-//                                   color: AppColors.lightBlack,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 );
-//               },
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:realestate_fe/core/utils/app_colors.dart';
-// import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
-// import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
-// import 'package:realestate_fe/features/property_details/presentation/pages/property_details.dart';
-
-// class ViewAllGridScreen extends StatelessWidget {
-//   final String title;
-//   final String listType;
-
-//   const ViewAllGridScreen({
-//     super.key,
-//     required this.title,
-//     required this.listType,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: AppColors.white,
-//       appBar: AppBar(
-//         backgroundColor: AppColors.white,
-//         elevation: 0,
-//         iconTheme: const IconThemeData(color: AppColors.black),
-//         title: Text(
-//           title,
-//           style: const TextStyle(
-//             color: AppColors.black,
-//             fontWeight: FontWeight.w600,
-//           ),
-//         ),
-//       ),
-//       body: BlocBuilder<PropertiesBloc, PropertiesState>(
-//         builder: (context, state) {
-//           if (state.isLoading) {
-//             return const Center(child: CircularProgressIndicator());
-//           }
-
-//           // Select list dynamically
-//           final properties = listType == 'pg'
-//               ? state.idealPGList
-//               : listType == 'rent'
-//                   ? state.rentpropertiesList
-//                   : state.trendingProperties;
-
-//           if (properties.isEmpty) {
-//             return Center(child: Text("No $title found"));
-//           }
-
-//           return Padding(
-//             padding: const EdgeInsets.all(10.0),
-//             child: GridView.builder(
-//               itemCount: properties.length,
-//               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                 crossAxisCount: 2,
-//                 crossAxisSpacing: 10,
-//                 mainAxisSpacing: 10,
-//                 childAspectRatio: 0.8,
-//               ),
-//               itemBuilder: (context, index) {
-//                 final property = properties[index];
-//                 return GestureDetector(
-//                   onTap: () {
-//                     Navigator.push(
-//                       context,
-//                       MaterialPageRoute(
-//                         builder: (_) => PropertyDetailsScreen(
-//                           propertyId: property.id,
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                   child: Card(
-//                     elevation: 3,
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(12),
-//                       side: const BorderSide(
-//                         color: AppColors.blackTranslucent,
-//                         width: 0.5,
-//                       ),
-//                     ),
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         ClipRRect(
-//                           borderRadius: const BorderRadius.only(
-//                             topLeft: Radius.circular(12),
-//                             topRight: Radius.circular(12),
-//                           ),
-//                           child: Image.network(
-//                             property.images.isNotEmpty
-//                                 ? property.images[0].imageName
-//                                 : 'assets/no-img.jpg',
-//                             height: 100,
-//                             width: double.infinity,
-//                             fit: BoxFit.cover,
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: const EdgeInsets.all(8.0),
-//                           child: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               Text(
-//                                 "₹${property.price}",
-//                                 style: const TextStyle(
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: 14,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 property.name,
-//                                 maxLines: 1,
-//                                 overflow: TextOverflow.ellipsis,
-//                                 style: const TextStyle(
-//                                   fontSize: 13,
-//                                   fontWeight: FontWeight.w500,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 "${property.city}, ${property.state}",
-//                                 style: const TextStyle(
-//                                   fontSize: 11,
-//                                   color: AppColors.lightBlack,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 );
-//               },
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/property_details/presentation/pages/property_details.dart';
 import 'package:realestate_fe/models/rent_properties_model.dart';
@@ -286,33 +17,55 @@ class ViewAllGridScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size; // Get screen size
+    final crossAxisCount =
+        size.width < 600 ? 2 : 3; // 2 for phones, 3 for tablets
+    final imageHeight = size.height * 0.18; // dynamic image height
+
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.lightGray,
       appBar: AppBar(
         backgroundColor: AppColors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: AppColors.black),
+        leading: InkWell(
+          onTap: () => Navigator.pop(context),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AppAssets.arrowbackIcon),
+          ),
+        ),
         title: Text(
           title,
           style: const TextStyle(
-            color: AppColors.black,
             fontWeight: FontWeight.w600,
+            fontSize: 20,
+            color: AppColors.black,
           ),
         ),
+        centerTitle: true,
       ),
       body: properties.isEmpty
           ? Center(
-              child: Text("No $title found"),
+              child: Text(
+                "No $title found",
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  color: AppColors.black,
+                ),
+              ),
             )
           : Padding(
               padding: const EdgeInsets.all(10.0),
               child: GridView.builder(
                 itemCount: properties.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 0.8,
+                  // 🔹 Automatically adjusts height based on screen width
+                  childAspectRatio:
+                      (size.width / crossAxisCount) / (size.height * 0.32),
                 ),
                 itemBuilder: (context, index) {
                   final property = properties[index];
@@ -328,7 +81,7 @@ class ViewAllGridScreen extends StatelessWidget {
                       );
                     },
                     child: Card(
-                      elevation: 3,
+                      elevation: 5,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: const BorderSide(
@@ -339,47 +92,96 @@ class ViewAllGridScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // 🔹 Responsive image section
                           ClipRRect(
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(12),
                               topRight: Radius.circular(12),
                             ),
-                            child: Image.network(
-                              property.images.isNotEmpty
-                                  ? property.images[0].imageName
-                                  : 'assets/no-img.jpg',
-                              height: 100,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                            child: property.images.isNotEmpty
+                                ? Image.network(
+                                    property.images[0].imageName,
+                                    height: imageHeight,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.asset(
+                                    'assets/no-img.jpg',
+                                    height: imageHeight,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
+
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.03,
+                              vertical: size.height * 0.008,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "₹${property.price}",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 14,
+                                    fontSize: size.width * 0.038,
                                   ),
                                 ),
-                                Text(
-                                  property.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      property.name.length > 10
+                                          ? '${property.name.substring(0, 10)}...'
+                                          : property.name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: size.width * 0.034,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        RatingBar.builder(
+                                          initialRating: 1,
+                                          minRating: 1,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 1,
+                                          ignoreGestures: true,
+                                          itemSize: 14,
+                                          itemBuilder: (context, _) =>
+                                              const Icon(
+                                            Icons.star,
+                                            color: AppColors.ratingColor,
+                                          ),
+                                          onRatingUpdate: (rating) {},
+                                        ),
+                                        Text(
+                                          property.overallRatings.toString(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
+                                const SizedBox(height: 2),
                                 Text(
                                   "${property.city}, ${property.state}",
-                                  style: const TextStyle(
-                                    fontSize: 11,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: size.width * 0.03,
                                     color: AppColors.lightBlack,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
                               ],
                             ),

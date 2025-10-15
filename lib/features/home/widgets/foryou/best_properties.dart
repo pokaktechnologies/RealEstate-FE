@@ -101,7 +101,7 @@ class _BestPropertiesState extends State<BestProperties> {
                 removeTop: false,
                 child: SizedBox(
                   width: double.infinity,
-                  height: 220,
+                  height: 210,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.fromLTRB(
@@ -114,13 +114,11 @@ class _BestPropertiesState extends State<BestProperties> {
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PropertyDetailsScreen(
-                                      propertyId: properties[i].id,
-                                    )),
-                          );
+                          pushNavigation(
+                              context,
+                              PropertyDetailsScreen(
+                                propertyId: properties[i].id,
+                              ));
                         },
                         child: SizedBox(
                           width: 170,
@@ -146,6 +144,7 @@ class _BestPropertiesState extends State<BestProperties> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  SizedBox(height: 5),
                                   Center(
                                     child: SizedBox(
                                       height: 120,

@@ -63,7 +63,7 @@ class _StayFinderScreenState extends State<StayFinderScreen> {
                         pushNavigation(
                           context,
                           ViewAllGridScreen(
-                            title: 'Paying Guest Stays',
+                            title: 'Paying Guest Stay',
                             properties: state.idealPGList,
                           ),
                         );
@@ -95,21 +95,18 @@ class _StayFinderScreenState extends State<StayFinderScreen> {
 
               SizedBox(
                 width: double.infinity,
-                height: 220,
+                height: 210,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
-                  itemCount: properties.length, // ✅ use real length!
+                  itemCount: properties.length,
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PropertyDetailsScreen(
-                                    propertyId: properties[i].id,
-                                  )),
-                        );
+                        pushNavigation(
+                            context,
+                            PropertyDetailsScreen(
+                                propertyId: properties[i].id));
                       },
                       child: SizedBox(
                         width: 170,
@@ -135,9 +132,10 @@ class _StayFinderScreenState extends State<StayFinderScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                SizedBox(height: 5),
                                 Center(
                                   child: SizedBox(
-                                    height: 120,
+                                    height: 100,
                                     width: double.infinity,
                                     child: Image.network(
                                       properties[i].images.isNotEmpty
