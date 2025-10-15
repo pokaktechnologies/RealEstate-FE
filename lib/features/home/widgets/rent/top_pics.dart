@@ -8,7 +8,7 @@ import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
 import 'package:realestate_fe/features/home/home_bloc/properties_event.dart';
 import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
 import 'package:realestate_fe/features/home/widgets/viewallscreen/viewall.dart';
-import 'package:realestate_fe/features/property_details/presentation/pages/property_details.dart';
+import 'package:realestate_fe/features/property_details/property_details_pages/property_details.dart';
 
 class TopPicksForYou extends StatefulWidget {
   const TopPicksForYou({super.key});

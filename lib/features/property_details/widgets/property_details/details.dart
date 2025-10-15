@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/core/utils/flutter_icons.dart';
 import 'package:realestate_fe/models/propertydetails_model.dart';
@@ -21,14 +20,14 @@ class PropertyDetailsWidgets {
             Icon(Icons.star, color: AppColors.ratingColor, size: 25),
             SizedBox(width: 4),
             Text(
-              "${property.storedRating ?? 0}",
+              property.storedRating,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                   color: AppColors.black),
             ),
             SizedBox(width: 4),
-            Text("(${property.reviewCount ?? 0})",
+            Text("(${property.reviewCount})",
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,

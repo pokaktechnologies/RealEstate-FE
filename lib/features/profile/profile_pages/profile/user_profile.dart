@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/profile/blocs/profile/profile_bloc.dart';
-import 'package:realestate_fe/features/profile/blocs/profile/profile_event.dart';
-import 'package:realestate_fe/features/profile/blocs/profile/profile_state.dart';
-import 'package:realestate_fe/features/profile/blocs/theme_bloc.dart';
-import 'package:realestate_fe/features/profile/pages/mybooking/mybooking_Main.dart';
-import 'package:realestate_fe/features/profile/pages/profile/edit_profile.dart';
-import 'package:realestate_fe/features/profile/pages/profile_tile/language.dart';
-import 'package:realestate_fe/features/profile/pages/profile_tile/notification.dart';
-import 'package:realestate_fe/features/profile/pages/profile_tile/settings.dart';
-import 'package:realestate_fe/features/profile/pages/transaction/transaction.dart';
+import 'package:realestate_fe/features/profile/profile_bloc/profile/profile_bloc.dart';
+import 'package:realestate_fe/features/profile/profile_bloc/profile/profile_event.dart';
+import 'package:realestate_fe/features/profile/profile_bloc/profile/profile_state.dart';
+import 'package:realestate_fe/features/profile/profile_bloc/theme_bloc.dart';
+import 'package:realestate_fe/features/profile/profile_pages/mybooking/mybooking_Main.dart';
+import 'package:realestate_fe/features/profile/profile_pages/profile/edit_profile.dart';
+import 'package:realestate_fe/features/profile/profile_pages/profile_tile/language.dart';
+import 'package:realestate_fe/features/profile/profile_pages/profile_tile/notification.dart';
+import 'package:realestate_fe/features/profile/profile_pages/profile_tile/settings.dart';
+import 'package:realestate_fe/features/profile/profile_pages/transaction/transaction.dart';
 import 'package:realestate_fe/features/profile/widgets/logout_popup.dart';
 
 class UserProfileScreen extends StatefulWidget {

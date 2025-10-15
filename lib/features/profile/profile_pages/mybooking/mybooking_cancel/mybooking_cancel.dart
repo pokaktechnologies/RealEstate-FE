@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/profile/pages/mybooking/mybookinginfo.dart';
-import 'package:realestate_fe/features/profile/pages/mybooking/mybooking_cancel/cancel_dialogbox.dart';
+import 'package:realestate_fe/features/profile/profile_pages/mybooking/mybookinginfo.dart';
+import 'package:realestate_fe/features/profile/profile_pages/mybooking/mybooking_cancel/cancel_dialogbox.dart';
 
 class BookingCancelScreen extends StatelessWidget {
   const BookingCancelScreen({super.key});

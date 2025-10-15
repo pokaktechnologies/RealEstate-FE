@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/property_details/presentation/pages/property_details.dart';
+import 'package:realestate_fe/features/property_details/property_details_pages/property_details.dart';
 import 'package:realestate_fe/models/rent_properties_model.dart';
 
 class ViewAllGridScreen extends StatelessWidget {

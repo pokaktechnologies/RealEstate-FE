@@ -98,9 +98,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/core/utils/navigations.dart';
 import 'package:realestate_fe/features/auth_user/auth_pages/login_screen.dart';
-import 'package:realestate_fe/features/profile/blocs/logout/logout_bloc.dart';
-import 'package:realestate_fe/features/profile/blocs/logout/logout_event.dart';
-import 'package:realestate_fe/features/profile/blocs/logout/logout_state.dart';
+import 'package:realestate_fe/features/profile/profile_bloc/logout/logout_bloc.dart';
+import 'package:realestate_fe/features/profile/profile_bloc/logout/logout_event.dart';
+import 'package:realestate_fe/features/profile/profile_bloc/logout/logout_state.dart';
 import 'package:realestate_fe/features/profile/widgets/animated_error.dart';
 
 void showLogoutPopup(BuildContext parentContext) {

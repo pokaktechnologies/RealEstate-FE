@@ -3,7 +3,7 @@ import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/home/home_pages/home_page.dart';
 import 'package:realestate_fe/features/message/message_pages/message.dart';
-import 'package:realestate_fe/features/profile/pages/profile/user_profile.dart';
+import 'package:realestate_fe/features/profile/profile_pages/profile/user_profile.dart';
 import 'package:realestate_fe/features/saved/presentation/pages/empty_saved.dart';
 
 import '../deals/deals_pages/deals.dart';

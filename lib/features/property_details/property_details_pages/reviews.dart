@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestate_fe/features/property_details/presentation/bloc_review/reviews_bloc.dart';
-import 'package:realestate_fe/features/property_details/presentation/bloc_review/reviews_event.dart';
-import 'package:realestate_fe/features/property_details/presentation/bloc_review/reviews_state.dart';
+import 'package:realestate_fe/features/property_details/review_bloc/reviews_bloc.dart';
+import 'package:realestate_fe/features/property_details/review_bloc/reviews_event.dart';
+import 'package:realestate_fe/features/property_details/review_bloc/reviews_state.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
-import 'package:realestate_fe/features/property_details/presentation/pages/customer_reviews.dart';
+import 'package:realestate_fe/features/property_details/property_details_pages/customer_reviews.dart';
 import 'package:realestate_fe/services/reviews/reviews_repository.dart';
 
 class ReviewsScreen extends StatelessWidget {
