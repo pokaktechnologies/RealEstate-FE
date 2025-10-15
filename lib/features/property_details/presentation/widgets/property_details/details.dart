@@ -89,7 +89,7 @@ class PropertyDetailsWidgets {
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
-          getFlutterIcon(feature.flutterIcon), // ✅ actual icon image
+          getFlutterIcon(feature.flutterIcon),
           size: 20,
           color: Colors.blueGrey,
         ),
@@ -213,11 +213,11 @@ class PropertyDetailsWidgets {
         //     "Total Floors", "02", "Constructed In", "2019", "State", "Kerala"),
         buildPropertyRow(
           "City",
-          property.cityName ?? "",
+          property.cityName,
           "State",
-          property.stateName ?? "",
+          property.stateName,
           "Country",
-          property.countryName ?? "",
+          property.countryName,
         ),
       ],
     );

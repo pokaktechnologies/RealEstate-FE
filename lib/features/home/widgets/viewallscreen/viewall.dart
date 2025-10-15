@@ -92,27 +92,48 @@ class ViewAllGridScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // 🔹 Responsive image section
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(12),
-                            ),
-                            child: property.images.isNotEmpty
-                                ? Image.network(
-                                    property.images[0].imageName,
-                                    height: imageHeight,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.asset(
-                                    'assets/no-img.jpg',
-                                    height: imageHeight,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(12),
+                                ),
+                                child: property.images.isNotEmpty
+                                    ? Image.network(
+                                        property.images[0].imageName,
+                                        height: imageHeight,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.asset(
+                                        'assets/no-img.jpg',
+                                        height: imageHeight,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: const EdgeInsets.all(6),
+                                    child: Icon(
+                                      Icons.favorite_border,
+                                      color: AppColors.tealBlue,
+                                      size: 20,
+                                    ),
                                   ),
+                                ),
+                              ),
+                            ],
                           ),
-
                           Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: size.width * 0.03,
