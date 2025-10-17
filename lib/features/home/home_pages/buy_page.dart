@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
@@ -6,64 +7,72 @@ import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
 import 'package:realestate_fe/features/home/widgets/buy/buy_banner.dart';
 import 'package:realestate_fe/features/home/widgets/buy/trending_properties.dart';
 import 'package:realestate_fe/features/home/widgets/viewmore_common.dart';
+import 'package:realestate_fe/features/home_category/category_bloc/category_bloc.dart';
+import 'package:realestate_fe/services/category/category_repository.dart';
 
 class BuyPage extends StatelessWidget {
-  const BuyPage({super.key});
+  final String category;
+  const BuyPage({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 10),
-          BuyBanner(),
-          SizedBox(height: 10),
-          TrendingProperties(),
-          Container(
-            height: 450,
-            color: AppColors.white,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Properties Near You",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 19,
+    return BlocProvider(
+      create: (_) => CategoryBloc(CategoryRepository()),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            BuyBanner(),
+            SizedBox(height: 10),
+            TrendingBuyProperties(
+              category: category,
+            ),
+            Container(
+              height: 450,
+              color: AppColors.white,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Properties Near You",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 19,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: BlocBuilder<PropertiesBloc, PropertiesState>(
-                      builder: (context, state) {
-                        if (state.isLoading) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-                        if (state.trendingProperties.isEmpty) {
-                          return const Center(
-                              child: Text("No Properties Near To You."));
-                        }
+                    const SizedBox(height: 10),
+                    Expanded(
+                      child: BlocBuilder<PropertiesBloc, PropertiesState>(
+                        builder: (context, state) {
+                          if (state.isLoading) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          if (state.trendingProperties.isEmpty) {
+                            return const Center(
+                                child: Text("No Properties Near To You."));
+                          }
 
-                        return ListView.separated(
-                          itemCount: state.trendingProperties.length,
-                          separatorBuilder: (_, __) =>
-                              const SizedBox(height: 20),
-                          itemBuilder: (context, index) {
-                            final property = state.trendingProperties[index];
-                            return ViewmoreCommon(property: property);
-                          },
-                        );
-                      },
-                    ),
-                  )
-                ],
+                          return ListView.separated(
+                            itemCount: state.trendingProperties.length,
+                            separatorBuilder: (_, __) =>
+                                const SizedBox(height: 20),
+                            itemBuilder: (context, index) {
+                              final property = state.trendingProperties[index];
+                              return ViewmoreCommon(property: property);
+                            },
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

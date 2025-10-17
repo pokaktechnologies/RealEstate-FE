@@ -17,9 +17,12 @@ class HomepageCubit extends Cubit<int> {
       case 0:
         return ForyouPage();
       case 1:
-        return RentPage();
+        return RentPage(category: "rent");
+
       case 2:
-        return BuyPage();
+        return BuyPage(
+          category: "buy",
+        );
       case 3:
         return PayingGuest();
       default:

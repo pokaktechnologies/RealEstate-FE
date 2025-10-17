@@ -4,14 +4,15 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:realestate_fe/common_widgets/custom_loader.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/core/utils/navigations.dart';
-import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
-import 'package:realestate_fe/features/home/home_bloc/properties_event.dart';
-import 'package:realestate_fe/features/home/home_bloc/properties_state.dart';
 import 'package:realestate_fe/features/home/widgets/viewallscreen/viewall.dart';
+import 'package:realestate_fe/features/home_category/category_bloc/category_bloc.dart';
+import 'package:realestate_fe/features/home_category/category_bloc/category_event.dart';
+import 'package:realestate_fe/features/home_category/category_bloc/category_state.dart';
 import 'package:realestate_fe/features/property_details/property_details_pages/property_details.dart';
 
 class TopPicksForYou extends StatefulWidget {
-  const TopPicksForYou({super.key});
+  final String category;
+  const TopPicksForYou({super.key, required this.category});
 
   @override
   State<TopPicksForYou> createState() => _TopPicksForYouState();
@@ -21,20 +22,20 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
   @override
   void initState() {
     super.initState();
-    context.read<PropertiesBloc>().add(LoadrentProperties());
+    context.read<CategoryBloc>().add(FetchCategoryEvent(widget.category));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PropertiesBloc, PropertiesState>(
+    return BlocBuilder<CategoryBloc, CategoryState>(
       builder: (context, state) {
         if (state.isLoading) {
           return const AppLoadingIndicator();
         }
-        if (state.rentpropertiesList.isEmpty) {
+        if (state.categoryProperties.isEmpty) {
           return const Text("No category rent properties found");
         }
-        final rentproperties = state.rentpropertiesList;
+        final properties = state.categoryProperties;
 
         return Container(
           height: 290,
@@ -64,7 +65,7 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                           context,
                           ViewAllGridScreen(
                             title: 'Top Pics For You',
-                            properties: state.rentpropertiesList,
+                            properties: properties,
                           ),
                         );
                       },
@@ -110,14 +111,14 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                       12,
                       0,
                     ),
-                    itemCount: rentproperties.length,
+                    itemCount: properties.length,
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         onTap: () {
                           pushNavigation(
                               context,
                               PropertyDetailsScreen(
-                                propertyId: rentproperties[i].id,
+                                propertyId: properties[i].id,
                               ));
                         },
                         child: SizedBox(
@@ -149,11 +150,9 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                                     child: SizedBox(
                                       height: 120,
                                       width: double.infinity,
-                                      child: rentproperties[i].images.isNotEmpty
+                                      child: properties[i].images.isNotEmpty
                                           ? Image.network(
-                                              rentproperties[i]
-                                                  .images[0]
-                                                  .imageName,
+                                              properties[i].images[0].imageName,
                                               fit: BoxFit.cover,
                                             )
                                           : Image.asset(
@@ -176,7 +175,7 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                                         children: [
                                           const SizedBox(height: 4),
                                           Text(
-                                            "₹${rentproperties[i].price.toString()}",
+                                            "₹${properties[i].price.toString()}",
                                             maxLines: 2,
                                             style: TextStyle(
                                               fontSize: 15,
@@ -189,10 +188,9 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                rentproperties[i].name.length >
-                                                        10
-                                                    ? '${rentproperties[i].name.substring(0, 10)}...'
-                                                    : rentproperties[i].name,
+                                                properties[i].name.length > 10
+                                                    ? '${properties[i].name.substring(0, 10)}...'
+                                                    : properties[i].name,
                                                 style: TextStyle(
                                                   color: AppColors.black,
                                                   fontSize: 13,
@@ -219,7 +217,7 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
                                                     onRatingUpdate: (rating) {},
                                                   ),
                                                   Text(
-                                                    rentproperties[i]
+                                                    properties[i]
                                                         .overallRatings
                                                         .toString(),
                                                     style: TextStyle(
@@ -235,7 +233,7 @@ class _TopPicksForYouState extends State<TopPicksForYou> {
 
                                           //-----
                                           Text(
-                                            "${rentproperties[i].city}, ${rentproperties[i].state}",
+                                            "${properties[i].city}, ${properties[i].state}",
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(

@@ -23,9 +23,12 @@ class _HomepageState extends State<Homepage> {
       case 0:
         return const ForyouPage();
       case 1:
-        return const RentPage();
+        return const RentPage(category: "rent");
+
       case 2:
-        return const BuyPage();
+        return const BuyPage(
+          category: "buy",
+        );
       case 3:
         return const PayingGuest();
       default:
