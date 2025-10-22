@@ -16,12 +16,14 @@ import 'package:realestate_fe/features/profile/profile_bloc/theme_bloc.dart';
 import 'package:realestate_fe/features/profile/profile_bloc/country/country_bloc.dart';
 import 'package:realestate_fe/features/property_details/property_detail_bloc/propertydetails_bloc.dart';
 import 'package:realestate_fe/features/property_details/review_bloc/reviews_bloc.dart';
+import 'package:realestate_fe/features/saved/saved_bloc/saved_bloc.dart';
 import 'package:realestate_fe/services/category/category_repository.dart';
 import 'package:realestate_fe/services/deal/deals_repository.dart';
 import 'package:realestate_fe/services/home/home_repository.dart';
 import 'package:realestate_fe/services/profile/profile_repository.dart';
 import 'package:realestate_fe/services/property/property_repository.dart';
 import 'package:realestate_fe/services/reviews/reviews_repository.dart';
+import 'package:realestate_fe/services/saved/saved_repository.dart';
 
 final HomeRepository _homeRepository = HomeRepository();
 final PropertyRepository _propertyRepository = PropertyRepository();
@@ -29,6 +31,7 @@ final ProfileRepository _profileRepository = ProfileRepository();
 final DealRepository _dealRepository = DealRepository();
 final ReviewRepository _reviewRepository = ReviewRepository();
 final CategoryRepository _categoryRepository = CategoryRepository();
+final SavedRepository _savedRepository = SavedRepository();
 
 List<BlocProvider> appBlocProviders = [
   BlocProvider<HomepageCubit>(create: (_) => HomepageCubit()),
@@ -50,4 +53,5 @@ List<BlocProvider> appBlocProviders = [
   BlocProvider<DealBloc>(create: (_) => DealBloc(_dealRepository)),
   BlocProvider<ReviewsBloc>(create: (_) => ReviewsBloc(_reviewRepository)),
   BlocProvider<CategoryBloc>(create: (_) => CategoryBloc(_categoryRepository)),
+  BlocProvider<SavedBloc>(create: (_) => SavedBloc(_savedRepository)),
 ];

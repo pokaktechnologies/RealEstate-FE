@@ -6,10 +6,13 @@ import 'package:realestate_fe/features/message/message_pages/chat_screen.dart';
 import 'package:realestate_fe/features/payment/payment_pages/payment_screen.dart';
 import 'package:realestate_fe/features/profile/profile_pages/mybooking/share_bottomsheet.dart';
 import 'package:realestate_fe/features/property_details/property_detail_bloc/propertydetails_bloc.dart';
-import 'package:realestate_fe/features/property_details/saved_bloc/wishlist.dart';
 import 'package:realestate_fe/features/property_details/property_details_pages/reviews.dart';
 import 'package:realestate_fe/features/property_details/widgets/property_details/details.dart';
+import 'package:realestate_fe/features/saved/saved_bloc/saved_bloc.dart';
+import 'package:realestate_fe/features/saved/saved_bloc/saved_event.dart';
+import 'package:realestate_fe/features/saved/saved_bloc/saved_state.dart';
 import 'package:realestate_fe/models/propertydetails_model.dart';
+import 'package:realestate_fe/services/saved/saved_repository.dart';
 
 class PropertyDetailsScreen extends StatefulWidget {
   final int propertyId;
@@ -122,8 +125,10 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // return
+
     return BlocProvider(
-      create: (context) => FavoriteBloc(),
+      create: (context) => SavedBloc(SavedRepository()),
       child: Scaffold(
         bottomNavigationBar: SizedBox(
           height: 80,
@@ -210,19 +215,39 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                 color: AppColors.tealBlue,
               ),
             ),
-            BlocBuilder<FavoriteBloc, FavoriteState>(
+            SizedBox(
+              width: 3,
+            ),
+            BlocBuilder<SavedBloc, SavedState>(
               builder: (context, state) {
-                return IconButton(
-                  icon: Icon(
-                      state is FavoriteFilledState
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: AppColors.tealBlue),
-                  onPressed: () {
-                    context.read<FavoriteBloc>().add(ToggleFavoriteEvent());
+                bool saved = false;
+                if (state is SavedLoaded) {
+                  saved =
+                      state.properties.any((p) => p.savedId == widget.propertyId);
+                }
+
+                return InkWell(
+                  onTap: () {
+                    if (saved) {
+                      context
+                          .read<SavedBloc>()
+                          .add(RemoveSavedProperty(widget.propertyId));
+                    } else {
+                      context
+                          .read<SavedBloc>()
+                          .add(AddSavedProperty(widget.propertyId));
+                    }
                   },
+                  child: Icon(
+                    saved ? Icons.favorite : Icons.favorite_border,
+                    color: saved ? AppColors.tealBlue : AppColors.tealBlue,
+                    size: 28,
+                  ),
                 );
               },
+            ),
+            SizedBox(
+              width: 3,
             ),
           ],
         ),
@@ -253,12 +278,27 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                         duration: const Duration(milliseconds: 500),
                         transitionBuilder: (child, animation) =>
                             FadeTransition(opacity: animation, child: child),
-                        child: Image.network(
-                          images[_currentIndex],
-                          key: ValueKey<int>(_currentIndex),
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                        ),
+
+                        // Image.network(
+                        //   images[_currentIndex],
+                        //   key: ValueKey<int>(_currentIndex),
+                        //   fit: BoxFit.cover,
+                        //   width: double.infinity,
+                        // ),
+                        child: images[_currentIndex].startsWith('http')
+                            ? Image.network(
+                                images[_currentIndex],
+                                key: ValueKey<int>(_currentIndex),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              )
+                            : Image.asset(
+                                images[
+                                    _currentIndex], // use AssetImage or FileImage if it's a file
+                                key: ValueKey<int>(_currentIndex),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              ),
                       ),
                     ),
                   ),
