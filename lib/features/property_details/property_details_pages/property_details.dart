@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:realestate_fe/core/saved_hive.dart';
 import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/features/message/message_pages/chat_screen.dart';
@@ -24,7 +25,6 @@ class PropertyDetailsScreen extends StatefulWidget {
 
 class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
   int _currentIndex = 0;
-
   List<String> images = [];
 
   @override
@@ -33,6 +33,27 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
     context
         .read<PropertydetailsBloc>()
         .add(LoadPropertyDetails(widget.propertyId));
+
+    final savedBloc = context.read<SavedBloc>();
+    savedBloc.add(FetchSavedProperties());
+
+    // Show "Already saved" snackbar after first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final savedState = savedBloc.state;
+      if (savedState is SavedLoaded) {
+        bool isSaved =
+            savedState.properties.any((p) => p.savedId == widget.propertyId);
+        if (isSaved) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Already added to saved"),
+              backgroundColor: Colors.teal,
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    });
   }
 
   void _showContactMenu(BuildContext buttonContext) {
@@ -125,8 +146,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // return
-
     return BlocProvider(
       create: (context) => SavedBloc(SavedRepository()),
       child: Scaffold(
@@ -215,15 +234,13 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                 color: AppColors.tealBlue,
               ),
             ),
-            SizedBox(
-              width: 3,
-            ),
+            const SizedBox(width: 3),
             BlocBuilder<SavedBloc, SavedState>(
               builder: (context, state) {
                 bool saved = false;
                 if (state is SavedLoaded) {
-                  saved =
-                      state.properties.any((p) => p.savedId == widget.propertyId);
+                  saved = state.properties
+                      .any((p) => p.savedId == widget.propertyId);
                 }
 
                 return InkWell(
@@ -240,15 +257,13 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                   },
                   child: Icon(
                     saved ? Icons.favorite : Icons.favorite_border,
-                    color: saved ? AppColors.tealBlue : AppColors.tealBlue,
+                    color: AppColors.tealBlue,
                     size: 28,
                   ),
                 );
               },
             ),
-            SizedBox(
-              width: 3,
-            ),
+            const SizedBox(width: 3),
           ],
         ),
         backgroundColor: AppColors.white,
@@ -278,13 +293,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                         duration: const Duration(milliseconds: 500),
                         transitionBuilder: (child, animation) =>
                             FadeTransition(opacity: animation, child: child),
-
-                        // Image.network(
-                        //   images[_currentIndex],
-                        //   key: ValueKey<int>(_currentIndex),
-                        //   fit: BoxFit.cover,
-                        //   width: double.infinity,
-                        // ),
                         child: images[_currentIndex].startsWith('http')
                             ? Image.network(
                                 images[_currentIndex],
@@ -293,8 +301,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                                 width: double.infinity,
                               )
                             : Image.asset(
-                                images[
-                                    _currentIndex], // use AssetImage or FileImage if it's a file
+                                images[_currentIndex],
                                 key: ValueKey<int>(_currentIndex),
                                 fit: BoxFit.cover,
                                 width: double.infinity,
@@ -319,7 +326,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                       return Container(
                         padding: const EdgeInsets.all(24.0),
                         decoration: const BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(40),
                             topRight: Radius.circular(40),
@@ -362,7 +369,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                                           backgroundImage: AssetImage(
                                               AppAssets.annieprofile),
                                         ),
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -400,7 +407,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                                         );
                                       },
                                       child: Container(
-                                        padding: EdgeInsets.all(8),
+                                        padding: const EdgeInsets.all(8),
                                         decoration: BoxDecoration(
                                           color: AppColors.white,
                                           borderRadius:
@@ -414,17 +421,15 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                                             ),
                                           ],
                                         ),
-                                        child: Icon(Icons.chat_bubble,
+                                        child: const Icon(Icons.chat_bubble,
                                             color: Colors.teal),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              Divider(),
-                              ReviewsScreen(
-                                propertyId: property.id,
-                              ),
+                              const Divider(),
+                              ReviewsScreen(propertyId: property.id),
                               const SizedBox(height: 100),
                             ],
                           ),

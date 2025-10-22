@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:realestate_fe/core/utils/app_assets.dart';
 import 'package:realestate_fe/core/utils/app_colors.dart';
 import 'package:realestate_fe/core/utils/navigations.dart';
+import 'package:realestate_fe/features/auth_user/widgets/custom_button.dart';
+import 'package:realestate_fe/features/home_bottom_bar/bottom_bar.dart';
 import 'package:realestate_fe/features/property_details/property_details_pages/property_details.dart';
 import 'package:realestate_fe/features/saved/saved_bloc/saved_bloc.dart';
 import 'package:realestate_fe/features/saved/saved_bloc/saved_event.dart';
@@ -32,17 +35,16 @@ class SavedScreen extends StatelessWidget {
         body: BlocConsumer<SavedBloc, SavedState>(
           listener: (context, state) {
             if (state is SavedError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   SnackBar(content: Text(state.message)),
+              // );
             }
-
             if (state is SavedDeleted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text(
-                    'Deleted successfully',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    'Deleted Successfully',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
                   ),
                   backgroundColor: AppColors.red,
                   duration: Duration(seconds: 1),
@@ -54,9 +56,92 @@ class SavedScreen extends StatelessWidget {
             if (state is SavedLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is SavedEmpty) {
-              return const Center(child: Text('No saved items'));
+              return Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AppAssets.nosaved,
+                  ),
+                  Text(
+                    "Nothing saved yet",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.grey),
+                  ),
+                  Text(
+                    "Start saving your favorites!",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.grey),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  SizedBox(
+                    width: 120,
+                    child: CustomButton(
+                      buttonText: const Text(
+                        "Explore",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.white),
+                      ),
+                      onPressed: () {
+                        pushAndRemoveUntilFun(context, const BottomBar());
+                      },
+                    ),
+                  )
+                ],
+              ));
             } else if (state is SavedError) {
-              return Center(child: Text(state.message));
+              // return Center(
+              //   child: Text(state.message),
+              // );
+              return Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AppAssets.nosaved,
+                  ),
+                  Text(
+                    "Nothing saved yet",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.grey),
+                  ),
+                  Text(
+                    "Start saving your favorites!",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.grey),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  SizedBox(
+                    width: 120,
+                    child: CustomButton(
+                      buttonText: const Text(
+                        "Explore",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.white),
+                      ),
+                      onPressed: () {
+                        pushAndRemoveUntilFun(context, const BottomBar());
+                      },
+                    ),
+                  )
+                ],
+              ));
             } else if (state is SavedLoaded) {
               final properties = state.properties;
 
@@ -142,7 +227,6 @@ class SavedScreen extends StatelessWidget {
                 },
               );
             }
-
             return const SizedBox.shrink();
           },
         ),
