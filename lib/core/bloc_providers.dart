@@ -6,6 +6,7 @@ import 'package:realestate_fe/features/auth_user/auth_bloc/verify-otp/verify_otp
 import 'package:realestate_fe/features/deals/deals_bloc/deals_bloc.dart';
 import 'package:realestate_fe/features/home/home_bloc/properties_bloc.dart';
 import 'package:realestate_fe/features/home_category/category_bloc/category_bloc.dart';
+import 'package:realestate_fe/features/message/chat_bloc/chat_bloc.dart';
 import 'package:realestate_fe/features/profile/profile_bloc/logout/logout_bloc.dart';
 import 'package:realestate_fe/features/home/home_bloc/homepage_cubit.dart';
 import 'package:realestate_fe/features/profile/profile_bloc/contact/contact_bloc.dart';
@@ -20,6 +21,8 @@ import 'package:realestate_fe/features/saved/saved_bloc/saved_bloc.dart';
 import 'package:realestate_fe/services/category/category_repository.dart';
 import 'package:realestate_fe/services/deal/deals_repository.dart';
 import 'package:realestate_fe/services/home/home_repository.dart';
+import 'package:realestate_fe/services/message/message_provider.dart';
+import 'package:realestate_fe/services/message/message_repository.dart';
 import 'package:realestate_fe/services/profile/profile_repository.dart';
 import 'package:realestate_fe/services/property/property_repository.dart';
 import 'package:realestate_fe/services/reviews/reviews_repository.dart';
@@ -32,6 +35,8 @@ final DealRepository _dealRepository = DealRepository();
 final ReviewRepository _reviewRepository = ReviewRepository();
 final CategoryRepository _categoryRepository = CategoryRepository();
 final SavedRepository _savedRepository = SavedRepository();
+final MessageRepository _messageRepository =
+    MessageRepository(MessageProvider());
 
 List<BlocProvider> appBlocProviders = [
   BlocProvider<HomepageCubit>(create: (_) => HomepageCubit()),
@@ -54,4 +59,5 @@ List<BlocProvider> appBlocProviders = [
   BlocProvider<ReviewsBloc>(create: (_) => ReviewsBloc(_reviewRepository)),
   BlocProvider<CategoryBloc>(create: (_) => CategoryBloc(_categoryRepository)),
   BlocProvider<SavedBloc>(create: (_) => SavedBloc(_savedRepository)),
+  BlocProvider<ChatBloc>(create: (_) => ChatBloc(_messageRepository)),
 ];
